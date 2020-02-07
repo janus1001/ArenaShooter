@@ -536,4 +536,4 @@ MonoBehaviour:
   speed: 6
   aerialMultiplier: 0.5
   jumpStrength: 10
-  mouseSensitivity: 3
+  mouseSensitivity: 200
