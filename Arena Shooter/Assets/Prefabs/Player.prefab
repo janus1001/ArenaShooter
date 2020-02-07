@@ -67,7 +67,7 @@ MonoBehaviour:
   speed: 6
   aerialMultiplier: 0.5
   jumpStrength: 10
-  mouseSensitivity: 200
+  mouseSensitivity: 3
 --- !u!1 &6291389004106292679
 GameObject:
   m_ObjectHideFlags: 0

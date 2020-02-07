@@ -62,8 +62,8 @@ public class PlayerMovement : MonoBehaviour
     private void CameraControl()
     {
         // Getting values for horizontal and vertical mouse moves
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         // Vertical movement
         xRotation -= mouseY;
