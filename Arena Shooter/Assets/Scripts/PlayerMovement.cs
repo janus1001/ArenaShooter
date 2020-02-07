@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     public float speed = 6.0f;
     public float aerialMultiplier = 0.5f;
@@ -21,12 +22,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if(isLocalPlayer)
+        {
+            Move();
+        }
     }
 
     private void Update()
     {
-        CameraControl();
+        if (isLocalPlayer)
+        {
+            CameraControl();
+        }
     }
 
     private void Move()

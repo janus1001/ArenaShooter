@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 6291389003617165792}
   - component: {fileID: 6291389003617165797}
   - component: {fileID: 6291389003617165793}
+  - component: {fileID: 7332901583459692462}
+  - component: {fileID: 4118996814263344134}
+  - component: {fileID: 1541344209730924027}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -64,10 +67,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555faecb2dce845aab1b90ab37530c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   speed: 6
   aerialMultiplier: 0.5
   jumpStrength: 10
-  mouseSensitivity: 3
+  mouseSensitivity: 1
+--- !u!114 &7332901583459692462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291389003617165796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &4118996814263344134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291389003617165796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  compressRotation: 1
+--- !u!114 &1541344209730924027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291389003617165796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd2373aabe4db945b2fae2293246c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerCamera: {fileID: 6291389004202919380}
 --- !u!1 &6291389004106292679
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +213,7 @@ GameObject:
   - component: {fileID: 6291389004202919378}
   - component: {fileID: 6291389004202919381}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -126,7 +126,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 876259374}
+    m_TransformParent: {fileID: 2001438183}
     m_Modifications:
     - target: {fileID: -4216859302048453862, guid: ca38bceace234ef439e05ca86d0183a2,
         type: 3}
@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ca38bceace234ef439e05ca86d0183a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ca38bceace234ef439e05ca86d0183a2,
         type: 3}
@@ -166,7 +166,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ca38bceace234ef439e05ca86d0183a2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ca38bceace234ef439e05ca86d0183a2,
         type: 3}
@@ -354,7 +354,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14528
+  m_Name: pb_Mesh14354
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -539,11 +539,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2001438183}
-  - {fileID: 425659199}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1018051879
+--- !u!1 &1177003480
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -551,42 +550,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1018051883}
-  - component: {fileID: 1018051882}
-  - component: {fileID: 1018051881}
-  - component: {fileID: 1018051880}
+  - component: {fileID: 1177003484}
+  - component: {fileID: 1177003483}
+  - component: {fileID: 1177003482}
+  - component: {fileID: 1177003481}
   m_Layer: 0
-  m_Name: NetworkManager
+  m_Name: Network Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1018051880
+--- !u!114 &1177003481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018051879}
+  m_GameObject: {fileID: 1177003480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
---- !u!114 &1018051881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018051879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 74e9ccf0f80396c4e872809df1897f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnClientConnected:
@@ -613,17 +597,41 @@ MonoBehaviour:
   OnServerDisconnected:
     m_PersistentCalls:
       m_Calls: []
-  port: 7777
-  NoDelay: 1
-  serverMaxMessageSize: 16384
-  clientMaxMessageSize: 16384
---- !u!114 &1018051882
+  DebugEnabled: 0
+  ServerBindAll: 1
+  ServerBindAddress: 127.0.0.1
+  CommunicationPort: 7777
+  MaxPacketSizeInKb: 64
+  Channels: 0100000002000000
+  CustomMaxPeerLimit: 0
+  CustomMaxPeers: 1000
+  CustomTimeoutLimit: 0
+  CustomTimeoutBaseTicks: 5000
+  CustomTimeoutMultiplier: 3
+  PingCalculationEnabled: 1
+  PingCalculationFrameTimer: 120
+--- !u!114 &1177003482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018051879}
+  m_GameObject: {fileID: 1177003480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
+--- !u!114 &1177003483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177003480}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
@@ -636,20 +644,22 @@ MonoBehaviour:
   showDebugMessages: 0
   offlineScene: 
   onlineScene: 
-  transport: {fileID: 1018051881}
+  transport: {fileID: 1177003481}
   networkAddress: localhost
   maxConnections: 4
-  playerPrefab: {fileID: 0}
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 6291389003617165796, guid: 5b116df3d9a819847b0dbab70fe71a29,
+    type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
---- !u!4 &1018051883
+--- !u!4 &1177003484
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018051879}
+  m_GameObject: {fileID: 1177003480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -672,7 +682,7 @@ GameObject:
   - component: {fileID: 2001438179}
   - component: {fileID: 2001438184}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3106,9 +3116,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001438178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 100, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 425659199}
   m_Father: {fileID: 876259374}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3125,7 +3136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PolyMesh:
-    name: pb_Mesh14528
+    name: pb_Mesh14354
     vertices:
     - {x: 0, y: 0, z: 0}
     - {x: 0, y: 6.55, z: 0}
