@@ -9,6 +9,8 @@ public class PlayerMovement : NetworkBehaviour
     public float aerialMultiplier = 0.5f;
     public float jumpStrength = 10.0f;
     public float mouseSensitivity = 100.0f;
+    public float slopeForce = 5.0f;
+    public float slopeRayLengthMultiplier = 1.5f;
 
     CharacterController characterController;
     Vector3 motion = Vector3.zero;
@@ -36,6 +38,25 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    private bool OnSlope()
+    {
+        if (!characterController.isGrounded)
+        {
+            return false;
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, characterController.height / 2 * slopeRayLengthMultiplier))
+        {
+            if (hit.normal !=  Vector3.up)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void Move()
     {
         if (characterController.isGrounded)
@@ -44,11 +65,7 @@ public class PlayerMovement : NetworkBehaviour
             motion = transform.right * Input.GetAxis("Horizontal") * speed;
             motion += transform.forward * Input.GetAxis("Vertical") * speed;
 
-            // Jumping
-            if (Input.GetButton("Jump"))
-            {
-                motion.y = jumpStrength;
-            }
+            
         }
         else
         {
@@ -57,6 +74,18 @@ public class PlayerMovement : NetworkBehaviour
             motion = transform.right * Input.GetAxis("Horizontal") * speed * aerialMultiplier;
             motion += transform.forward * Input.GetAxis("Vertical") * speed * aerialMultiplier;
             motion.y = ySpeed;
+        }
+
+        // Slope force
+        if ((motion.x != 0 || motion.z != 0) && OnSlope())
+        {
+            motion.y += slopeForce * Time.fixedDeltaTime;
+        }
+
+        // Jumping
+        if (characterController.isGrounded && Input.GetButton("Jump"))
+        {
+            motion.y = jumpStrength;
         }
 
         // Gravity

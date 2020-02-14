@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : NetworkBehaviour
 {
     public float damage = 20.0f;
     public float range = 100.0f;
@@ -29,6 +30,11 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             // TODO add damage
+            Damageable hitObject = hit.collider.GetComponent<Damageable>();
+            if (hitObject)
+            {
+                //PlayerNetwork.player.CmdDealDamage(, );
+            }
 
             // TODO add force to the hit
 

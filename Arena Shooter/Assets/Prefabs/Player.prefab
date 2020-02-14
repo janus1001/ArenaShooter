@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6013744696233277196}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,9 +71,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   speed: 6
-  aerialMultiplier: 0.5
-  jumpStrength: 10
+  aerialMultiplier: 0.8
+  jumpStrength: 5
   mouseSensitivity: 1
+  slopeForce: -1000
+  slopeRayLengthMultiplier: 1.5
 --- !u!114 &7332901583459692462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296e5dd87b0414343b699fd8810b251c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  currentPrefab: {fileID: 0}
+  currentPlaceable: {fileID: 0}
 --- !u!1 &6291389004106292679
 GameObject:
   m_ObjectHideFlags: 0

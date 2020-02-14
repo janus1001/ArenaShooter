@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerNetwork : NetworkBehaviour
+public class PlayerNetwork : Damageable
 {
+    public static PlayerNetwork player;
     public GameObject playerCamera;
     public Armour armour;
 
@@ -13,21 +14,26 @@ public class PlayerNetwork : NetworkBehaviour
 
     void Start()
     {
-        if(!isLocalPlayer)
+        if (isLocalPlayer)
+        {
+            player = this;
+        }
+
+        if (!isLocalPlayer)
         {
             Destroy(playerCamera);
         }
     }
 
     // Function called by client, executed on server.
-    [Command]
+    /*[Command]
     public void CmdDealDamage(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
     {
         // TODO: simple checks if player was even able to hit the target.
 
         PlayerNetwork target = targetPlayer.GetComponent<PlayerNetwork>();
         target.health -= CheckDamageAmount(baseDamage, hitPart, armour.GetDamageMultiplier(hitPart));
-    }
+    }*/
 
     // Function called by server, executed on all clients
     [ClientRpc]
@@ -74,6 +80,11 @@ public class PlayerNetwork : NetworkBehaviour
                 return 0;
         }
         return (int)damageReceived;
+    }
+
+    public override void CmdDealDamage()
+    {
+        throw new System.NotImplementedException();
     }
 }
 
