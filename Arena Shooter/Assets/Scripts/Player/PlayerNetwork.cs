@@ -9,7 +9,7 @@ public class PlayerNetwork : NetworkBehaviour
     public Armour armour;
 
     [SyncVar]
-    int health = 100;
+    float health = 100;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class PlayerNetwork : NetworkBehaviour
 
     // Function called by client, executed on server.
     [Command]
-    public void CmdDealDamage(NetworkIdentity targetPlayer, int baseDamage, BodyPart hitPart)
+    public void CmdDealDamage(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
     {
         // TODO: simple checks if player was even able to hit the target.
 
@@ -37,7 +37,7 @@ public class PlayerNetwork : NetworkBehaviour
         Debug.Log(targetPlayer.name + " hit!");
     }
 
-    public int CheckDamageAmount(int baseDamage, BodyPart hitPart, float armourMultiplier)
+    public int CheckDamageAmount(float baseDamage, BodyPart hitPart, float armourMultiplier)
     {
         float damageReceived = baseDamage;
         damageReceived *= armourMultiplier;
@@ -86,5 +86,12 @@ public enum BodyPart
     LeftUpperArm = 4,
     LeftLowerArm = 8,
     RightUpperArm = 16,
-    RightLowerArm = 32, LeftUpperLeg, LeftLowerLeg, RightUpperLeg, RightLowerLeg
+    RightLowerArm = 32, 
+    LeftUpperLeg = 64, 
+    LeftLowerLeg = 128, 
+    RightUpperLeg = 256, 
+    RightLowerLeg = 512,
+
+    WholeUpperBody = Chest | LeftLowerArm | LeftUpperArm | RightLowerArm | RightUpperArm,
+    WholeLowerBody = LeftLowerLeg | LeftUpperLeg | RightLowerLeg | RightUpperLeg
 }
