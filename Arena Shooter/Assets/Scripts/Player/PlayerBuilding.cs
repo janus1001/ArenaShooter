@@ -5,13 +5,15 @@ using Mirror;
 
 public class PlayerBuilding : NetworkBehaviour
 {
+    public GameObject currentPrefab;
+
     void Update()
     {
         
     }
 
     [Command]
-    void BuildStructure()
+    void CmdBuildStructure()
     {
 
     }

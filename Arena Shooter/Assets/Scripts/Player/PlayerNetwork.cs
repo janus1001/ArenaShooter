@@ -20,8 +20,9 @@ public class PlayerNetwork : NetworkBehaviour
 
     // Server side function
     [Command]
-    public void CmdDealDamage(PlayerNetwork target, int baseDamage, BodyPart hitPart, Armour armour)
+    public void CmdDealDamage(GameObject targetPlayer, int baseDamage, BodyPart hitPart, Armour armour)
     {
+        PlayerNetwork target = targetPlayer.GetComponent<PlayerNetwork>();
         target.health -= CheckDamageAmount(baseDamage, hitPart, armour.GetDamageMultiplier());
     }
 
