@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Armour
 {
-    int ProtMultiplier = 1;
+    float ProtMultiplier = 2;
+    BodyPart protectedParts = BodyPart.Head | BodyPart.Chest;
 
-    public int GetDamageMultiplier()
+    public float GetDamageMultiplier(BodyPart bodyPartHit)
     {
-        return ProtMultiplier;
+        if (protectedParts.HasFlag(bodyPartHit))
+        {
+            return ProtMultiplier;
+        }
+        return 1;
     }
 }
