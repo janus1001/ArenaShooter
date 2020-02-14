@@ -5,29 +5,35 @@ using Mirror;
 
 public class PlayerBuilding : NetworkBehaviour
 {
-    public GameObject currentPrefab;
+	public Placeable currentPlaceable;
 
-    public Placeable currentPlaceable;
+	private const float PlacementRange = 4;
 
-    const float PlacementRange = 5;
+	private void Start()
+	{
+		currentPlaceable = GameObject.Find("Placeable").GetComponent<Placeable>();
+	}
 
-    void Update()
-    {
-        bool isAimingAtGround = CheckForGroundSpace();
-    }
+	private void Update()
+	{
+		RaycastHit hit;
+		if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, PlacementRange))
+		{
+			Debug.Log("Hit");
+			currentPlaceable.IsOnSurface = true;
+			currentPlaceable.MoveToCursor(hit.point, hit.normal);
+		}
+		else
+		{
+			Debug.Log("Not Hit");
+			currentPlaceable.IsOnSurface = false;
+			currentPlaceable.MoveToCursor(transform.position + Camera.main.transform.forward * PlacementRange, Vector3.up);
+		}
+	}
 
-    bool CheckForGroundSpace()
-    {
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, PlacementRange))
-        {
-            Debug.Log(hit.collider.gameObject.name + " hit!");
-        }
-        return false;
-    }
+	[Command]
+	private void CmdBuildStructure()
+	{
 
-    [Command]
-    void CmdBuildStructure()
-    {
-
-    }
+	}
 }
