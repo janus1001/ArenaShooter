@@ -20,7 +20,7 @@ public class Placeable : MonoBehaviour
     public float minAngle = Mathf.NegativeInfinity;
     public float maxAngle = Mathf.Infinity;
 
-    bool IsPlaceable
+    public bool IsPlaceable
     {
         get
         {
@@ -55,10 +55,12 @@ public class Placeable : MonoBehaviour
         currentRenderer.material.color = color;
     }
 
-    public void MoveToCursor(Vector3 position, Vector3 normalHit)
+    public void MoveToCursor(Vector3 position, Vector3 normalHit, float yAngle)
     {
         transform.position = position;
+        //transform.forward = direction;
         transform.up = normalHit;
+        transform.Rotate(0, yAngle, 0, Space.Self); //.LookAt(direction, normalHit);
 
         if (IsOnSurface)
             transform.Translate(groundedOffset, Space.Self);

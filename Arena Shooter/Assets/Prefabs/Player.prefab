@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 6291389003617165792}
   - component: {fileID: 6291389003617165797}
   - component: {fileID: 6291389003617165793}
+  - component: {fileID: 4059586475804762699}
   - component: {fileID: 7332901583459692462}
   - component: {fileID: 4118996814263344134}
   - component: {fileID: 1541344209730924027}
   - component: {fileID: 6013744696233277196}
+  - component: {fileID: 3044024549517627628}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -76,6 +78,23 @@ MonoBehaviour:
   mouseSensitivity: 1
   slopeForce: -1000
   slopeRayLengthMultiplier: 1.5
+--- !u!114 &4059586475804762699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291389003617165796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c7b2e3715e69d46ac15f84ac2a8de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerBuilding: {fileID: 6013744696233277196}
+  playerShooting: {fileID: 0}
+  tempPlaceableData: {fileID: 11400000, guid: b517e85a2ca2da749b464fae4cd53916, type: 2}
 --- !u!114 &7332901583459692462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,15 +151,33 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6291389003617165796}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 296e5dd87b0414343b699fd8810b251c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  currentPrefab: {fileID: 0}
-  currentPlaceable: {fileID: 0}
+  PlaceableData: {fileID: 0}
+--- !u!114 &3044024549517627628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291389003617165796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53376ea9d5f754f3bb5e44fb5f9d5a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  damage: 20
+  range: 100
+  fireRate: 10
+  playerCamera: {fileID: 0}
+  impactEffect: {fileID: 0}
 --- !u!1 &6291389004106292679
 GameObject:
   m_ObjectHideFlags: 0

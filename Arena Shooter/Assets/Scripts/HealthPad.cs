@@ -38,7 +38,7 @@ public class HealthPad : NetworkBehaviour
 	private void MoveModel()
 	{
 		pickupModel.transform.Rotate(0, Time.deltaTime * rotateSpeed, 0);
-		pickupModel.transform.localPosition = new Vector3(0, amountOfHealthRestored / 100 + healthIncreaseTimer / 10, 0);
+		pickupModel.transform.localPosition = new Vector3(0, amountOfHealthRestored / 100 + healthIncreaseTimer / 10 + 0.5f, 0);
 	}
 
 	private void TickHealthIncrease()

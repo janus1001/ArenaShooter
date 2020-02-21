@@ -96,6 +96,6 @@ MonoBehaviour:
   IsOnSurface: 0
   groundedOffset: {x: 0, y: 0, z: 0}
   heldOffset: {x: 0, y: 0.75, z: 0}
-  placementSpaceNeeded: 0
-  minAngle: 90
-  maxAngle: 90
+  placementSpaceNeeded: 0.5
+  minAngle: 0
+  maxAngle: 45
