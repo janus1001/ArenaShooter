@@ -11,21 +11,19 @@ public class PlayerBuilding : NetworkBehaviour
 
 	private void Start()
 	{
-		currentPlaceable = GameObject.Find("Placeable").GetComponent<Placeable>();
+		currentPlaceable = GameObject.Find("Health Pad Indicator").GetComponent<Placeable>();
 	}
 
 	private void Update()
 	{
 		RaycastHit hit;
-		if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, PlacementRange))
+		if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, PlacementRange, 1 << LayerMask.NameToLayer("Terrain")))
 		{
-			Debug.Log("Hit");
 			currentPlaceable.IsOnSurface = true;
 			currentPlaceable.MoveToCursor(hit.point, hit.normal);
 		}
 		else
 		{
-			Debug.Log("Not Hit");
 			currentPlaceable.IsOnSurface = false;
 			currentPlaceable.MoveToCursor(transform.position + Camera.main.transform.forward * PlacementRange, Vector3.up);
 		}
@@ -34,6 +32,6 @@ public class PlayerBuilding : NetworkBehaviour
 	[Command]
 	private void CmdBuildStructure()
 	{
-
+		
 	}
 }
