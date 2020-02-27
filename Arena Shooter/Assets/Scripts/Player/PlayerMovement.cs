@@ -64,7 +64,12 @@ public class PlayerMovement : NetworkBehaviour
             // Moving on the ground
             motion = transform.right * Input.GetAxis("Horizontal");
             motion += transform.forward * Input.GetAxis("Vertical");
-            motion = motion.normalized * speed;
+            if (motion.sqrMagnitude > motion.normalized.sqrMagnitude)
+            {
+                motion = motion.normalized;
+            }
+            motion *= speed;
+            
         }
         else
         {
@@ -72,7 +77,11 @@ public class PlayerMovement : NetworkBehaviour
             float ySpeed = motion.y;
             motion = transform.right * Input.GetAxis("Horizontal");
             motion += transform.forward * Input.GetAxis("Vertical");
-            motion = motion.normalized * speed * aerialMultiplier;
+            if (motion.sqrMagnitude > motion.normalized.sqrMagnitude)
+            {
+                motion = motion.normalized;
+            }
+            motion *= speed * aerialMultiplier;
             motion.y = ySpeed;
         }
 
