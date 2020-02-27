@@ -33,6 +33,7 @@ public class PlayerShooting : NetworkBehaviour
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
         {
+            Debug.Log("hit");
             // TODO add damage
             Damageable hitObject = hit.collider.GetComponent<Damageable>();
             if (hitObject)
@@ -42,8 +43,8 @@ public class PlayerShooting : NetworkBehaviour
 
             // TODO add force to the hit
 
-            //GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            //Destroy(impact, 1.0f);
+            GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impact, 0.5f);
         }
     }
 }
