@@ -9,9 +9,9 @@ public class EntityNetwork : NetworkBehaviour
     public Armour armour;
 
     [SyncVar(hook = "UpdateHealth")]
-    public float health = 100;
+    float health = 100;
     [SyncVar(hook = "UpdateShield")]
-    public float shield = 100;
+    float shield = 100;
 
     void Start()
     {
@@ -54,6 +54,11 @@ public class EntityNetwork : NetworkBehaviour
 
             }
         }
+    }
+
+    public void DealDamage(float damageAmount, BodyPart bodyPartHit = BodyPart.Generic)
+    {
+        health -= damageAmount;
     }
 }
 

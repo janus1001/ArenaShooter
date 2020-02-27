@@ -58,6 +58,6 @@ public class PlayerShooting : NetworkBehaviour
     {
         // TODO: simple checks if player was even able to hit the target.
 
-        targetPlayer.GetComponent<EntityNetwork>().health -= 10;
+        targetPlayer.GetComponent<EntityNetwork>().DealDamage(10);
     }
 }
