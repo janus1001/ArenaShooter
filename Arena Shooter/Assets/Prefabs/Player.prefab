@@ -176,8 +176,9 @@ MonoBehaviour:
   damage: 20
   range: 100
   fireRate: 10
-  playerCamera: {fileID: 0}
-  impactEffect: {fileID: 0}
+  playerCamera: {fileID: 6291389004202919378}
+  impactEffect: {fileID: 305578011448879931, guid: 734e3b51f3e473c4ea6c1adb4e1a92af,
+    type: 3}
 --- !u!1 &6291389004106292679
 GameObject:
   m_ObjectHideFlags: 0

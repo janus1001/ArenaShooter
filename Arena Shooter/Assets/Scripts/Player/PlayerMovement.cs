@@ -62,17 +62,26 @@ public class PlayerMovement : NetworkBehaviour
         if (characterController.isGrounded)
         {
             // Moving on the ground
-            motion = transform.right * Input.GetAxis("Horizontal") * speed;
-            motion += transform.forward * Input.GetAxis("Vertical") * speed;
-
+            motion = transform.right * Input.GetAxis("Horizontal");
+            motion += transform.forward * Input.GetAxis("Vertical");
+            if (motion.sqrMagnitude > motion.normalized.sqrMagnitude)
+            {
+                motion = motion.normalized;
+            }
+            motion *= speed;
             
         }
         else
         {
             // Moving in the air
             float ySpeed = motion.y;
-            motion = transform.right * Input.GetAxis("Horizontal") * speed * aerialMultiplier;
-            motion += transform.forward * Input.GetAxis("Vertical") * speed * aerialMultiplier;
+            motion = transform.right * Input.GetAxis("Horizontal");
+            motion += transform.forward * Input.GetAxis("Vertical");
+            if (motion.sqrMagnitude > motion.normalized.sqrMagnitude)
+            {
+                motion = motion.normalized;
+            }
+            motion *= speed * aerialMultiplier;
             motion.y = ySpeed;
         }
 
