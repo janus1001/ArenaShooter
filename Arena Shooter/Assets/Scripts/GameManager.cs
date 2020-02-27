@@ -7,41 +7,35 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager current;
 
-    [SyncVar(hook = "UpdateForestTeam")]
-    private TeamState forestTeamState;
-    [SyncVar(hook = "UpdateDesertTeam")]
-    private TeamState desertTeamState;
-    [SyncVar(hook = "UpdateIceTeam")]
-    private TeamState iceTeamState;
-    
-    // UpdateGameState is called when new game data changes
-    void UpdateForestTeam(TeamState oldValue, TeamState newValue)
-    {
-        
-    }
-    void UpdateDesertTeam(TeamState oldValue, TeamState newValue)
-    {
-        
-    }
-    void UpdateIceTeam(TeamState oldValue, TeamState newValue)
-    {
-        
-    }
+    readonly SyncListString avatarURIs = new SyncListString();
+
 
     private void Start()
     {
-        if(current)
+        if (current)
         {
             Destroy(gameObject);
             return;
         }
         current = this;
     }
+
+    private void Update()
+    {
+        if (isServer)
+        {
+            ProcessServer();
+        }
+    }
+
+    private void ProcessServer()
+    {
+
+    }
 }
 
-public struct TeamState
+public struct PlayerHUD
 {
-    private int baseHealth;
-    private int playerOneHealth;
-    private int playerTwoHealth;
+    public string AvatarURI { get; set; }
+    public float health;
 }

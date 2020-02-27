@@ -19,6 +19,13 @@ public class PlayerShooting : NetworkBehaviour
 
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerNetwork.player.CmdRemoveHealth(PlayerNetwork.player.GetComponent<NetworkIdentity>(), 10);
+        }
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1.0f / fireRate;

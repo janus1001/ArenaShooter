@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HUDManager : MonoBehaviour
 {
     public static HUDManager current;
 
     public RectTransform offsetHUD;
+
+    public Image playerHealthImage;
+    public TMP_Text playerHealthText;
+    public Image playerShieldImage;
+    public TMP_Text playerShieldText;
 
     public Image forestTeamHealth;
     public List<HUDPlayer> forestTeamPlayers;
@@ -19,9 +25,14 @@ public class HUDManager : MonoBehaviour
     public Image iceTeamHealth;
     public List<HUDPlayer> iceTeamPlayers;
 
+    private float mouseHUDMovementStrength = 0;
+    private float lastPlayerYPosition = 0;
+
     void Start()
     {
-        if(current)
+        mouseHUDMovementStrength = Settings.MoveHUDMultiplier;
+
+        if (current)
         {
             Destroy(gameObject);
             return;
@@ -29,10 +40,44 @@ public class HUDManager : MonoBehaviour
         current = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float value = Time.time % 1;
+        if (PlayerNetwork.player)
+        {
+            MoveHUD();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        // Changes value for MoveHUD function. It's connected to physics, so can't run every frame.
+        // Due to this, the result isn't accurate, but the effect is cosmetic and looks good anyway.
+        if (PlayerNetwork.player)
+        {
+            lastPlayerYPosition = PlayerNetwork.player.transform.position.y;
+        }
+    }
+
+    /// <summary>
+    /// Moves HUD on screen to imitate effect of the player moving and rotating.
+    /// </summary>
+    private void MoveHUD()
+    {
+        float playerHeightDelta = PlayerNetwork.player.transform.position.y - lastPlayerYPosition;
+
+        Vector2 mouseDelta = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") + playerHeightDelta * 20) * mouseHUDMovementStrength;
+        offsetHUD.localPosition = Vector2.Lerp(offsetHUD.localPosition, -mouseDelta, 0.2f);
+    }
+
+    public void SetHUDPlayerHealth(float health)
+    {
+        playerHealthText.text = health.ToString("00.");
+        playerHealthImage.fillAmount = health / 100;
+    }
+    public void SetHUDPlayerShield(float shield)
+    {
+        playerShieldText.text = shield.ToString("00.");
+        playerShieldImage.fillAmount = shield / 100;
     }
 }
 

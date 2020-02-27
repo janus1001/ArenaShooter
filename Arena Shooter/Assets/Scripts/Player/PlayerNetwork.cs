@@ -9,8 +9,10 @@ public class PlayerNetwork : Damageable
     public GameObject playerCamera;
     public Armour armour;
 
-    [SyncVar]
+    [SyncVar(hook = "UpdateHealth")]
     float health = 100;
+    [SyncVar(hook = "UpdateShield")]
+    float shield = 100;
 
     void Start()
     {
@@ -25,15 +27,56 @@ public class PlayerNetwork : Damageable
         }
     }
 
+    void UpdateHealth(float oldHealth, float newHealth)
+    {
+        if (isLocalPlayer)
+        {
+            HUDManager.current.SetHUDPlayerHealth(newHealth);
+            if (newHealth > oldHealth) // Regained health
+            {
+
+            }
+            else // Lost health
+            {
+
+            }
+        }
+    }
+    void UpdateShield(float oldShield, float newShield)
+    {
+        if (isLocalPlayer)
+        {
+            HUDManager.current.SetHUDPlayerShield(newShield);
+            if (newShield > oldShield) // Regained shield
+            {
+
+            }
+            else // Lost shield
+            {
+
+            }
+        }
+    }
+
     // Function called by client, executed on server.
-    /*[Command]
+    [Command]
     public void CmdDealDamage(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
     {
         // TODO: simple checks if player was even able to hit the target.
 
         PlayerNetwork target = targetPlayer.GetComponent<PlayerNetwork>();
         target.health -= CheckDamageAmount(baseDamage, hitPart, armour.GetDamageMultiplier(hitPart));
-    }*/
+    }
+
+    [Command]
+    public void CmdRemoveHealth(NetworkIdentity targetPlayer, float baseDamage)
+    {
+        if (isServer)
+        {
+            PlayerNetwork target = targetPlayer.GetComponent<PlayerNetwork>();
+            target.health -= baseDamage;
+        }
+    }
 
     // Function called by server, executed on all clients
     [ClientRpc]
