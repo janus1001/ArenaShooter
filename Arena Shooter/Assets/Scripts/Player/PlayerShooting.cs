@@ -22,10 +22,6 @@ public class PlayerShooting : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            PlayerNetwork.player.CmdRemoveHealth(PlayerNetwork.player.GetComponent<NetworkIdentity>(), 10);
-        }
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1.0f / fireRate;
@@ -42,10 +38,11 @@ public class PlayerShooting : NetworkBehaviour
         {
             Debug.Log("hit");
             // TODO add damage
-            Damageable hitObject = hit.collider.GetComponent<Damageable>();
+
+            EntityNetwork hitObject = hit.collider.GetComponent<EntityNetwork>();
             if (hitObject)
             {
-                //PlayerNetwork.player.CmdDealDamage(, );
+                CmdDealDamage(hitObject.GetComponent<NetworkIdentity>(), 10, BodyPart.Generic);
             }
 
             // TODO add force to the hit
@@ -53,5 +50,14 @@ public class PlayerShooting : NetworkBehaviour
             GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impact, 0.5f);
         }
+    }
+
+    // Function called by client, executed on server.
+    [Command]
+    public void CmdDealDamage(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
+    {
+        // TODO: simple checks if player was even able to hit the target.
+
+        targetPlayer.GetComponent<EntityNetwork>().health -= 10;
     }
 }

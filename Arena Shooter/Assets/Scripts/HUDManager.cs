@@ -42,7 +42,7 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerNetwork.player)
+        if (EntityNetwork.localPlayer)
         {
             MoveHUD();
         }
@@ -52,9 +52,9 @@ public class HUDManager : MonoBehaviour
     {
         // Changes value for MoveHUD function. It's connected to physics, so can't run every frame.
         // Due to this, the result isn't accurate, but the effect is cosmetic and looks good anyway.
-        if (PlayerNetwork.player)
+        if (EntityNetwork.localPlayer)
         {
-            lastPlayerYPosition = PlayerNetwork.player.transform.position.y;
+            lastPlayerYPosition = EntityNetwork.localPlayer.transform.position.y;
         }
     }
 
@@ -63,7 +63,7 @@ public class HUDManager : MonoBehaviour
     /// </summary>
     private void MoveHUD()
     {
-        float playerHeightDelta = PlayerNetwork.player.transform.position.y - lastPlayerYPosition;
+        float playerHeightDelta = EntityNetwork.localPlayer.transform.position.y - lastPlayerYPosition;
 
         Vector2 mouseDelta = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") + playerHeightDelta * 20) * mouseHUDMovementStrength;
         offsetHUD.localPosition = Vector2.Lerp(offsetHUD.localPosition, -mouseDelta, 0.2f);
