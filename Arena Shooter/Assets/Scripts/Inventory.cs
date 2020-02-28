@@ -10,6 +10,12 @@ public class Inventory : NetworkBehaviour
     public PlayerShooting playerShooting;
 
     public PlaceableData tempPlaceableData; // To be replaced with inventory system
+    private int dollals = 0;
+
+    public void IncreaseDollals()
+    {
+        dollals += 10;
+    }
 
     void Update()
     {
