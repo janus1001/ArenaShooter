@@ -14,6 +14,11 @@ public class PlayerShooting : NetworkBehaviour
 
     private void Start()
     {
+        if(isLocalPlayer)
+        {
+            // Setting player layer to Ignore Raycast in order to make it impossible to shoot yourself.
+            gameObject.layer = 2;
+        }
         playerCamera = Camera.main;
     }
 
@@ -47,8 +52,9 @@ public class PlayerShooting : NetworkBehaviour
 
             // TODO add force to the hit
 
-            GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impact, 0.5f);
+            GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.identity);
+            impact.transform.up = hit.normal;
+            //Destroy(impact, 0.5f);
         }
     }
 
