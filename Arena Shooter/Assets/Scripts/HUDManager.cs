@@ -48,16 +48,6 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        // Changes value for MoveHUD function. It's connected to physics, so can't run every frame.
-        // Due to this, the result isn't accurate, but the effect is cosmetic and looks good anyway.
-        if (EntityNetwork.localPlayer)
-        {
-            lastPlayerYPosition = EntityNetwork.localPlayer.transform.position.y;
-        }
-    }
-
     /// <summary>
     /// Moves HUD on screen to imitate effect of the player moving and rotating.
     /// </summary>
@@ -65,8 +55,9 @@ public class HUDManager : MonoBehaviour
     {
         float playerHeightDelta = EntityNetwork.localPlayer.transform.position.y - lastPlayerYPosition;
 
-        Vector2 mouseDelta = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") + playerHeightDelta * 20) * mouseHUDMovementStrength;
+        Vector2 mouseDelta = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") + playerHeightDelta * 40) * mouseHUDMovementStrength;
         offsetHUD.localPosition = Vector2.Lerp(offsetHUD.localPosition, -mouseDelta, 0.2f);
+        lastPlayerYPosition = EntityNetwork.localPlayer.transform.position.y;
     }
 
     public void SetHUDPlayerHealth(float health)

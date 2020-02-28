@@ -11,7 +11,11 @@ public class Inventory : NetworkBehaviour
     public PlayerShooting playerShooting;
 
     public PlaceableData tempPlaceableData; // To be replaced with inventory system
+
+    [SyncVar]
     private int tokens = 0;
+    [SyncVar]
+    private int dollars = 0;
 
     [Command]
     public void CmdIncreaseTokenAmount(NetworkIdentity token)
