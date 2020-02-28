@@ -22,19 +22,12 @@ public class PlayerMovement : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void FixedUpdate()
-    {
-        if(isLocalPlayer)
-        {
-            Move();
-        }
-    }
-
     private void Update()
     {
         if (isLocalPlayer)
         {
             CameraControl();
+            Move();
         }
     }
 
@@ -88,7 +81,7 @@ public class PlayerMovement : NetworkBehaviour
         // Slope force
         if ((motion.x != 0 || motion.z != 0) && OnSlope())
         {
-            motion.y += slopeForce * Time.fixedDeltaTime;
+            motion.y += slopeForce * Time.deltaTime;
         }
 
         // Jumping
@@ -98,10 +91,10 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // Gravity
-        motion.y += Physics.gravity.y * Time.fixedDeltaTime;
+        motion.y += Physics.gravity.y * Time.deltaTime;
 
         // Final movement vector
-        characterController.Move(motion * Time.fixedDeltaTime);
+        characterController.Move(motion * Time.deltaTime);
     }
 
     private void CameraControl()

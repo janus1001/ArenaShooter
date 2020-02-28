@@ -22,7 +22,7 @@ public class PlayerShooting : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1.0f / fireRate;
             Shoot();
