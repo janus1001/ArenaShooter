@@ -59,6 +59,19 @@ public class EntityNetwork : NetworkBehaviour
     public void DealDamage(float damageAmount, BodyPart bodyPartHit = BodyPart.Generic)
     {
         health -= damageAmount;
+
+        if(health <= 0)
+        {
+            if(gameObject.CompareTag("Player"))
+            {
+                health = 100;
+
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
 
