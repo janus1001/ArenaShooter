@@ -6,15 +6,27 @@ using System;
 
 public class Inventory : NetworkBehaviour
 {
+    public static Inventory localInventory;
     public PlayerBuilding playerBuilding;
     public PlayerShooting playerShooting;
 
     public PlaceableData tempPlaceableData; // To be replaced with inventory system
-    private int dollals = 0;
+    private int tokens = 0;
 
-    public void IncreaseDollals()
+    [Command]
+    public void CmdIncreaseTokenAmount(NetworkIdentity token)
     {
-        dollals += 10;
+        TokenPickUp target = token.GetComponent<TokenPickUp>();
+        tokens += target.tokenWorth;
+        target.tokenWorth = 0;
+    }
+
+    private void Start()
+    {
+        if (isLocalPlayer)
+        {
+            localInventory = this;
+        }
     }
 
     void Update()
