@@ -56,6 +56,7 @@ public class EntityNetwork : NetworkBehaviour
         }
     }
 
+    // Server only, use CmdDealDamage on client
     public void DealDamage(float damageAmount, BodyPart bodyPartHit = BodyPart.Generic)
     {
         health -= damageAmount;
@@ -66,12 +67,20 @@ public class EntityNetwork : NetworkBehaviour
             {
                 health = 100;
 
+                Transform startPosition = NetworkManager.singleton.GetStartPosition();
+                TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
             }
             else
             {
                 Destroy(gameObject);
             }
         }
+    }
+
+    [TargetRpc]
+    void TargetRespawnAt(NetworkConnection conn, Vector3 position, Quaternion rotation)
+    {
+
     }
 }
 
