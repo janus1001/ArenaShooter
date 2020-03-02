@@ -7,9 +7,6 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager current;
 
-    readonly SyncListString avatarURIs = new SyncListString();
-
-
     private void Start()
     {
         if (current)
@@ -18,19 +15,6 @@ public class GameManager : NetworkBehaviour
             return;
         }
         current = this;
-    }
-
-    private void Update()
-    {
-        if (isServer)
-        {
-            ProcessServer();
-        }
-    }
-
-    private void ProcessServer()
-    {
-
     }
 }
 

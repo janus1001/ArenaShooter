@@ -53,8 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  health: 100
-  shield: 100
 --- !u!114 &7332901583459692462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +175,7 @@ MonoBehaviour:
   range: 100
   fireRate: 10
   playerCamera: {fileID: 0}
-  impactEffect: {fileID: 305578011448879931, guid: 734e3b51f3e473c4ea6c1adb4e1a92af,
+  impactEffect: {fileID: 565196021349365542, guid: 97cc492531d6b944bbc7b591df86d3b1,
     type: 3}
 --- !u!1 &6291389004106292679
 GameObject:
