@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "NewPlaceable", menuName = "Inventory/NewPlaceable", order = 1)]
+[CreateAssetMenu(fileName = "NewPlaceable", menuName = "Inventory/New Placeable", order = 1)]
 public class PlaceableData : ScriptableObject
 {
     public string objectName = "New MyScriptablePlaceable";

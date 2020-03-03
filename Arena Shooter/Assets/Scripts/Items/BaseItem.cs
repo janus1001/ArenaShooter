@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class BaseItem : NetworkBehaviour
+[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/New Item", order = 1)]
+public class BaseItem : ScriptableObject
 {
+    public GameObject itemPrefab;
+
     protected virtual void EquipItem()
     {
 

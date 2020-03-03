@@ -10,7 +10,7 @@ public class HealthPad : NetworkBehaviour
 	private float amountOfHealthRestored = 5f;
 	private float healthIncreaseRate = 0.1f;
 	private float healthIncreaseTimer = 0;
-	private float maxHealthRestored = 100f;
+	private float maxHealthRestored = 80f;
 
 	public TMP_Text healthRestoreText;
 	public GameObject pickupModel;
@@ -18,7 +18,7 @@ public class HealthPad : NetworkBehaviour
 
 	void Update()
 	{
-		if (amountOfHealthRestored >= 100f)
+		if (amountOfHealthRestored >= maxHealthRestored)
 		{
 			// Health pickup is fully charged
 		}
