@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4118996814263344134}
   - component: {fileID: 6013744696233277196}
   - component: {fileID: 3044024549517627628}
+  - component: {fileID: -469662474525219990}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -177,6 +178,18 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   impactEffect: {fileID: 565196021349365542, guid: 97cc492531d6b944bbc7b591df86d3b1,
     type: 3}
+--- !u!114 &-469662474525219990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291389003617165796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a1317afad8d0f429140d99702c423e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6291389004106292679
 GameObject:
   m_ObjectHideFlags: 0

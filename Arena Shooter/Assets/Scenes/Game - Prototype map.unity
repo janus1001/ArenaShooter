@@ -1636,6 +1636,11 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2490728180
       objectReference: {fileID: 0}
+    - target: {fileID: 4462374797774998171, guid: eea5699edb0947241a229d6d592dfcaa,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.423706
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eea5699edb0947241a229d6d592dfcaa, type: 3}
 --- !u!1001 &1810099511
@@ -1713,7 +1718,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh843004
+  m_Name: pb_Mesh15092
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4611,7 +4616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PolyMesh:
-    name: pb_Mesh843004
+    name: pb_Mesh15092
     vertices:
     - {x: 0, y: 0, z: 0}
     - {x: 0, y: 6.55, z: 0}
@@ -6529,30 +6534,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2999374840753489955, guid: 1fe489758c78eef4782fd249383cc46d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2999374840753489976, guid: 1fe489758c78eef4782fd249383cc46d,
         type: 3}
       propertyPath: m_Name
       value: Shop Health Pack Frame
-      objectReference: {fileID: 0}
-    - target: {fileID: 6801511083933066116, guid: 1fe489758c78eef4782fd249383cc46d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6801511083933066116, guid: 1fe489758c78eef4782fd249383cc46d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6801511083933066116, guid: 1fe489758c78eef4782fd249383cc46d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fe489758c78eef4782fd249383cc46d, type: 3}

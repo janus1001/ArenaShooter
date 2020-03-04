@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 1616751732908363591}
   - component: {fileID: 1616751732908363589}
   - component: {fileID: 1616751732908363590}
+  - component: {fileID: 8005072955600710261}
   m_Layer: 11
   m_Name: Details Panel
   m_TagString: Untagged
@@ -175,6 +176,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!65 &8005072955600710261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616751732908363584}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100.00001, y: 101.308556, z: 1}
+  m_Center: {x: 0.4999995, y: 0.8542716, z: 0}
 --- !u!1 &1616751733057148492
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPreview: {fileID: 1616751733827527160}
+  detailsPage: {fileID: 1616751732908363591}
   soldItem: {fileID: 0}
 --- !u!1 &1616751733174272723
 GameObject:

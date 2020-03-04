@@ -18,20 +18,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 3e184ef882b73594aa8e071851ba3b77,
         type: 2}
+    - target: {fileID: 1616751733057148499, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: detailsPage
+      value: 
+      objectReference: {fileID: 2999374839816737075}
     - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 16.7
       objectReference: {fileID: 0}
     - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
@@ -76,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1616751733174272721, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
@@ -194,7 +199,13 @@ PrefabInstance:
     - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c43605c7c9483d4488fc4c8e212ea0e1, type: 3}
+--- !u!224 &2999374839816737075 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1616751732908363591, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4607235900160958068}
+  m_PrefabAsset: {fileID: 0}
