@@ -14,6 +14,7 @@ public class PlayerMovement : NetworkBehaviour
 
     CharacterController characterController;
     Vector3 motion = Vector3.zero;
+    Vector3 groundNormal = Vector3.up;
     float xRotation = 0.0f;
 
     private void Start()
@@ -31,19 +32,37 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    private bool OnSlope()
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.layer == LayerMask.NameToLayer("Terrain") || hit.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            groundNormal = hit.normal;
+        }
+    }
+
+    private bool OnSliperySlope()
     {
         if (!characterController.isGrounded)
         {
             return false;
         }
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, characterController.height / 2 * slopeRayLengthMultiplier))
+        else
         {
-            if (hit.normal !=  Vector3.up)
+            float groundAngle = Vector3.Angle(groundNormal, Vector3.up);
+
+            if (groundAngle > characterController.slopeLimit)
             {
+                // można przenieść na dół
+                Vector3 groundCross = Vector3.Cross(groundNormal, Vector3.up);
+                Vector3 slopeVector = Vector3.Cross(groundNormal, groundCross);
+                motion = slopeVector * slopeForce * Time.deltaTime;
+                Debug.DrawRay(transform.position, motion);
                 return true;
+            }
+            else if (groundAngle != 0 && groundAngle <= characterController.slopeLimit)
+            {
+                motion.y = -slopeForce * Time.deltaTime;
+                return false;
             }
         }
 
@@ -79,14 +98,15 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // Slope force
-        if ((motion.x != 0 || motion.z != 0) && OnSlope())
+        if (OnSliperySlope())
         {
-            motion.y += slopeForce * Time.deltaTime;
+
         }
 
         // Jumping
-        if (characterController.isGrounded && Input.GetButton("Jump"))
+        if (characterController.isGrounded && !OnSliperySlope() && Input.GetButton("Jump"))
         {
+            Debug.Log("JUMP");
             motion.y = jumpStrength;
         }
 

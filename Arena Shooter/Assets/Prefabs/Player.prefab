@@ -104,8 +104,8 @@ MonoBehaviour:
   speed: 6
   aerialMultiplier: 0.8
   jumpStrength: 5
-  mouseSensitivity: 1
-  slopeForce: -1000
+  mouseSensitivity: 6
+  slopeForce: 300
   slopeRayLengthMultiplier: 1.5
 --- !u!114 &4059586475804762699
 MonoBehaviour:
@@ -190,6 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a1317afad8d0f429140d99702c423e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &6291389004106292679
 GameObject:
   m_ObjectHideFlags: 0
