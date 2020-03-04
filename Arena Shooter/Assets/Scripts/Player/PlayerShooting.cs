@@ -41,7 +41,6 @@ public class PlayerShooting : NetworkBehaviour
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
         {
-            Debug.Log("hit");
             // TODO add damage
 
             EntityNetwork hitObject = hit.collider.GetComponent<EntityNetwork>();

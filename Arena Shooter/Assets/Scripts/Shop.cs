@@ -26,7 +26,7 @@ public class Shop : NetworkBehaviour
 
     public void ShowDetails()
     {
-        slideTarget = -10f;
+        slideTarget = -9f;
     }
 
     public void HideDetails()

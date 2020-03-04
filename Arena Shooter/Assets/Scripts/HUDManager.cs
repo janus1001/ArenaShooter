@@ -17,13 +17,10 @@ public class HUDManager : MonoBehaviour
     public TMP_Text playerShieldText;
 
     public Image forestTeamHealth;
-    public List<HUDPlayer> forestTeamPlayers;
 
     public Image desertTeamHealth;
-    public List<HUDPlayer> desertTeamPlayers;
 
     public Image iceTeamHealth;
-    public List<HUDPlayer> iceTeamPlayers;
 
     private float mouseHUDMovementStrength = 0;
     private float lastPlayerYPosition = 0;
@@ -70,17 +67,4 @@ public class HUDManager : MonoBehaviour
         playerShieldText.text = shield.ToString("00.");
         playerShieldImage.fillAmount = shield / 100;
     }
-}
-
-[Serializable]
-public class HUDPlayer
-{
-    [SerializeField]
-    public Image avatar;
-    [SerializeField]
-    public Image health;
-    [SerializeField]
-    public Image shield;
-    [SerializeField]
-    public Image crossout;
 }

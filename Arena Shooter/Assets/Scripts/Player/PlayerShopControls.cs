@@ -46,6 +46,6 @@ public class PlayerShopControls : NetworkBehaviour
     [Command]
     void CmdTryBuy(NetworkIdentity shopIdentity)
     {
-
+        //connectionToClient.identity
     }
 }
