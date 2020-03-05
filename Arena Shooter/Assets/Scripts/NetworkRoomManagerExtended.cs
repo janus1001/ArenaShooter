@@ -10,9 +10,13 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
 
     public static NetworkRoomManagerExtended newSingleton;
 
-    public List<PlayerDataServer> teamForest = new List<PlayerDataServer>();
-    public List<PlayerDataServer> teamDesert = new List<PlayerDataServer>();
-    public List<PlayerDataServer> teamIce = new List<PlayerDataServer>();
+    public static List<PlayerDataServer> teamForest = new List<PlayerDataServer>();
+    public static List<PlayerDataServer> teamDesert = new List<PlayerDataServer>();
+    public static List<PlayerDataServer> teamIce = new List<PlayerDataServer>();
+
+    public static List<Transform> forestStartPositions = new List<Transform>(); 
+    public static List<Transform> desertStartPositions = new List<Transform>();
+    public static List<Transform> iceStartPositions = new List<Transform>();
 
     public override void OnRoomServerSceneChanged(string sceneName)
     {
@@ -42,7 +46,11 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
                 teamIce.Add(calledBy.playerData);
                 calledBy.RpcSetPanelPosition(LobbyPosition.Ice, playerConnection.identity);
                 break;
+            case Team.NoTeam:
+                calledBy.RpcSetPanelPosition(LobbyPosition.List, playerConnection.identity);
+                break;
             default:
+                Debug.LogError("Unknown Team selected.");
                 break;
         }
     }
@@ -66,6 +74,68 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
         if (newSingleton == null)
         {
             newSingleton = this;
+        }
+    }
+
+    internal static void RegisterTeamStartPosition(Transform transform, Team team)
+    {
+        switch (team)
+        {
+            case Team.Forest:
+                forestStartPositions.Add(transform);
+                break;
+            case Team.Desert:
+                desertStartPositions.Add(transform);
+                break;
+            case Team.Ice:
+                iceStartPositions.Add(transform);
+                break;
+            case Team.NoTeam:
+                RegisterStartPosition(transform);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public override Transform GetStartPosition()
+    {
+        // first remove any dead transforms
+        startPositions.RemoveAll(t => t == null);
+
+        if (startPositions.Count == 0)
+            return null;
+
+        if (playerSpawnMethod == PlayerSpawnMethod.Random)
+        {
+            return startPositions[UnityEngine.Random.Range(0, startPositions.Count)];
+        }
+        else
+        {
+            Transform startPosition = startPositions[startPositionIndex];
+            startPositionIndex = (startPositionIndex + 1) % startPositions.Count;
+            return startPosition;
+        }
+    }
+
+    internal static void UnRegisterTeamStartPosition(Transform transform, Team team)
+    {
+        switch (team)
+        {
+            case Team.Forest:
+                forestStartPositions.Remove(transform);
+                break;
+            case Team.Desert:
+                desertStartPositions.Remove(transform);
+                break;
+            case Team.Ice:
+                iceStartPositions.Remove(transform);
+                break;
+            case Team.NoTeam:
+                UnRegisterStartPosition(transform);
+                break;
+            default:
+                break;
         }
     }
 }

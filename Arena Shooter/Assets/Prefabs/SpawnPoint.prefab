@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5657519217040662023}
-  - component: {fileID: 2889725877369243983}
+  - component: {fileID: 578492515797399932}
   m_Layer: 0
   m_Name: Respawn location
   m_TagString: Untagged
@@ -157,7 +157,7 @@ Transform:
   m_Father: {fileID: 2937204309329638674}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2889725877369243983
+--- !u!114 &578492515797399932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6086251327995843335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f84591ce72545258ea98cb7518d8b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 47b901795da52164795ad06e6f1b7937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 3

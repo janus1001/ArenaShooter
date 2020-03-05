@@ -1320,7 +1320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4462374796629387125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1621,7 +1621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4462374796695607304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3341,7 +3341,7 @@ GameObject:
   - component: {fileID: 4462374797285322633}
   - component: {fileID: 4462374797285322638}
   m_Layer: 5
-  m_Name: HUD Canvas
+  m_Name: Game HUD Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3447,35 +3447,8 @@ MonoBehaviour:
   playerShieldImage: {fileID: 4462374796695607305}
   playerShieldText: {fileID: 4462374796629387130}
   forestTeamHealth: {fileID: 4462374797178657842}
-  forestTeamPlayers:
-  - avatar: {fileID: 4462374797002546353}
-    health: {fileID: 4462374796736039968}
-    shield: {fileID: 4462374796503290258}
-    crossout: {fileID: 4462374796702564191}
-  - avatar: {fileID: 4462374796516152076}
-    health: {fileID: 4462374798199632107}
-    shield: {fileID: 4462374797791457791}
-    crossout: {fileID: 4462374796355406135}
   desertTeamHealth: {fileID: 4462374798059070434}
-  desertTeamPlayers:
-  - avatar: {fileID: 4462374797200405456}
-    health: {fileID: 0}
-    shield: {fileID: 0}
-    crossout: {fileID: 4462374797549343388}
-  - avatar: {fileID: 4462374797316154064}
-    health: {fileID: 0}
-    shield: {fileID: 0}
-    crossout: {fileID: 4462374797840055383}
   iceTeamHealth: {fileID: 4462374796760994103}
-  iceTeamPlayers:
-  - avatar: {fileID: 4462374796100852675}
-    health: {fileID: 0}
-    shield: {fileID: 0}
-    crossout: {fileID: 4462374798050525893}
-  - avatar: {fileID: 4462374796714983626}
-    health: {fileID: 0}
-    shield: {fileID: 0}
-    crossout: {fileID: 4462374796473863708}
 --- !u!114 &4462374797285322638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4107,7 +4080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4462374797532581104
 RectTransform:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum Team
 {
-    Forest, Desert, Ice
+    Forest, Desert, Ice, NoTeam
 }
 
 [Serializable]

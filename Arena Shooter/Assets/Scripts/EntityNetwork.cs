@@ -8,13 +8,20 @@ public class EntityNetwork : NetworkBehaviour
     public static EntityNetwork localPlayer;
     public Armour armour;
 
+    public float startingHealth = 100;
+
     [SyncVar(hook = "UpdateHealth")]
-    float health = 100;
+    internal float health = 100;
     [SyncVar(hook = "UpdateShield")]
     float shield = 100;
 
     void Start()
     {
+        if(isServer)
+        {
+            health = startingHealth;
+        }
+
         if (isLocalPlayer)
         {
             localPlayer = this;

@@ -46,7 +46,7 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
                 playerIdentity.transform.SetParent(RoomHudCanvas.singleton.playerSlotsIce);
                 break;
             case LobbyPosition.List:
-                Debug.LogError("List not implemented.");
+                playerIdentity.transform.SetParent(RoomHudCanvas.singleton.playerSlotsList);
                 break;
             default:
                 Debug.LogError("Unidentified LobbyPosition.");

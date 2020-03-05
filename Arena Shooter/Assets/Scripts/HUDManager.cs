@@ -17,10 +17,12 @@ public class HUDManager : MonoBehaviour
     public TMP_Text playerShieldText;
 
     public Image forestTeamHealth;
-
     public Image desertTeamHealth;
-
     public Image iceTeamHealth;
+
+    private EntityNetwork forestCrystal;
+    private EntityNetwork desertCrystal;
+    private EntityNetwork iceCrystal;
 
     private float mouseHUDMovementStrength = 0;
     private float lastPlayerYPosition = 0;
@@ -39,6 +41,36 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
+        if (forestCrystal)
+        {
+            forestTeamHealth.fillAmount = forestCrystal.health / forestCrystal.startingHealth;
+        }
+        else
+        {
+            GameObject crystal = GameObject.Find("Forest Crystal");
+            if (crystal)
+                forestCrystal = crystal.GetComponent<EntityNetwork>();
+        }
+        if (desertCrystal)
+        {
+            desertTeamHealth.fillAmount = desertCrystal.health / desertCrystal.startingHealth;
+        }
+        else
+        {
+            GameObject crystal = GameObject.Find("Desert Crystal");
+            if (crystal)
+                desertCrystal = crystal.GetComponent<EntityNetwork>();
+        }
+        if (iceCrystal)
+        {
+            iceTeamHealth.fillAmount = iceCrystal.health / iceCrystal.startingHealth;
+        }
+        else 
+        { 
+            GameObject crystal = GameObject.Find("Ice Crystal");
+            if (crystal)
+                iceCrystal = crystal.GetComponent<EntityNetwork>();
+        }
         if (EntityNetwork.localPlayer)
         {
             MoveHUD();

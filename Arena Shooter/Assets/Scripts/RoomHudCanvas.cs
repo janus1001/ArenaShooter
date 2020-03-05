@@ -14,6 +14,7 @@ public class RoomHudCanvas : MonoBehaviour
     public RectTransform playerSlotsForest;
     public RectTransform playerSlotsDesert;
     public RectTransform playerSlotsIce;
+    public RectTransform playerSlotsList;
 
     public TMPro.TMP_Text readyText;
 
@@ -37,6 +38,9 @@ public class RoomHudCanvas : MonoBehaviour
                 break;
             case "ice":
                 NetworkRoomPlayerExtended.singleton.CmdSelectTeam(Team.Ice);
+                break;
+            case "no team":
+                NetworkRoomPlayerExtended.singleton.CmdSelectTeam(Team.NoTeam);
                 break;
             default:
                 Debug.LogError("Check team text on button.");
