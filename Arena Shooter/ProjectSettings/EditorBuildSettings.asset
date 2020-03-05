@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Game - Prototype map.unity
     guid: 47e6a57ea4766474e897d22bcb677224
   - enabled: 1
-    path: Assets/Scenes/Arena Fixed.unity
+    path: Assets/Scenes/Arena.unity
     guid: f615ba3156f359c48aa4742feede3ecf
   m_configObjects: {}

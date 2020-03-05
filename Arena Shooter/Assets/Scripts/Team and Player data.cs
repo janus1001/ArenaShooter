@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum Team
 {
-    Forest, Desert, Ice
+    Forest, Desert, Ice, NoTeam
 }
 
 [Serializable]
 public struct PlayerDataServer
 {
+    public static List<PlayerDataServer> forestTeam = new List<PlayerDataServer>();
+    public static List<PlayerDataServer> desertTeam = new List<PlayerDataServer>();
+    public static List<PlayerDataServer> iceTeam = new List<PlayerDataServer>();
+
     [SerializeField]
     public string avatarURI;
     [SerializeField]

@@ -43,7 +43,7 @@ public class PlayerShooting : NetworkBehaviour
         {
             // TODO add damage
 
-            EntityNetwork hitObject = hit.collider.GetComponent<EntityNetwork>();
+            EntityNetwork hitObject = hit.collider.GetComponentInParent<EntityNetwork>();
             if (hitObject)
             {
                 CmdDealDamage(hitObject.GetComponent<NetworkIdentity>(), 10, BodyPart.Generic);

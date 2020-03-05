@@ -2,19 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Linq;
 
 public class EntityNetwork : NetworkBehaviour
 {
+    public PlayerDataServer serverSidePlayerData;
     public static EntityNetwork localPlayer;
     public Armour armour;
 
+    public float startingHealth = 100;
+
     [SyncVar(hook = "UpdateHealth")]
-    float health = 100;
+    internal float health = 100;
     [SyncVar(hook = "UpdateShield")]
     float shield = 100;
 
     void Start()
     {
+        if(isServer)
+        {
+            health = startingHealth;
+
+            // Assigning team value to the player that they have chosen
+            if (connectionToClient != null)
+            {
+
+            }
+        }
+
         if (isLocalPlayer)
         {
             localPlayer = this;
@@ -31,11 +46,11 @@ public class EntityNetwork : NetworkBehaviour
             HUDManager.current.SetHUDPlayerHealth(newHealth);
             if (newHealth > oldHealth) // Regained health
             {
-
+                // TODO: Idk play sound? Maybe?
             }
             else // Lost health
             {
-
+                // TODO: Color the health bar into red hue
             }
         }
     }
@@ -67,7 +82,7 @@ public class EntityNetwork : NetworkBehaviour
             {
                 health = 100;
 
-                Transform startPosition = NetworkManager.singleton.GetStartPosition();
+                Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData);
                 TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
             }
             else
@@ -80,7 +95,8 @@ public class EntityNetwork : NetworkBehaviour
     [TargetRpc]
     void TargetRespawnAt(NetworkConnection conn, Vector3 position, Quaternion rotation)
     {
-
+        localPlayer.transform.position = position;
+        localPlayer.transform.rotation = rotation;
     }
 }
 
