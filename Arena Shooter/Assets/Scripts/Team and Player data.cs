@@ -16,7 +16,7 @@ public struct PlayerDataServer
     [SerializeField]
     public Mirror.NetworkConnection connectionToPlayer;
 
-    public PlayerDataServer(string newAvatarURI, string newPlayerName, Mirror.NetworkConnection newConnectionToPlayer)
+    public PlayerDataServer(string newPlayerName, string newAvatarURI, Mirror.NetworkConnection newConnectionToPlayer)
     {
         avatarURI = newAvatarURI;
         playerName = newPlayerName;
@@ -27,14 +27,22 @@ public struct PlayerDataServer
 [Serializable]
 public struct PlayerDataClient
 {
+    public static PlayerDataClient localPlayerData = new PlayerDataClient("Default Player", "xxx");
+
     [SerializeField]
     public string avatarURI;
     [SerializeField]
     public string playerName;
 
-    public PlayerDataClient(string newAvatarURI, string newPlayerName)
+    public PlayerDataClient(string newPlayerName, string newAvatarURI)
     {
         avatarURI = newAvatarURI;
         playerName = newPlayerName;
+    }
+
+    public PlayerDataClient(PlayerDataServer serverData)
+    {
+        avatarURI = serverData.avatarURI;
+        playerName = serverData.playerName;
     }
 }

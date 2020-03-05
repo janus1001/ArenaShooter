@@ -104,7 +104,7 @@ MonoBehaviour:
   speed: 6
   aerialMultiplier: 0.8
   jumpStrength: 5
-  mouseSensitivity: 6
+  mouseSensitivity: 1.2
   slopeForce: 300
   slopeRayLengthMultiplier: 1.5
 --- !u!114 &4059586475804762699

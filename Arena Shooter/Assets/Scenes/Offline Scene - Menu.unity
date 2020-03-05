@@ -128,6 +128,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4150641047240093866, guid: 7dde332e0c6bec848a76bb28f037657b,
+        type: 3}
+      propertyPath: showRoomGUI
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5610486385060568047, guid: 7dde332e0c6bec848a76bb28f037657b,
+        type: 3}
+      propertyPath: showGUI
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8242651968563590650, guid: 7dde332e0c6bec848a76bb28f037657b,
         type: 3}
       propertyPath: m_Name
@@ -188,79 +198,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8242651968563590648, guid: 7dde332e0c6bec848a76bb28f037657b, type: 3}
-    - {fileID: 8242651968563590649, guid: 7dde332e0c6bec848a76bb28f037657b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dde332e0c6bec848a76bb28f037657b, type: 3}
---- !u!1 &515875713 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8242651968563590650, guid: 7dde332e0c6bec848a76bb28f037657b,
-    type: 3}
-  m_PrefabInstance: {fileID: 322483990}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &515875714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515875713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
---- !u!114 &515875715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515875713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfbefa9bf55fa564e8d0ccc39e5e4317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  runInBackground: 1
-  startOnHeadless: 1
-  serverTickRate: 30
-  showDebugMessages: 0
-  offlineScene: Offline Scene - Menu
-  onlineScene: Room Scene
-  transport: {fileID: 515875716}
-  networkAddress: localhost
-  maxConnections: 4
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 6291389003617165796, guid: 5b116df3d9a819847b0dbab70fe71a29,
-    type: 3}
-  autoCreatePlayer: 1
-  playerSpawnMethod: 0
-  spawnPrefabs: []
-  showRoomGUI: 1
-  minPlayers: 1
-  roomPlayerPrefab: {fileID: 8472053408076175907, guid: 344af5dc6e25b2c44b12b9647777f590,
-    type: 3}
-  RoomScene: Room Scene
-  GameplayScene: Arena Fixed
-  roomSlots: []
-  allPlayersReady: 0
---- !u!114 &515875716 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8242651968563590651, guid: 7dde332e0c6bec848a76bb28f037657b,
-    type: 3}
-  m_PrefabInstance: {fileID: 322483990}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515875713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74e9ccf0f80396c4e872809df1897f54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1235331808
 GameObject:
   m_ObjectHideFlags: 0
