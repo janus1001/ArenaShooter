@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2009649464535283517, guid: cd2279b4a3beba84280922f31f881138,
         type: 3}
       propertyPath: m_Name
-      value: Forest Crystal
+      value: Forest Crystal Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2353158047412614056, guid: cd2279b4a3beba84280922f31f881138,
         type: 3}
@@ -70,6 +70,11 @@ PrefabInstance:
     - target: {fileID: 3294642967427089710, guid: cd2279b4a3beba84280922f31f881138,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548693353411850793, guid: cd2279b4a3beba84280922f31f881138,
+        type: 3}
+      propertyPath: belongingToTeam
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7548693353411850794, guid: cd2279b4a3beba84280922f31f881138,

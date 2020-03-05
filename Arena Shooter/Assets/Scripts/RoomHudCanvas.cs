@@ -60,7 +60,6 @@ public class RoomHudCanvas : MonoBehaviour
         if(isLocalPlayerChanged)
         {
             // Show button if player chose a team
-            Debug.Log(readyText.transform.parent.gameObject);
             readyText.transform.parent.gameObject.SetActive(true);
 
             if(!NetworkRoomPlayerExtended.singleton.readyToBegin)

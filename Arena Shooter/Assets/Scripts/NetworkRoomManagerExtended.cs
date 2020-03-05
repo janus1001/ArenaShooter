@@ -14,9 +14,12 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
     public static List<PlayerDataServer> teamDesert = new List<PlayerDataServer>();
     public static List<PlayerDataServer> teamIce = new List<PlayerDataServer>();
 
-    public static List<Transform> forestStartPositions = new List<Transform>(); 
+    public static List<Transform> forestStartPositions = new List<Transform>();
+    static int forestStartPositionIndex = 0;
     public static List<Transform> desertStartPositions = new List<Transform>();
+    static int desertStartPositionIndex = 0;
     public static List<Transform> iceStartPositions = new List<Transform>();
+    static int iceStartPositionIndex = 0;
 
     public override void OnRoomServerSceneChanged(string sceneName)
     {
@@ -98,24 +101,37 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
         }
     }
 
-    public override Transform GetStartPosition()
+    public Transform GetTeamStartPosition(Team team)
     {
-        // first remove any dead transforms
-        startPositions.RemoveAll(t => t == null);
-
-        if (startPositions.Count == 0)
-            return null;
-
-        if (playerSpawnMethod == PlayerSpawnMethod.Random)
+        Transform startPosition;
+        switch (team)
         {
-            return startPositions[UnityEngine.Random.Range(0, startPositions.Count)];
+            case Team.Forest:
+                forestStartPositions.RemoveAll(t => t == null);
+                if (forestStartPositions.Count == 0)
+                    return null;
+                startPosition = forestStartPositions[forestStartPositionIndex];
+                forestStartPositionIndex = (forestStartPositionIndex + 1) % forestStartPositions.Count;
+                return startPosition;
+
+            case Team.Desert:
+                desertStartPositions.RemoveAll(t => t == null);
+                if (desertStartPositions.Count == 0)
+                    return null;
+                startPosition = desertStartPositions[desertStartPositionIndex];
+                desertStartPositionIndex = (desertStartPositionIndex + 1) % desertStartPositions.Count;
+                return startPosition;
+
+            case Team.Ice:
+                iceStartPositions.RemoveAll(t => t == null);
+                if (iceStartPositions.Count == 0)
+                    return null;
+                startPosition = iceStartPositions[iceStartPositionIndex];
+                iceStartPositionIndex = (iceStartPositionIndex + 1) % iceStartPositions.Count;
+                return startPosition;
         }
-        else
-        {
-            Transform startPosition = startPositions[startPositionIndex];
-            startPositionIndex = (startPositionIndex + 1) % startPositions.Count;
-            return startPosition;
-        }
+        // If team tag is missing, return default value.
+        return base.GetStartPosition();
     }
 
     internal static void UnRegisterTeamStartPosition(Transform transform, Team team)
@@ -137,5 +153,28 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
             default:
                 break;
         }
+    }
+
+    public void ChangePlayerName()
+    {
+        string newName = GameObject.Find("Player Name Input").GetComponent<TMPro.TMP_InputField>().text;
+        if(newName == "")
+        {
+            newName = "Player";
+        }
+        PlayerDataClient.localPlayerData.playerName = newName;
+    }
+
+    public override void OnServerAddPlayer(NetworkConnection conn)
+    {
+        Transform startPos = GetStartPosition();
+        GameObject player = startPos != null
+            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+            : Instantiate(playerPrefab);
+
+        NetworkServer.AddPlayerForConnection(conn, player);
+
+        base.OnServerAddPlayer(conn);
+        
     }
 }

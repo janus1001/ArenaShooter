@@ -23,12 +23,21 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
     void CmdDeclarePlayerData(PlayerDataClient playerData)
     {
         connectionToClient.identity.GetComponent<NetworkRoomPlayerExtended>().playerData = new PlayerDataServer(playerData.playerName, playerData.avatarURI, connectionToClient);
+        RpcUpdatePlayerPanel(connectionToClient.identity, playerData);
     }
 
     [Command]
     public void CmdSelectTeam(Team selectedTeam)
     {
         NetworkRoomManagerExtended.newSingleton.AddPlayerToTeam(connectionToClient, selectedTeam);
+    }
+
+    [ClientRpc]
+    private void RpcUpdatePlayerPanel(NetworkIdentity playerPanel, PlayerDataClient playerData)
+    {
+        //playerPanel.transform.Find("Avatar"); // Change avatar
+        Debug.Log(playerPanel.transform.Find("Player Name").GetComponent<TMPro.TMP_Text>());
+        playerPanel.transform.Find("Player Name").GetComponent<TMPro.TMP_Text>().text = playerData.playerName;
     }
 
     [ClientRpc]
