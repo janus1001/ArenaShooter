@@ -15,6 +15,7 @@ public class PlayerMovement : NetworkBehaviour
     CharacterController characterController;
     Vector3 motion = Vector3.zero;
     Vector3 groundNormal = Vector3.up;
+    bool isSlipping = false;
     float xRotation = 0.0f;
 
     private void Start()
@@ -29,34 +30,30 @@ public class PlayerMovement : NetworkBehaviour
         {
             CameraControl();
             Move();
+            Debug.DrawRay(transform.position, motion);
         }
     }
 
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.gameObject.layer == LayerMask.NameToLayer("Terrain") || hit.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Terrain") || hit.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             groundNormal = hit.normal;
         }
+        else
+        {
+            groundNormal = Vector3.up;
+        }
     }
 
-    private bool OnSliperySlope()
+    private bool OnSlipperySlope()
     {
-        if (!characterController.isGrounded)
-        {
-            return false;
-        }
-        else
+        if (characterController.isGrounded)
         {
             float groundAngle = Vector3.Angle(groundNormal, Vector3.up);
 
             if (groundAngle > characterController.slopeLimit)
             {
-                // można przenieść na dół
-                Vector3 groundCross = Vector3.Cross(groundNormal, Vector3.up);
-                Vector3 slopeVector = Vector3.Cross(groundNormal, groundCross);
-                motion = slopeVector * slopeForce * Time.deltaTime;
-                Debug.DrawRay(transform.position, motion);
                 return true;
             }
             else if (groundAngle != 0 && groundAngle <= characterController.slopeLimit)
@@ -81,7 +78,6 @@ public class PlayerMovement : NetworkBehaviour
                 motion = motion.normalized;
             }
             motion *= speed;
-            
         }
         else
         {
@@ -98,15 +94,16 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // Slope force
-        if (OnSliperySlope())
+        if (isSlipping = OnSlipperySlope())
         {
-
+            Vector3 groundCross = Vector3.Cross(groundNormal, Vector3.up);
+            Vector3 slopeVector = Vector3.Cross(groundNormal, groundCross);
+            motion = slopeVector * slopeForce * Time.deltaTime;
         }
 
         // Jumping
-        if (characterController.isGrounded && !OnSliperySlope() && Input.GetButton("Jump"))
+        if (characterController.isGrounded && !isSlipping && Input.GetButton("Jump"))
         {
-            Debug.Log("JUMP");
             motion.y = jumpStrength;
         }
 
