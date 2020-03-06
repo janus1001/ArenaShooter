@@ -38,7 +38,7 @@ namespace Mirror
 
         [FormerlySerializedAs("m_RoomPlayerPrefab")]
         [SerializeField]
-        NetworkRoomPlayer roomPlayerPrefab;
+        protected NetworkRoomPlayer roomPlayerPrefab;
 
         /// <summary>
         /// The scene to use for the room. This is similar to the offlineScene of the NetworkManager.

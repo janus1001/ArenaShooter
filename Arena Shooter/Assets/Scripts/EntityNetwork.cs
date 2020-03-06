@@ -82,8 +82,8 @@ public class EntityNetwork : NetworkBehaviour
             {
                 health = 100;
 
-                Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData);
-                TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
+                //Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData);
+                //TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
             }
             else
             {

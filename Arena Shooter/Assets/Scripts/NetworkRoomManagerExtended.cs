@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using System;
+using UnityEngine.SceneManagement;
 
 public class NetworkRoomManagerExtended : NetworkRoomManager
 {
@@ -167,14 +168,23 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
-        Transform startPos = GetStartPosition();
-        GameObject player = startPos != null
-            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-            : Instantiate(playerPrefab);
+        if (SceneManager.GetActiveScene().name == RoomScene)
+        {
+            if (roomSlots.Count == maxConnections) return;
 
-        NetworkServer.AddPlayerForConnection(conn, player);
+            allPlayersReady = false;
 
-        base.OnServerAddPlayer(conn);
-        
+            if (LogFilter.Debug) Debug.LogFormat("NetworkRoomManager.OnServerAddPlayer playerPrefab:{0}", roomPlayerPrefab.name);
+
+            GameObject newRoomGameObject = OnRoomServerCreateRoomPlayer(conn);
+            if (newRoomGameObject == null)
+                newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
+
+            NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
+        }
+        else
+        {
+            OnRoomServerAddPlayer(conn);
+        }
     }
 }
