@@ -66,10 +66,12 @@ public class Inventory : NetworkBehaviour
     }
     void UpdateDollarsHUD(int oldValue, int newValue)
     {
-        HUDManager.current.dollarsText.text = "Money: $" + newValue.ToString();
+        if(isLocalPlayer)
+            HUDManager.current.dollarsText.text = "Money: $" + newValue.ToString();
     }
     void UpdateTokensHUD(int oldValue, int newValue)
     {
-        HUDManager.current.tokensText.text = "Tokens: " + newValue.ToString();
+        if (isLocalPlayer)
+            HUDManager.current.tokensText.text = "Tokens: " + newValue.ToString();
     }
 }

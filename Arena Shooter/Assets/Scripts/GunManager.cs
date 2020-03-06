@@ -37,47 +37,56 @@ public class GunManager : MonoBehaviour
 
     public void EquipPistol()
     {
+        HideAllWeapons();
         playerShooting.fireRate = 3;
         playerShooting.damage = 13;
         playerShooting.maxAmmo = 12;
+        playerShooting.currentAmmo = playerShooting.maxAmmo;
         playerShooting.nextTimeToFire = 0;
-        HideAllWeapons();
         pistolModel.SetActive(true);
         pistolMuzzleFlash.gameObject.SetActive(true);
     }
     public void EquipElitePistol()
     {
+        HideAllWeapons();
         playerShooting.fireRate = 1;
         playerShooting.damage = 45;
         playerShooting.maxAmmo = 6;
+        playerShooting.currentAmmo = playerShooting.maxAmmo;
         playerShooting.nextTimeToFire = 0;
-        HideAllWeapons();
         elitePistolModel.SetActive(true);
         pistolMuzzleFlash.gameObject.SetActive(true);
     }
     public void EquipRifle()
     {
+        HideAllWeapons();
         playerShooting.fireRate = 8;
         playerShooting.damage = 18;
         playerShooting.maxAmmo = 20;
+        playerShooting.currentAmmo = playerShooting.maxAmmo;
         playerShooting.nextTimeToFire = 0;
-        HideAllWeapons();
         rifleModel.SetActive(true);
         rifleMuzzleFlash.gameObject.SetActive(true);
     }
     public void EquipDmr()
     {
+        HideAllWeapons();
         playerShooting.fireRate = 3;
         playerShooting.damage = 50;
         playerShooting.maxAmmo = 8;
+        playerShooting.currentAmmo = playerShooting.maxAmmo;
         playerShooting.nextTimeToFire = 0;
-        HideAllWeapons();
         dmrModel.SetActive(true);
         rifleMuzzleFlash.gameObject.SetActive(true);
     }
 
-    private void HideAllWeapons()
+    public void HideAllWeapons()
     {
+        playerShooting.fireRate = float.MinValue;
+        playerShooting.damage = 0;
+        playerShooting.maxAmmo = 0;
+        playerShooting.currentAmmo = playerShooting.maxAmmo;
+        playerShooting.nextTimeToFire = 0;
         pistolModel.SetActive(false);
         elitePistolModel.SetActive(false);
         rifleModel.SetActive(false);

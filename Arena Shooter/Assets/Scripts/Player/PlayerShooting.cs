@@ -11,9 +11,10 @@ public class PlayerShooting : NetworkBehaviour
     public Camera playerCamera;
     public GameObject impactEffect;
 
-    private int currentAmmo = 0;
+    public int currentAmmo = 0;
     public float nextTimeToFire = 0;
 
+    private bool reloading = false;
     private float reloadingTime = 0;
 
     private void Start()
@@ -28,12 +29,24 @@ public class PlayerShooting : NetworkBehaviour
 
     private void Update()
     {
+
         if (!isLocalPlayer)
             return;
 
+        HUDManager.current.UpdateAmmo(currentAmmo, maxAmmo);
+
         reloadingTime -= Time.deltaTime;
+        Camera.main.transform.GetChild(0).localPosition = new Vector3(0, -Mathf.Sin(Mathf.Clamp01(reloadingTime)), 0);
+
+        if (reloading == true && reloadingTime <= 0)
+        {
+            reloading = false;
+            currentAmmo = maxAmmo;
+        }
         if(Input.GetKeyDown(KeyCode.R) && reloadingTime <= 0)
         {
+            reloading = true;
+            currentAmmo = 0;
             reloadingTime = 1;
         }
 
@@ -67,7 +80,6 @@ public class PlayerShooting : NetworkBehaviour
             impact.transform.up = hit.normal;
             //Destroy(impact, 0.5f);
         }
-        HUDManager.current.UpdateAmmo(currentAmmo, maxAmmo);
     }
 
     // Function called by client, executed on server.

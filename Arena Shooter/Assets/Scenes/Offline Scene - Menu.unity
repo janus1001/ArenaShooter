@@ -506,10 +506,12 @@ MonoBehaviour:
 
     Jump: Space
 
-    Buy items: E
+    Shooting: LMB
 
-    Shooting:
-    LMB'
+    Reload:
+    R
+
+    Buy items: E'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 710e9ba5605214e47b75806a6f0e9e22, type: 2}
   m_sharedMaterial: {fileID: -8118488905535421554, guid: 710e9ba5605214e47b75806a6f0e9e22,
@@ -579,12 +581,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1224308683}
-    characterCount: 59
+    characterCount: 69
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 11
+    wordCount: 12
     linkCount: 0
-    lineCount: 5
+    lineCount: 6
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

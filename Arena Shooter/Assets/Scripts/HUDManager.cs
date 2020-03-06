@@ -25,9 +25,9 @@ public class HUDManager : MonoBehaviour
     public Image desertTeamHealth;
     public Image iceTeamHealth;
 
-    private EntityNetwork forestCrystal;
-    private EntityNetwork desertCrystal;
-    private EntityNetwork iceCrystal;
+    public static EntityNetwork forestCrystal;
+    public static EntityNetwork desertCrystal;
+    public static EntityNetwork iceCrystal;
 
     private float mouseHUDMovementStrength = 0;
     private float lastPlayerYPosition = 0;
@@ -52,6 +52,7 @@ public class HUDManager : MonoBehaviour
         }
         else
         {
+            forestTeamHealth.fillAmount = 0;
             GameObject crystal = GameObject.Find("Forest Crystal");
             if (crystal)
                 forestCrystal = crystal.GetComponent<EntityNetwork>();
@@ -62,6 +63,7 @@ public class HUDManager : MonoBehaviour
         }
         else
         {
+            desertTeamHealth.fillAmount = 0;
             GameObject crystal = GameObject.Find("Desert Crystal");
             if (crystal)
                 desertCrystal = crystal.GetComponent<EntityNetwork>();
@@ -71,8 +73,9 @@ public class HUDManager : MonoBehaviour
             iceTeamHealth.fillAmount = iceCrystal.health / iceCrystal.startingHealth;
         }
         else 
-        { 
-            GameObject crystal = GameObject.Find("Ice Crystal");
+        {
+            iceTeamHealth.fillAmount = 0;
+              GameObject crystal = GameObject.Find("Ice Crystal");
             if (crystal)
                 iceCrystal = crystal.GetComponent<EntityNetwork>();
         }

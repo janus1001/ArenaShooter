@@ -63,7 +63,7 @@ public class EntityNetwork : NetworkBehaviour
             }
             else // Lost shield
             {
-
+                
             }
         }
     }
@@ -73,11 +73,38 @@ public class EntityNetwork : NetworkBehaviour
     {
         health -= damageAmount;
 
-        if(health <= 0)
+        if (health <= 0)
         {
-            if(gameObject.CompareTag("Player"))
+            if (gameObject.CompareTag("Player"))
             {
                 health = 100;
+
+                switch (serverSidePlayerData.belongingTo)
+                {
+                    case Team.Desert:
+                        if (!HUDManager.desertCrystal)
+                        {
+                            Destroy(gameObject);
+                            connectionToClient.Disconnect();
+                        }
+                        break;
+                    case Team.Forest:
+                        if (!HUDManager.forestCrystal)
+                        {
+                            Destroy(gameObject);
+                            connectionToClient.Disconnect();
+
+                        }
+                        break;
+                    case Team.Ice:
+                        if (!HUDManager.iceCrystal)
+                        {
+                            Destroy(gameObject);
+                            connectionToClient.Disconnect();
+
+                        }
+                        break;
+                }
 
                 Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData.belongingTo);
                 TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
@@ -98,6 +125,7 @@ public class EntityNetwork : NetworkBehaviour
     [TargetRpc]
     void TargetRespawnAt(NetworkConnection conn, Vector3 position, Quaternion rotation)
     {
+        GunManager.singleton.HideAllWeapons();
         localPlayer.transform.position = position;
         localPlayer.transform.rotation = rotation;
     }
