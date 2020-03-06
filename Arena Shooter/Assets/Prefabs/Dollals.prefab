@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3581651445283727884}
   - component: {fileID: 3581651445283727887}
   - component: {fileID: 3581651445283727886}
+  - component: {fileID: -3527750032469250271}
   m_Layer: 0
-  m_Name: PowerCrystal
+  m_Name: Dollals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,3 +109,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  tokenWorth: 0
+  refreshRate: 6
+--- !u!114 &-3527750032469250271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3581651445283727881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 

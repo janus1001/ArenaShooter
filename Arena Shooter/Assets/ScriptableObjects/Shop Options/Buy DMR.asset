@@ -15,3 +15,4 @@ MonoBehaviour:
   itemToBuy: {fileID: 0}
   moneyPrice: 0
   tokenPrice: 10
+  id: 4

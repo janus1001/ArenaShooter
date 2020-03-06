@@ -12,10 +12,12 @@ public class Inventory : NetworkBehaviour
 
     public PlaceableData tempPlaceableData; // To be replaced with inventory system
 
-    [SyncVar]
-    private int tokens = 0;
-    [SyncVar]
-    private int dollars = 0;
+    private float paymentTimer = 10;
+
+    [SyncVar(hook = "UpdateDollarsHUD")]
+    public int dollars = 30;
+    [SyncVar(hook = "UpdateTokensHUD")]
+    public int tokens = 0;
 
     [Command]
     public void CmdIncreaseTokenAmount(NetworkIdentity token)
@@ -30,11 +32,24 @@ public class Inventory : NetworkBehaviour
         if (isLocalPlayer)
         {
             localInventory = this;
+
+            UpdateDollarsHUD(0, dollars);
+            UpdateTokensHUD(0, tokens);
         }
     }
 
     void Update()
     {
+        if(isServer)
+        {
+            paymentTimer -= Time.deltaTime;
+            if(paymentTimer <= 0)
+            {
+                paymentTimer = 10;
+                dollars += 10;
+            }
+        }
+
         if(isLocalPlayer)
         {
             //HandleInput();
@@ -48,5 +63,13 @@ public class Inventory : NetworkBehaviour
             playerBuilding.StopBuilding();
             playerBuilding.EquipPlaceable(tempPlaceableData);
         }
+    }
+    void UpdateDollarsHUD(int oldValue, int newValue)
+    {
+        HUDManager.current.dollarsText.text = "Money: $" + newValue.ToString();
+    }
+    void UpdateTokensHUD(int oldValue, int newValue)
+    {
+        HUDManager.current.tokensText.text = "Tokens: " + newValue.ToString();
     }
 }

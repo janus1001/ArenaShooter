@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class PlayerShooting : NetworkBehaviour
 {
-    public float damage = 20.0f;
+    public float damage = 0.0f;
     public float range = 100.0f;
     public float fireRate = 10.0f;
+    public int maxAmmo = 10;
 
     public Camera playerCamera;
     public GameObject impactEffect;
 
-    private float nextTimeToFire = 0.0f;
+    private int currentAmmo = 0;
+    public float nextTimeToFire = 0;
+
+    private float reloadingTime = 0;
 
     private void Start()
     {
@@ -27,7 +31,13 @@ public class PlayerShooting : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
+        reloadingTime -= Time.deltaTime;
+        if(Input.GetKeyDown(KeyCode.R) && reloadingTime <= 0)
+        {
+            reloadingTime = 1;
+        }
+
+        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire && currentAmmo > 0)
         {
             nextTimeToFire = Time.time + 1.0f / fireRate;
             Shoot();
@@ -37,6 +47,8 @@ public class PlayerShooting : NetworkBehaviour
     private void Shoot()
     {
         // TODO muzzle flash
+        currentAmmo--;
+        GunManager.singleton.MuzzleFlash();
 
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
@@ -46,7 +58,7 @@ public class PlayerShooting : NetworkBehaviour
             EntityNetwork hitObject = hit.collider.GetComponentInParent<EntityNetwork>();
             if (hitObject)
             {
-                CmdDealDamage(hitObject.GetComponent<NetworkIdentity>(), 10, BodyPart.Generic);
+                CmdDealDamage(hitObject.GetComponent<NetworkIdentity>(), damage, BodyPart.Generic);
             }
 
             // TODO add force to the hit
@@ -55,6 +67,7 @@ public class PlayerShooting : NetworkBehaviour
             impact.transform.up = hit.normal;
             //Destroy(impact, 0.5f);
         }
+        HUDManager.current.UpdateAmmo(currentAmmo, maxAmmo);
     }
 
     // Function called by client, executed on server.
@@ -63,6 +76,6 @@ public class PlayerShooting : NetworkBehaviour
     {
         // TODO: simple checks if player was even able to hit the target.
 
-        targetPlayer.GetComponent<EntityNetwork>().DealDamage(10);
+        targetPlayer.GetComponent<EntityNetwork>().DealDamage(baseDamage, connectionToClient, hitPart);
     }
 }

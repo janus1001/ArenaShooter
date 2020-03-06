@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Buy Pistol
   m_EditorClassIdentifier: 
   itemToBuy: {fileID: 11400000, guid: 6f430247112b4b94cbc12ed889aca713, type: 2}
-  moneyPrice: 50
+  moneyPrice: 20
   tokenPrice: 0
+  id: 1

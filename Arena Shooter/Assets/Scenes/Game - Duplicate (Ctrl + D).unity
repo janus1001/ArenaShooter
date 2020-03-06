@@ -1144,6 +1144,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  serverSidePlayerData:
+    avatarURI: 
+    playerName: 
+    belongingTo: 0
+  startingHealth: 100
 --- !u!114 &749030682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6401,6 +6406,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9106602749315547136, guid: b065c8be121bf5e4889d8ac11f6cc1fc,
+        type: 3}
+      propertyPath: sceneId
+      value: 933968594
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b065c8be121bf5e4889d8ac11f6cc1fc, type: 3}
 --- !u!1001 &2573705393090826319
@@ -6470,6 +6480,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6487536045570387589, guid: 784b1246e8c911b44882f2c087cb8b00,
+        type: 3}
+      propertyPath: sceneId
+      value: 571849564
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 784b1246e8c911b44882f2c087cb8b00, type: 3}
 --- !u!1001 &2999374840128491287
@@ -6538,6 +6553,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shop Health Pack Frame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066488448146782554, guid: 1fe489758c78eef4782fd249383cc46d,
+        type: 3}
+      propertyPath: sceneId
+      value: 436668838
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fe489758c78eef4782fd249383cc46d, type: 3}

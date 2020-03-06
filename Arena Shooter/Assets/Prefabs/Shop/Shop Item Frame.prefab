@@ -199,6 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1616751733057148503}
   - component: {fileID: 1616751733057148499}
+  - component: {fileID: -450367923795663058}
   m_Layer: 11
   m_Name: Shop Item Frame
   m_TagString: Untagged
@@ -239,6 +240,21 @@ MonoBehaviour:
   itemPreview: {fileID: 1616751733827527160}
   detailsPage: {fileID: 1616751732908363591}
   soldItem: {fileID: 0}
+--- !u!114 &-450367923795663058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616751733057148492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
 --- !u!1 &1616751733174272723
 GameObject:
   m_ObjectHideFlags: 0

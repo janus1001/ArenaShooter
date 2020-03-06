@@ -6061,6 +6061,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9106602749315547136, guid: b065c8be121bf5e4889d8ac11f6cc1fc,
+        type: 3}
+      propertyPath: sceneId
+      value: 3288362216
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b065c8be121bf5e4889d8ac11f6cc1fc, type: 3}
 --- !u!1001 &2573705393090826319
@@ -6129,6 +6134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487536045570387589, guid: 784b1246e8c911b44882f2c087cb8b00,
+        type: 3}
+      propertyPath: sceneId
+      value: 1881260319
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 784b1246e8c911b44882f2c087cb8b00, type: 3}
@@ -6199,6 +6209,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shop Health Pack Frame
       objectReference: {fileID: 0}
+    - target: {fileID: 5066488448146782554, guid: 1fe489758c78eef4782fd249383cc46d,
+        type: 3}
+      propertyPath: sceneId
+      value: 800547996
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fe489758c78eef4782fd249383cc46d, type: 3}
 --- !u!1001 &3033026285345945695
@@ -6267,6 +6282,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479816732328037800, guid: c7cffcd20f59faf4aa19d3860573bab4,
+        type: 3}
+      propertyPath: sceneId
+      value: 614947399
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7cffcd20f59faf4aa19d3860573bab4, type: 3}

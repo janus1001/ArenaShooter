@@ -8,4 +8,7 @@ public class Buyable : ScriptableObject
     public BaseItem itemToBuy;
     public int moneyPrice;
     public int tokenPrice;
+
+    // Temporary, to be replaced with BaseItem
+    public int id;
 }

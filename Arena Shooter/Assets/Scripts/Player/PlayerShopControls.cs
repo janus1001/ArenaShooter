@@ -34,6 +34,11 @@ public class PlayerShopControls : NetworkBehaviour
                 lastHitShop.GetComponentInParent<Shop>().ShowDetails();
                 maxDistance = 5;
             }
+
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                CmdTryBuy(lastHitShop.GetComponentInParent<NetworkIdentity>());
+            }
         }
         else if (lastHitShop)
         {
@@ -46,6 +51,37 @@ public class PlayerShopControls : NetworkBehaviour
     [Command]
     void CmdTryBuy(NetworkIdentity shopIdentity)
     {
-        //connectionToClient.identity
+        Shop targetedShop = shopIdentity.GetComponentInParent<Shop>();
+        Inventory playerInventory = GetComponent<Inventory>();
+
+        if(playerInventory.dollars >= targetedShop.soldItem.moneyPrice && playerInventory.tokens >= targetedShop.soldItem.tokenPrice)
+        {
+            playerInventory.dollars -= targetedShop.soldItem.moneyPrice;
+            playerInventory.tokens -= targetedShop.soldItem.tokenPrice;
+
+            // TODO: To be pruned
+            TargetEquipItem(connectionToClient, targetedShop.soldItem.id);
+        }
+    }
+
+    // TODO: To be pruned
+    [TargetRpc]
+    public void TargetEquipItem(NetworkConnection connection, int itemID)
+    {
+        switch(itemID)
+        {
+            case 1: // Pistol
+                GunManager.singleton.EquipPistol();
+                break;
+            case 2: // Elite Pistol
+                GunManager.singleton.EquipElitePistol();
+                break;
+            case 3: // Rifle
+                GunManager.singleton.EquipRifle();
+                break;
+            case 4: // DMR
+                GunManager.singleton.EquipDmr();
+                break;
+        }
     }
 }

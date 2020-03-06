@@ -16,6 +16,11 @@ public class HUDManager : MonoBehaviour
     public Image playerShieldImage;
     public TMP_Text playerShieldText;
 
+    public TMP_Text dollarsText;
+    public TMP_Text tokensText;
+
+    public TMP_Text ammoText;
+
     public Image forestTeamHealth;
     public Image desertTeamHealth;
     public Image iceTeamHealth;
@@ -98,5 +103,9 @@ public class HUDManager : MonoBehaviour
     {
         playerShieldText.text = shield.ToString("00.");
         playerShieldImage.fillAmount = shield / 100;
+    }
+    public void UpdateAmmo(int currentAmmo, int maxAmmo)
+    {
+        ammoText.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
     }
 }

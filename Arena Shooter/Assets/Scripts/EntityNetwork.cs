@@ -30,6 +30,9 @@ public class EntityNetwork : NetworkBehaviour
             Camera.main.transform.parent = localPlayer.transform;
             Camera.main.transform.localPosition = new Vector3(0, 0.75f, 0);
             Camera.main.transform.localRotation = Quaternion.identity;
+
+            // Destroy model if local player
+            Destroy(transform.GetChild(0).gameObject);
         }
     }
 
@@ -66,7 +69,7 @@ public class EntityNetwork : NetworkBehaviour
     }
 
     // Server only, use CmdDealDamage on client
-    public void DealDamage(float damageAmount, BodyPart bodyPartHit = BodyPart.Generic)
+    public void DealDamage(float damageAmount, NetworkConnection attackingPlayer, BodyPart bodyPartHit = BodyPart.Generic)
     {
         health -= damageAmount;
 
@@ -78,6 +81,12 @@ public class EntityNetwork : NetworkBehaviour
 
                 Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData.belongingTo);
                 TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
+
+                // TODO: Remove items
+
+
+                // Money awarded on kill
+                attackingPlayer.identity.GetComponentInParent<Inventory>().dollars += 50;
             }
             else
             {
