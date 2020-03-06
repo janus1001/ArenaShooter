@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1616751733057148492, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_Name
-      value: Shop Elite Pistol Frame
+      value: Shop Elite Pistol Frame Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1616751733057148499, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
@@ -152,37 +152,38 @@ PrefabInstance:
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_text
-      value: 'Upgraded pistol.
+      value: 'Slow shooting, but deals greater damage.
 
 
-        20 Damage
+        45 Damage
 
-        12 Ammo'
+        6
+        Ammo'
       objectReference: {fileID: 0}
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_fontSize
-      value: 13.95
+      value: 11.65
       objectReference: {fileID: 0}
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 35
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}

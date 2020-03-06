@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Buy Health Pack
   m_EditorClassIdentifier: 
   itemToBuy: {fileID: 11400000, guid: fa7b279c503e0134f80e9befaa39a00a, type: 2}
-  moneyPrice: 0
+  moneyPrice: 200
   tokenPrice: 0

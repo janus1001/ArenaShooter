@@ -16,14 +16,14 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
     
     [SyncVar]
     string playerAvatarUri;
-    [SyncVar]
+    [SyncVar(hook = "UpdatePlayerName")]
     string playerName;
 
     [Command]
     void CmdDeclarePlayerData(PlayerDataClient playerData)
     {
         connectionToClient.identity.GetComponent<NetworkRoomPlayerExtended>().playerData = new PlayerDataServer(playerData.playerName, playerData.avatarURI, connectionToClient);
-        RpcUpdatePlayerPanel(connectionToClient.identity, playerData);
+        playerName = playerData.playerName;
     }
 
     [Command]
@@ -32,12 +32,10 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
         NetworkRoomManagerExtended.newSingleton.AddPlayerToTeam(connectionToClient, selectedTeam);
     }
 
-    [ClientRpc]
-    private void RpcUpdatePlayerPanel(NetworkIdentity playerPanel, PlayerDataClient playerData)
+    private void UpdatePlayerName(string oldValue, string newValue)
     {
         //playerPanel.transform.Find("Avatar"); // Change avatar
-        Debug.Log(playerPanel.transform.Find("Player Name").GetComponent<TMPro.TMP_Text>());
-        playerPanel.transform.Find("Player Name").GetComponent<TMPro.TMP_Text>().text = playerData.playerName;
+        transform.Find("Player Name").GetComponent<TMPro.TMP_Text>().text = playerName;
     }
 
     [ClientRpc]

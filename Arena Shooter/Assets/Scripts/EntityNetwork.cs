@@ -22,12 +22,6 @@ public class EntityNetwork : NetworkBehaviour
         if(isServer)
         {
             health = startingHealth;
-
-            // Assigning team value to the player that they have chosen
-            if (connectionToClient != null)
-            {
-
-            }
         }
 
         if (isLocalPlayer)
@@ -82,8 +76,8 @@ public class EntityNetwork : NetworkBehaviour
             {
                 health = 100;
 
-                //Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData);
-                //TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
+                Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData.belongingTo);
+                TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
             }
             else
             {

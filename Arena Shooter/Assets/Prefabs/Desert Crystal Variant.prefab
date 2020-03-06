@@ -77,6 +77,11 @@ PrefabInstance:
       propertyPath: belongingToTeam
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7548693353411850793, guid: cd2279b4a3beba84280922f31f881138,
+        type: 3}
+      propertyPath: serverSidePlayerData.belongingTo
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7548693353411850794, guid: cd2279b4a3beba84280922f31f881138,
         type: 3}
       propertyPath: sceneId

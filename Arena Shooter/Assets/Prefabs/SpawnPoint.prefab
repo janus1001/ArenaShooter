@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 5657519217040662023}
   - component: {fileID: 578492515797399932}
   m_Layer: 0
-  m_Name: Respawn location
+  m_Name: No team Respawn location
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -169,4 +169,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b901795da52164795ad06e6f1b7937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 3
+  team: 0

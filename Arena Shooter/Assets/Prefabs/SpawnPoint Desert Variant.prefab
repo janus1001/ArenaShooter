@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 578492515797399932, guid: f4eed3ae7a5410b47884233d90ac0ab1,
         type: 3}
       propertyPath: team
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2937204309329638674, guid: f4eed3ae7a5410b47884233d90ac0ab1,
         type: 3}
@@ -77,5 +77,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c01085e79a4f2cc498fd2a831520d13f, type: 2}
+    - target: {fileID: 6086251327995843335, guid: f4eed3ae7a5410b47884233d90ac0ab1,
+        type: 3}
+      propertyPath: m_Name
+      value: Desert Respawn location
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4eed3ae7a5410b47884233d90ac0ab1, type: 3}

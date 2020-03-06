@@ -37,7 +37,7 @@ public class Inventory : NetworkBehaviour
     {
         if(isLocalPlayer)
         {
-            HandleInput();
+            //HandleInput();
         }
     }
 

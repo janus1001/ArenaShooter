@@ -39,14 +39,17 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
         switch (choosenTeam)
         {
             case Team.Forest:
+                calledBy.playerData.belongingTo = Team.Forest;
                 teamForest.Add(calledBy.playerData);
                 calledBy.RpcSetPanelPosition(LobbyPosition.Forest, playerConnection.identity);
                 break;
             case Team.Desert:
+                calledBy.playerData.belongingTo = Team.Desert;
                 teamDesert.Add(calledBy.playerData);
                 calledBy.RpcSetPanelPosition(LobbyPosition.Desert, playerConnection.identity);
                 break;
             case Team.Ice:
+                calledBy.playerData.belongingTo = Team.Ice;
                 teamIce.Add(calledBy.playerData);
                 calledBy.RpcSetPanelPosition(LobbyPosition.Ice, playerConnection.identity);
                 break;
@@ -184,7 +187,19 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
         }
         else
         {
-            OnRoomServerAddPlayer(conn);
+            AddPlayer(conn);
         }
+    }
+
+    public void AddPlayer(NetworkConnection conn)
+    {
+        Transform startPos = GetTeamStartPosition(PlayerDataServer.RetrievePlayerDataByConnection(conn).belongingTo);
+        GameObject player = startPos != null
+            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+            : Instantiate(playerPrefab);
+
+        NetworkServer.AddPlayerForConnection(conn, player);
+
+        player.GetComponent<EntityNetwork>().serverSidePlayerData = PlayerDataServer.RetrievePlayerDataByConnection(conn); 
     }
 }

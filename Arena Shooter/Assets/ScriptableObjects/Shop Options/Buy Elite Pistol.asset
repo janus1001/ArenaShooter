@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemToBuy: {fileID: 0}
   moneyPrice: 0
-  tokenPrice: 0
+  tokenPrice: 4
