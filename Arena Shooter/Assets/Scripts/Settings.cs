@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
-    public static float MoveHUDMultiplier { get; set; } = 10;
+    public static float MoveHUDMultiplier = 10;
     public static int targetFPS = 144; // My PC was becoming a jet turbine ok
+    public static float mouseSensitivity = 1; // Currently unused
+    public static float HudScale = 1; // Currently unused
+    public static float masterVolume = 1; // Currently unused
 
     void Awake()
     {
