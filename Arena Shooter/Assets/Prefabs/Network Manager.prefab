@@ -66,12 +66,9 @@ MonoBehaviour:
   roomPlayerPrefab: {fileID: 8514446628699788486, guid: 00b2c0a868ddfc742ad4f54090b997c3,
     type: 3}
   RoomScene: Room Scene
-  GameplayScene: Arena Fixed
+  GameplayScene: 
   roomSlots: []
   allPlayersReady: 0
-  teamForest: []
-  teamDesert: []
-  teamIce: []
 --- !u!114 &8242651968563590651
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,6 +22,11 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
     public static List<Transform> iceStartPositions = new List<Transform>();
     static int iceStartPositionIndex = 0;
 
+    private void ColorPlayers()
+    {
+
+    }
+
     public override void OnRoomServerSceneChanged(string sceneName)
     {
         if (sceneName == "Room Scene")
@@ -200,6 +205,7 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
 
         NetworkServer.AddPlayerForConnection(conn, player);
 
-        player.GetComponent<EntityNetwork>().serverSidePlayerData = PlayerDataServer.RetrievePlayerDataByConnection(conn); 
+        player.GetComponent<EntityNetwork>().serverSidePlayerData = PlayerDataServer.RetrievePlayerDataByConnection(conn);
+        //player.GetComponent<EntityNetwork>().RpcSetColorToTeam(player.GetComponent<EntityNetwork>().serverSidePlayerData.belongingTo);
     }
 }

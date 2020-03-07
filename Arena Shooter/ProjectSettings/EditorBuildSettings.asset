@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Room Scene.unity
     guid: dc9af41373506a9449d8973f3015b2f1
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Game - Prototype map.unity
     guid: 47e6a57ea4766474e897d22bcb677224
   - enabled: 1

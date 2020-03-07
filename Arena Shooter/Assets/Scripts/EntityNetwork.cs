@@ -9,6 +9,7 @@ public class EntityNetwork : NetworkBehaviour
     public PlayerDataServer serverSidePlayerData;
     public static EntityNetwork localPlayer;
     public Armour armour;
+    public Renderer entityRenderer;
 
     public float startingHealth = 100;
 
@@ -128,6 +129,27 @@ public class EntityNetwork : NetworkBehaviour
         GunManager.singleton.HideAllWeapons();
         localPlayer.transform.position = position;
         localPlayer.transform.rotation = rotation;
+    }
+
+    [ClientRpc]
+    public void RpcSetColorToTeam(Team team)
+    {
+        if (entityRenderer)
+            switch (team)
+            {
+                case Team.NoTeam:
+                    entityRenderer.material.color = Color.gray;
+                    break;
+                case Team.Forest:
+                    entityRenderer.material.color = Color.green;
+                    break;
+                case Team.Desert:
+                    entityRenderer.material.color = Color.yellow;
+                    break;
+                case Team.Ice:
+                    entityRenderer.material.color = Color.cyan;
+                    break;
+            }
     }
 }
 

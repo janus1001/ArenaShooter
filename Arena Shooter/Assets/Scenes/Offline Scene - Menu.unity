@@ -293,6 +293,11 @@ PrefabInstance:
       propertyPath: GameplayScene
       value: Arena
       objectReference: {fileID: 0}
+    - target: {fileID: 4150641047240093866, guid: 7dde332e0c6bec848a76bb28f037657b,
+        type: 3}
+      propertyPath: maxConnections
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5610486385060568047, guid: 7dde332e0c6bec848a76bb28f037657b,
         type: 3}
       propertyPath: showGUI
