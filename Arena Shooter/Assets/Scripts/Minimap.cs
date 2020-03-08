@@ -8,7 +8,7 @@ public class Minimap : MonoBehaviour
 {
     public GameObject newMarkerPrefab;
 
-    public Transform localPlayer;
+    Transform localPlayer;
     public static List<Transform> targets = new List<Transform>();
     public static List<RectTransform> otherPlayerMarkers = new List<RectTransform>();
     public List<RectTransform> teamCrystals;

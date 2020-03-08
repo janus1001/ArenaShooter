@@ -18,4 +18,17 @@ public class Settings : MonoBehaviour
         Application.targetFrameRate = targetFPS;
         #endif
     }
+
+    public static string GetLocalIPAddress()
+    {
+        var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+        return "No local IP found.";
+    }
 }
