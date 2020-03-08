@@ -65,16 +65,12 @@
 		void surf (Input IN, inout SurfaceOutput o) 
 		{
 			float finalP = IN.worldPos.x * _HoloDirection.x + IN.worldPos.y * _HoloDirection.y + IN.worldPos.z * _HoloDirection.z;
-			if(frac((finalP + _Time.y) * _HoloValue) > _HoloDistance)
-			{
-				o.Emission = _HoloColor;
-				o.Alpha = _HoloColor.a;
-			}
-			else
-			{
-				o.Emission = _Color;
-				o.Alpha = _Color.a;
-			}
+			float a = frac((finalP + _Time.y) * _HoloValue) > _HoloDistance;
+			float4 emission = lerp(_Color, _HoloColor, a);
+			float alpha = lerp(_Color.a, _HoloColor.a, a);
+
+			o.Emission = emission;
+			o.Alpha = alpha;
 
 			o.Emission *= _EmissionMultiplier;
 			

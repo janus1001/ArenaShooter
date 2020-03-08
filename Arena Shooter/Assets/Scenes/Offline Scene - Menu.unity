@@ -602,6 +602,11 @@ PrefabInstance:
       propertyPath: sceneId
       value: 3387872765
       objectReference: {fileID: 0}
+    - target: {fileID: 5468710559117661198, guid: eea5699edb0947241a229d6d592dfcaa,
+        type: 3}
+      propertyPath: m_Name
+      value: Local Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8416915690103213754, guid: eea5699edb0947241a229d6d592dfcaa,
         type: 3}
       propertyPath: m_textInfo.characterCount

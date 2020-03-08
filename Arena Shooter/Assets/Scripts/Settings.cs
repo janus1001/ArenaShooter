@@ -9,6 +9,7 @@ public class Settings : MonoBehaviour
     public static float mouseSensitivity = 1; // Currently unused
     public static float HudScale = 1; // Currently unused
     public static float masterVolume = 1; // Currently unused
+    public static bool rotateMinimap = true;
 
     void Awake()
     {
