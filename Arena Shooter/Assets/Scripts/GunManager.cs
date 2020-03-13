@@ -6,6 +6,7 @@ public class GunManager : MonoBehaviour
 {
     public static GunManager singleton;
     public PlayerShooting playerShooting;
+    public Recoil recoil;
 
     public GameObject pistolModel;
     public GameObject elitePistolModel;
@@ -33,6 +34,12 @@ public class GunManager : MonoBehaviour
         {
             playerShooting = GetComponentInParent<PlayerShooting>();
         }
+    }
+
+    public void Shoot()
+    {
+        MuzzleFlash();
+        recoil.Punch();
     }
 
     public void EquipPistol()
@@ -95,7 +102,7 @@ public class GunManager : MonoBehaviour
         rifleMuzzleFlash.gameObject.SetActive(false);
     }
 
-    public void MuzzleFlash()
+    private void MuzzleFlash()
     {
         pistolMuzzleFlash.Play();
         rifleMuzzleFlash.Play();

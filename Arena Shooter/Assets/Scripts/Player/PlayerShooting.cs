@@ -29,7 +29,6 @@ public class PlayerShooting : NetworkBehaviour
 
     private void Update()
     {
-
         if (!isLocalPlayer)
             return;
 
@@ -61,7 +60,7 @@ public class PlayerShooting : NetworkBehaviour
     {
         // TODO muzzle flash
         currentAmmo--;
-        GunManager.singleton.MuzzleFlash();
+        GunManager.singleton.Shoot();
 
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
