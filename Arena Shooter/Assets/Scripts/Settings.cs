@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
+    public static Settings settingsInstance;
     public static float MoveHUDMultiplier = 10;
     public static int targetFPS = 144; // My PC was becoming a jet turbine ok
     public static float mouseSensitivity = 1; // Currently unused
@@ -17,6 +18,13 @@ public class Settings : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = targetFPS;
         #endif
+
+        settingsInstance = this;
+
+        mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1.0f);
+        Debug.Log(mouseSensitivity);
+
+        gameObject.SetActive(false);
     }
 
     public static string GetLocalIPAddress()
@@ -30,5 +38,12 @@ public class Settings : MonoBehaviour
             }
         }
         return "No local IP found.";
+    }
+
+    public void MainVolumeControl(System.Single vol)
+    {
+        mouseSensitivity = vol * 10.0f + 0.1f;
+        PlayerPrefs.SetFloat("MouseSensitivity", mouseSensitivity);
+        Debug.Log(mouseSensitivity);
     }
 }

@@ -46,6 +46,19 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Settings.settingsInstance.gameObject.SetActive(!Settings.settingsInstance.gameObject.activeSelf);
+            if (Settings.settingsInstance.gameObject.activeSelf)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
         if (forestCrystal)
         {
             forestTeamHealth.fillAmount = forestCrystal.health / forestCrystal.startingHealth;
@@ -79,7 +92,7 @@ public class HUDManager : MonoBehaviour
             if (crystal)
                 iceCrystal = crystal.GetComponent<EntityNetwork>();
         }
-        if (EntityNetwork.localPlayer)
+        if (EntityNetwork.localPlayer && !Settings.settingsInstance.gameObject.activeSelf)
         {
             MoveHUD();
         }

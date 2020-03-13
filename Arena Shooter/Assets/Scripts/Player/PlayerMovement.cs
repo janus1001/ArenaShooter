@@ -8,7 +8,6 @@ public class PlayerMovement : NetworkBehaviour
     public float speed = 6.0f;
     public float aerialMultiplier = 0.5f;
     public float jumpStrength = 10.0f;
-    public float mouseSensitivity = 100.0f;
     public float slopeForce = 300.0f;
 
     CharacterController characterController;
@@ -32,8 +31,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             isStill = transform.position == positionLastFrame;
             positionLastFrame = transform.position;
-            CameraControl();
-            Move();
+            if (!Settings.settingsInstance.gameObject.activeSelf)
+            {
+                CameraControl();
+                Move();
+            }
         }
     }
 
@@ -117,8 +119,8 @@ public class PlayerMovement : NetworkBehaviour
     private void CameraControl()
     {
         // Getting values for horizontal and vertical mouse moves
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * Settings.mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * Settings.mouseSensitivity;
 
         // Vertical movement
         xRotation -= mouseY;
