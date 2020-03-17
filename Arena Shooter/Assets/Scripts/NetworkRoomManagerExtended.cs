@@ -205,7 +205,7 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
 
         NetworkServer.AddPlayerForConnection(conn, player);
 
-        player.GetComponent<EntityNetwork>().serverSidePlayerData = PlayerDataServer.RetrievePlayerDataByConnection(conn);
+        player.GetComponent<PlayerEntityNetwork>().serverSidePlayerData = PlayerDataServer.RetrievePlayerDataByConnection(conn);
         //player.GetComponent<EntityNetwork>().RpcSetColorToTeam(player.GetComponent<EntityNetwork>().serverSidePlayerData.belongingTo);
     }
 }

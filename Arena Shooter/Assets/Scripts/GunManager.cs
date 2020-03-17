@@ -7,6 +7,7 @@ public class GunManager : MonoBehaviour
     public static GunManager singleton;
     public PlayerShooting playerShooting;
     public Recoil recoil;
+    public GunItem currentGun;
 
     public GameObject pistolModel;
     public GameObject elitePistolModel;
@@ -40,51 +41,6 @@ public class GunManager : MonoBehaviour
     {
         MuzzleFlash();
         recoil.Punch();
-    }
-
-    public void EquipPistol()
-    {
-        HideAllWeapons();
-        playerShooting.fireRate = 3;
-        playerShooting.damage = 13;
-        playerShooting.maxAmmo = 12;
-        playerShooting.currentAmmo = playerShooting.maxAmmo;
-        playerShooting.nextTimeToFire = 0;
-        pistolModel.SetActive(true);
-        pistolMuzzleFlash.gameObject.SetActive(true);
-    }
-    public void EquipElitePistol()
-    {
-        HideAllWeapons();
-        playerShooting.fireRate = 1;
-        playerShooting.damage = 45;
-        playerShooting.maxAmmo = 6;
-        playerShooting.currentAmmo = playerShooting.maxAmmo;
-        playerShooting.nextTimeToFire = 0;
-        elitePistolModel.SetActive(true);
-        pistolMuzzleFlash.gameObject.SetActive(true);
-    }
-    public void EquipRifle()
-    {
-        HideAllWeapons();
-        playerShooting.fireRate = 8;
-        playerShooting.damage = 18;
-        playerShooting.maxAmmo = 20;
-        playerShooting.currentAmmo = playerShooting.maxAmmo;
-        playerShooting.nextTimeToFire = 0;
-        rifleModel.SetActive(true);
-        rifleMuzzleFlash.gameObject.SetActive(true);
-    }
-    public void EquipDmr()
-    {
-        HideAllWeapons();
-        playerShooting.fireRate = 3;
-        playerShooting.damage = 50;
-        playerShooting.maxAmmo = 8;
-        playerShooting.currentAmmo = playerShooting.maxAmmo;
-        playerShooting.nextTimeToFire = 0;
-        dmrModel.SetActive(true);
-        rifleMuzzleFlash.gameObject.SetActive(true);
     }
 
     public void HideAllWeapons()

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerShooting : NetworkBehaviour
 {
+    public static PlayerShooting singleton;
+
     public float damage = 0.0f;
     public float range = 100.0f;
     public float fireRate = 10.0f;
@@ -23,6 +25,8 @@ public class PlayerShooting : NetworkBehaviour
         {
             // Setting player layer to Ignore Raycast in order to make it impossible to shoot yourself.
             gameObject.layer = 2;
+
+            singleton = this;
         }
         playerCamera = Camera.main;
     }
@@ -79,6 +83,11 @@ public class PlayerShooting : NetworkBehaviour
             impact.transform.up = hit.normal;
             //Destroy(impact, 0.5f);
         }
+    }
+
+    public void EquipWeapon()
+    {
+        
     }
 
     // Function called by client, executed on server.

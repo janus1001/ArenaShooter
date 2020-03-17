@@ -18,9 +18,9 @@ public class TokenPickUp : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (EntityNetwork.localPlayer && other.gameObject == EntityNetwork.localPlayer.gameObject)
+        if (PlayerEntityNetwork.localPlayer && other.gameObject == PlayerEntityNetwork.localPlayer.gameObject)
         {
-            Inventory.localInventory.CmdIncreaseTokenAmount(GetComponent<NetworkIdentity>());
+            // TODO: Add token Item
             tokenWorth = 0;
         }
     }

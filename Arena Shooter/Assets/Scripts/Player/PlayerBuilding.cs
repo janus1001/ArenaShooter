@@ -5,11 +5,19 @@ using Mirror;
 
 public class PlayerBuilding : NetworkBehaviour
 {
+	public static PlayerBuilding singleton;
 	public PlaceableData PlaceableData;
 	Placeable currentPlaceable;
 
 	private const float PlacementRange = 4;
 
+	private void Start()
+	{
+		if(isLocalPlayer)
+		{
+			singleton = this;
+		}
+	}
 	private void Update()
 	{
 		if(currentPlaceable.IsPlaceable && Input.GetMouseButtonDown(0))

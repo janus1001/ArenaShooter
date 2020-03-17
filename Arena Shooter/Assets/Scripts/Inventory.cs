@@ -7,26 +7,22 @@ using System;
 public class Inventory : NetworkBehaviour
 {
     public static Inventory localInventory;
-    public PlayerBuilding playerBuilding;
-    public PlayerShooting playerShooting;
+    public static BaseItem HeldItem
+    {
+        get
+        {
+            return localInventory.inventory[localInventory.currentInventoryIndex];
+        }
+    }
 
-    public PlaceableData tempPlaceableData; // To be replaced with inventory system
-
-    private float paymentTimer = 10;
+    BaseItem[] inventory = new BaseItem[5];
+    public InventorySlot[] inventoryPanels;
+    int currentInventoryIndex = 0;
+    const int maxInventoryIndex = 4;
 
     [SyncVar(hook = "UpdateDollarsHUD")]
     public int dollars = 30;
-    [SyncVar(hook = "UpdateTokensHUD")]
-    public int tokens = 0;
-
-    [Command]
-    public void CmdIncreaseTokenAmount(NetworkIdentity token)
-    {
-        TokenPickUp target = token.GetComponent<TokenPickUp>();
-        tokens += target.tokenWorth;
-        target.tokenWorth = 0;
-    }
-
+    
     private void Start()
     {
         if (isLocalPlayer)
@@ -34,44 +30,76 @@ public class Inventory : NetworkBehaviour
             localInventory = this;
 
             UpdateDollarsHUD(0, dollars);
-            UpdateTokensHUD(0, tokens);
+
+            HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
         }
     }
 
     void Update()
     {
-        if(isServer)
-        {
-            paymentTimer -= Time.deltaTime;
-            if(paymentTimer <= 0)
-            {
-                paymentTimer = 10;
-                dollars += 10;
-            }
-        }
-
         if(isLocalPlayer)
         {
-            //HandleInput();
+            HandleInput();
         }
     }
 
     private void HandleInput()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        if(ChangeInventorySlot())
         {
-            playerBuilding.StopBuilding();
-            playerBuilding.EquipPlaceable(tempPlaceableData);
+            HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
+            // Equip item
         }
     }
+
+    private bool ChangeInventorySlot() // Returns true if there was a slot change
+    {
+        int previous = currentInventoryIndex;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentInventoryIndex = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentInventoryIndex = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentInventoryIndex = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            currentInventoryIndex = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            currentInventoryIndex = 4;
+        }
+
+        currentInventoryIndex -= (int)Input.mouseScrollDelta.y;
+
+        if (currentInventoryIndex > maxInventoryIndex)
+        {
+            currentInventoryIndex = 0;
+        }
+        if (currentInventoryIndex < 0)
+        {
+            currentInventoryIndex = maxInventoryIndex;
+        }
+
+        if (previous == currentInventoryIndex)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     void UpdateDollarsHUD(int oldValue, int newValue)
     {
         if(isLocalPlayer)
             HUDManager.current.dollarsText.text = "Money: $" + newValue.ToString();
-    }
-    void UpdateTokensHUD(int oldValue, int newValue)
-    {
-        if (isLocalPlayer)
-            HUDManager.current.tokensText.text = "Tokens: " + newValue.ToString();
     }
 }

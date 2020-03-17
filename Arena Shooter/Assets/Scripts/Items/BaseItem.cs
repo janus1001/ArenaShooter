@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ using UnityEngine;
 public class BaseItem : ScriptableObject
 {
     public GameObject itemPrefab;
+    public Sprite itemIcon;
 
     protected virtual void EquipItem()
     {
@@ -20,5 +22,20 @@ public class BaseItem : ScriptableObject
     protected virtual void UseItem()
     {
 
+    }
+}
+
+public static class ItemSerializer
+{
+    public static void WriteItem(this NetworkWriter writer, BaseItem item)
+    {
+        // no need to serialize the data, just the name of the item
+        writer.WriteString(item.name);
+    }
+
+    public static BaseItem ReadItem(this NetworkReader reader)
+    {
+        // load the same item by name.  The data will come from the asset in Resources folder
+        return Resources.Load<BaseItem>("ScriptableObjects/Items/" + reader.ReadString());
     }
 }
