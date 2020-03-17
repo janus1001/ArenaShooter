@@ -185,8 +185,10 @@ MonoBehaviour:
   playerData:
     avatarURI: 
     playerName: 
+    belongingTo: 0
   playerSlotPanel: {fileID: 0}
-  playerAvatarImage: {fileID: 0}
+  playerNameText: {fileID: 5897180171745820096}
+  playerAvatarImage: {fileID: 8141102166637936473}
 --- !u!1 &7242566717702040201
 GameObject:
   m_ObjectHideFlags: 0

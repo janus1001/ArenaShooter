@@ -164,14 +164,22 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
         }
     }
 
-    public void ChangePlayerName()
+    public void ChangePlayerName(string newName)
     {
-        string newName = GameObject.Find("Player Name Input").GetComponent<TMPro.TMP_InputField>().text;
         if(newName == "")
         {
             newName = "Player";
         }
         PlayerDataClient.localPlayerData.playerName = newName;
+    }
+
+    public void ChangePlayerAvatar(string newAvatar)
+    {
+        if (newAvatar == "")
+        {
+            newAvatar = "avatar";
+        }
+        PlayerDataClient.localPlayerData.avatarURI = newAvatar;
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn)
@@ -207,5 +215,12 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
 
         player.GetComponent<PlayerEntityNetwork>().serverSidePlayerData = PlayerDataServer.RetrievePlayerDataByConnection(conn);
         //player.GetComponent<EntityNetwork>().RpcSetColorToTeam(player.GetComponent<EntityNetwork>().serverSidePlayerData.belongingTo);
+    }
+
+    public override void Start()
+    {
+        base.Start();
+
+        GameObject.Find("Player Name Input").GetComponent<TMPro.TMP_InputField>().text = Environment.UserName;
     }
 }

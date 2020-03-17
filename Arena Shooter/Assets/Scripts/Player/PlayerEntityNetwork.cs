@@ -7,21 +7,27 @@ public class PlayerEntityNetwork : EntityNetwork
 {
     public PlayerDataServer serverSidePlayerData;
     public static PlayerEntityNetwork localPlayer;
-    public Armour armour;
-
-    [SyncVar]
+    
+    [SyncVar(hook = "SetPlayerName")]
     public string playerName;
-    [SyncVar]
+    [SyncVar(hook = "SetPlayerAvatar")]
     public string playerAvatar;
-    [SyncVar]
+    [SyncVar(hook = "SetPlayerTeam")]
     public Team playerTeam;
 
+    public Armour armour;
     public BaseItem heldItem;
+
+    public TMPro.TMP_Text playerNameTag;
+    public UnityEngine.UI.Image playerAvatarTag;
+    public MeshRenderer[] playerRenderers;
+
+    public Material[] teamMaterials;
 
     protected override void Start()
     {
         base.Start();
-        
+
         if (isLocalPlayer)
         {
             localPlayer = this;
@@ -32,6 +38,13 @@ public class PlayerEntityNetwork : EntityNetwork
             // Hide model if local player
             transform.GetChild(0).gameObject.SetActive(false);
         }
+
+        if (isServer)
+        {
+            playerName = serverSidePlayerData.playerName;
+            playerAvatar = serverSidePlayerData.avatarURI;
+            playerTeam = serverSidePlayerData.belongingTo;
+        } 
     }
 
     protected override void UpdateHealth(float oldHealth, float newHealth)
@@ -122,6 +135,48 @@ public class PlayerEntityNetwork : EntityNetwork
         GunManager.singleton.HideAllWeapons();
         localPlayer.transform.position = position;
         localPlayer.transform.rotation = rotation;
+    }
+
+    void SetPlayerName(string oldName, string newName)
+    {
+        playerNameTag.text = newName;
+    }
+    void SetPlayerAvatar(string oldAvatar, string newAvatar)
+    {
+        Sprite sprite = Resources.Load<Sprite>("Avatars/" + newAvatar);
+
+        if (!sprite)
+        {
+            sprite = Resources.Load<Sprite>("Avatars/avatar");
+        }
+        
+        playerAvatarTag.sprite = sprite;
+    }
+    void SetPlayerTeam(Team oldTeam, Team newTeam)
+    {
+        Material teamMaterial;
+        switch (newTeam)
+        {
+            case Team.Forest:
+                teamMaterial = teamMaterials[0];
+                break;
+            case Team.Desert:
+                teamMaterial = teamMaterials[1];
+                break;
+            case Team.Ice:
+                teamMaterial = teamMaterials[2];
+                break;
+            default:
+                teamMaterial = null;
+                break;
+        }
+        if (teamMaterial && !isLocalPlayer)
+        {
+            foreach (var bodyPart in playerRenderers)
+            {
+                bodyPart.material = teamMaterial;
+            }
+        }
     }
 }
 
