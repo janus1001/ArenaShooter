@@ -440,6 +440,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4150641047240093866, guid: 7dde332e0c6bec848a76bb28f037657b,
         type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150641047240093866, guid: 7dde332e0c6bec848a76bb28f037657b,
+        type: 3}
       propertyPath: showRoomGUI
       value: 0
       objectReference: {fileID: 0}
@@ -453,6 +458,18 @@ PrefabInstance:
       propertyPath: maxConnections
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4150641047240093866, guid: 7dde332e0c6bec848a76bb28f037657b,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6406731841065861605, guid: a523f16c726075042b6975bf940aeaf4,
+        type: 3}
+    - target: {fileID: 4150641047240093866, guid: 7dde332e0c6bec848a76bb28f037657b,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7403001306335321907, guid: 819e688a0a4a97c4d8e511bdb7930552,
+        type: 3}
     - target: {fileID: 5610486385060568047, guid: 7dde332e0c6bec848a76bb28f037657b,
         type: 3}
       propertyPath: showGUI

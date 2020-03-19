@@ -136,7 +136,7 @@ namespace Mirror
 
             if (ServerStarted)
             {
-                Debug.LogWarning("MIRROR BUG: ClientDisconnect called even when we're in HostClient/Dedicated Server mode");
+                if (DebugEnabled) Debug.LogWarning("MIRROR BUG: ClientDisconnect called even when we're in HostClient/Dedicated Server mode");
                 return;
             }
 
@@ -231,7 +231,7 @@ namespace Mirror
             {
                 if (InitializeENET())
                 {
-                    Debug.Log($"Ignorance successfully initialized ENET.");
+                    //Debug.Log($"Ignorance successfully initialized ENET.");
                     ENETInitialized = true;
                 }
                 else

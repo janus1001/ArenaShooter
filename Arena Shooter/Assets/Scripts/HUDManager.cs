@@ -20,7 +20,7 @@ public class HUDManager : MonoBehaviour
 
     public TMP_Text ammoText;
 
-    public InventorySlot[] inventorySlots;
+    public InventorySlotHud[] inventorySlots;
     public TMP_Text itemDescriptionText;
 
     public Image forestTeamHealth;
@@ -40,6 +40,7 @@ public class HUDManager : MonoBehaviour
     readonly Color inactiveColor = new Color(1, 1, 1, 0.3f);
     const float descriptionHighlightTime = 2;
     const float descriptionDisappearSpeed = 2;
+    public Sprite transparentSprite;
 
     void Start()
     {
@@ -129,9 +130,12 @@ public class HUDManager : MonoBehaviour
     public void SetInventorySlotSelected(int index)
     {
         SetInventorySlotsUnselected();
+
         inventorySlots[index].slotPanel.color = activeColor;
 
-        if(Inventory.HeldItem)
+        descriptionTransparency = descriptionHighlightTime * descriptionDisappearSpeed;
+
+        if (Inventory.HeldItem)
         {
             itemDescriptionText.text = Inventory.HeldItem.name;
         }
@@ -139,15 +143,34 @@ public class HUDManager : MonoBehaviour
         {
             itemDescriptionText.text = "";
         }
-
-        descriptionTransparency = descriptionHighlightTime * descriptionDisappearSpeed;
     }
 
     private void SetInventorySlotsUnselected()
     {
-        foreach (var item in inventorySlots)
+        foreach (var slot in inventorySlots)
         {
-            item.slotPanel.color = inactiveColor;
+            slot.slotPanel.color = inactiveColor;
+        }
+    }
+
+    public void UpdateInventory(SyncListInventorySlots.Operation op, int index, InventorySlot oldItem, InventorySlot newItem)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            inventorySlots[i].itemCount.text = string.Empty;
+            if (Inventory.localInventory.inventory.Count > i)
+            {
+                inventorySlots[i].itemIcon.sprite = Inventory.localInventory.inventory[i].item.itemIcon;
+                if (Inventory.localInventory.inventory[i].itemAmount > 1)
+                {
+                    inventorySlots[i].itemCount.text = Inventory.localInventory.inventory[i].itemAmount.ToString();
+                }
+
+            }
+            else
+            {
+                inventorySlots[i].itemIcon.sprite = transparentSprite;
+            }
         }
     }
 }

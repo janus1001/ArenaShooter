@@ -51,17 +51,26 @@ public class PlayerShopControls : NetworkBehaviour
     [Command]
     void CmdTryBuy(NetworkIdentity shopIdentity)
     {
-        /*
         Shop targetedShop = shopIdentity.GetComponentInParent<Shop>();
         Inventory playerInventory = GetComponent<Inventory>();
 
-        if(playerInventory.dollars >= targetedShop.soldItem.moneyPrice && playerInventory.tokens >= targetedShop.soldItem.tokenPrice)
+        if (targetedShop.soldItem.priceInTokens) // Price specified in tokens
         {
-            playerInventory.dollars -= targetedShop.soldItem.moneyPrice;
-            playerInventory.tokens -= targetedShop.soldItem.tokenPrice;
-
-            // TODO: Add item to inventory on buy
+            if (targetedShop.soldItem.price > 1)
+            {
+                bool spaceInInventory = playerInventory.AddToInventory(targetedShop.soldItem.itemToBuy);
+            }
         }
-        */
+        else // Price specified in dollars
+        {
+            if (targetedShop.soldItem.price <= playerInventory.dollars)
+            {
+                bool spaceInInventory = playerInventory.AddToInventory(targetedShop.soldItem.itemToBuy);
+                if(spaceInInventory)
+                {
+                    playerInventory.dollars -= targetedShop.soldItem.price;
+                }
+            }
+        }
     }
 }
