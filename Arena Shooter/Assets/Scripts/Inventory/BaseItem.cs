@@ -7,24 +7,10 @@ using UnityEngine;
 public class BaseItem : ScriptableObject
 {
     public GameObject itemPrefab;
+    public GameObject itemViewportPrefab; // Object attached to camera, to be added to local player on equip
     public Sprite itemIcon;
 
     public int maxStack = 1;
-
-    protected virtual void EquipItem()
-    {
-
-    }
-
-    protected virtual void UnEquipItem()
-    {
-
-    }
-
-    protected virtual void UseItem()
-    {
-
-    }
 }
 
 public static class ItemSerializer

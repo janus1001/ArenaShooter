@@ -31,12 +31,18 @@ public class PlayerEntityNetwork : EntityNetwork
         if (isLocalPlayer)
         {
             localPlayer = this;
-            Camera.main.transform.parent = localPlayer.transform;
-            Camera.main.transform.localPosition = new Vector3(0, 0.75f, 0);
-            Camera.main.transform.localRotation = Quaternion.identity;
 
             // Hide model if local player
-            transform.GetChild(0).gameObject.SetActive(false);
+
+            foreach (Renderer renderer in transform.GetComponentsInChildren<Renderer>())
+            {
+                if(renderer.CompareTag("Player"))
+                    renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+            }
+        }
+        else
+        {
+            Destroy(transform.Find("Camera").gameObject);
         }
 
         if (isServer)

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  baseItem: {fileID: 11400000, guid: 6f430247112b4b94cbc12ed889aca713, type: 2}
+  baseItem: {fileID: 11400000, guid: da1cc91432a27714b910e87f3b0a29fb, type: 2}
 --- !u!33 &1434704128695830976
 MeshFilter:
   m_ObjectHideFlags: 0

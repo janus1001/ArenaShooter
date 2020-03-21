@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10333e90fab79fa44bc03d298028287a, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 6406731841065861605, guid: a523f16c726075042b6975bf940aeaf4,
+  itemPrefab: {fileID: 5901198915343049833, guid: 9b0b07a5331279b40b76f1afe95f2667,
+    type: 3}
+  itemViewportPrefab: {fileID: 6083914144427564474, guid: caa0212554428f64789bc6d47ae7de91,
     type: 3}
   itemIcon: {fileID: 21300000, guid: c2a2f2cc383d1f54eb099ba8ef896b0e, type: 3}
   maxStack: 1

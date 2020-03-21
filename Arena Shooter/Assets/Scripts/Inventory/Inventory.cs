@@ -23,8 +23,11 @@ public class Inventory : NetworkBehaviour
     }
 
     public readonly SyncListInventorySlots inventory = new SyncListInventorySlots() { };
-    int currentInventoryIndex = 0;
+    public int currentInventoryIndex { get; private set; }
     public const int maxInventoryIndex = 4;
+
+    public GameObject defaultViewport; // Viewports are player objects in front of the camera, like hands and guns. Local only.
+    List<GameObject> itemViewports = new List<GameObject>();
 
     [SyncVar(hook = "UpdateDollarsHUD")]
     public int dollars = 30;
@@ -40,6 +43,22 @@ public class Inventory : NetworkBehaviour
             HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
 
             inventory.Callback += HUDManager.current.UpdateInventory;
+            inventory.Callback += CheckForSlotChange;
+        }
+    }
+
+    private void CheckForSlotChange(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
+    {
+        if (itemIndex != currentInventoryIndex)
+            return;
+
+        if (newItem != null)
+        {
+            // TODO
+        }
+        else //Dropped item
+        {
+            // TODO
         }
     }
 
@@ -49,14 +68,16 @@ public class Inventory : NetworkBehaviour
         {
             HandleInput();
         }
+        UpdateCurrentViewport();
     }
 
     private void HandleInput()
     {
+        int previousSelection = currentInventoryIndex;
         if (ChangeInventorySlot())
         {
             HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
-            // Equip item
+
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -115,9 +136,28 @@ public class Inventory : NetworkBehaviour
             HUDManager.current.dollarsText.text = "$" + newValue.ToString();
     }
 
+    void UpdateCurrentViewport()
+    {
+        // TODO 
+    }
+
+    private void CreateNewViewport()
+    {
+        Transform camera = Camera.main.transform;
+        if(inventory[currentInventoryIndex].item.itemViewportPrefab)
+        {
+            itemViewports[currentInventoryIndex] = Instantiate(inventory[currentInventoryIndex].item.itemViewportPrefab, camera.position, camera.rotation, camera);
+        }
+    }
+
     [Command]
     public void CmdPickUpItem(NetworkIdentity item)
     {
+        if (item == null) // If item was picked up in the meantime or destroyed otherwise
+        {
+            return;
+        }
+
         bool wasPickedUp = AddToInventory(item.GetComponent<PickupItem>().baseItem);
 
         if (wasPickedUp)

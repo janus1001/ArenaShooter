@@ -172,5 +172,18 @@ public class HUDManager : MonoBehaviour
                 inventorySlots[i].itemIcon.sprite = transparentSprite;
             }
         }
+
+        if (Inventory.HeldItem)
+        {
+            itemDescriptionText.text = Inventory.HeldItem.name;
+            if (index == Inventory.localInventory.currentInventoryIndex)
+            {
+                descriptionTransparency = descriptionHighlightTime * descriptionDisappearSpeed;
+            }
+        }
+        else
+        {
+            itemDescriptionText.text = "";
+        }
     }
 }
