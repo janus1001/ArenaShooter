@@ -10,17 +10,17 @@ PrefabInstance:
     - target: {fileID: 3413680343052719553, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.182977
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3413680343052719553, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.4239783
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3413680343052719553, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.733753
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3413680343052719553, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
         type: 3}
@@ -65,12 +65,17 @@ PrefabInstance:
     - target: {fileID: 3413680343052719554, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
         type: 3}
       propertyPath: m_Name
-      value: Elite Pistol Viewport
+      value: Elite Pistol Viewport Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5322170501182161841, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358780404251370675, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8897075302282065539, guid: f5a35bcdeb3cf1c45b1f641c958af7fe,
         type: 3}

@@ -20,13 +20,13 @@ public class Recoil : MonoBehaviour
 
     [Space(10)]
     // These are actual values for the weapons recoil
-    float recoilPositionSides = 0.3f;
-    float recoilPositionUp = 0.3f;
-    float recoilPositionForward = -1f;
+    public float recoilPositionSides = 0.3f;
+    public float recoilPositionUp = 0.3f;
+    public float recoilPositionForward = -1f;
 
-    float recoilRotationKnockup = -24;
-    float recoilRotationSlip = 0.2f;
-    float recoilRotationTwist = 0.1f;
+    public float recoilRotationKnockup = -24;
+    public float recoilRotationSlip = 0.2f;
+    public float recoilRotationTwist = 0.1f;
 
 
     void Update()
@@ -43,7 +43,7 @@ public class Recoil : MonoBehaviour
 
     public void Punch()
     {
-        recoilPositionForce += new Vector3(Random.Range(-recoilPositionSides, recoilPositionSides), Random.Range(recoilPositionUp * 0.5f, recoilPositionUp), Random.Range(recoilPositionForward * 0.5f, recoilPositionForward));
+        recoilPositionForce += new Vector3(Random.Range(-recoilPositionSides, recoilPositionSides), Random.Range(recoilPositionUp * 0.8f, recoilPositionUp), Random.Range(recoilPositionForward * 0.8f, recoilPositionForward));
         recoilRotationForce += new Vector3(Random.Range(recoilRotationKnockup * 0.5f, recoilRotationKnockup), Random.Range(-recoilRotationSlip, recoilRotationSlip), Random.Range(-recoilRotationTwist, recoilRotationTwist));
     }
 }

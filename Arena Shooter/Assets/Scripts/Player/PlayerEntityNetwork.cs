@@ -30,7 +30,8 @@ public class PlayerEntityNetwork : EntityNetwork
 
         if (isLocalPlayer)
         {
-            localPlayer = this;
+            localPlayer = this; 
+            gameObject.layer = 2;
 
             // Hide model if local player
 
@@ -138,9 +139,10 @@ public class PlayerEntityNetwork : EntityNetwork
     [TargetRpc]
     void TargetRespawnAt(NetworkConnection conn, Vector3 position, Quaternion rotation)
     {
-        GunManager.singleton.HideAllWeapons();
+        GetComponent<CharacterController>().enabled = false;
         localPlayer.transform.position = position;
         localPlayer.transform.rotation = rotation;
+        GetComponent<CharacterController>().enabled = true;
     }
 
     void SetPlayerName(string oldName, string newName)
@@ -183,6 +185,15 @@ public class PlayerEntityNetwork : EntityNetwork
                 bodyPart.material = teamMaterial;
             }
         }
+    }
+
+    // Function called by client, executed on server.
+    [Command]
+    public void CmdShootAt(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
+    {
+        // TODO: simple checks if player was even able to hit the target.
+
+        targetPlayer.GetComponent<EntityNetwork>().DealDamage(baseDamage, connectionToClient, hitPart);
     }
 }
 

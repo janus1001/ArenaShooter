@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5176fc6d90e81af4db60228bc2566233, type: 3}
   m_Name: Buy Assault Rifle
   m_EditorClassIdentifier: 
-  itemToBuy: {fileID: 0}
-  moneyPrice: 300
-  tokenPrice: 0
-  id: 3
+  itemToBuy: {fileID: 11400000, guid: 5b829913699d5f84084781bed791104c, type: 2}
+  priceInTokens: 0
+  price: 0

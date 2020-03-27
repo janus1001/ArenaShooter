@@ -26,8 +26,10 @@ public class Inventory : NetworkBehaviour
     public int currentInventoryIndex { get; private set; }
     public const int maxInventoryIndex = 4;
 
-    public GameObject defaultViewport; // Viewports are player objects in front of the camera, like hands and guns. Local only.
-    List<GameObject> itemViewports = new List<GameObject>();
+    private bool canChangeOrDrop = true;
+
+    public GameObject defaultViewport;  // Viewports are player objects in front of the camera, like hands and guns. Local only.
+    public List<GameObject> itemViewports { get; private set; } = new List<GameObject>();
 
     [SyncVar(hook = "UpdateDollarsHUD")]
     public int dollars = 30;
@@ -38,28 +40,20 @@ public class Inventory : NetworkBehaviour
         {
             localInventory = this;
 
+            defaultViewport = transform.Find("Camera/Default Viewport").gameObject;
+
             UpdateDollarsHUD(0, dollars);
 
             HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
 
             inventory.Callback += HUDManager.current.UpdateInventory;
-            inventory.Callback += CheckForSlotChange;
+            inventory.Callback += UnlockInventory;
         }
     }
 
-    private void CheckForSlotChange(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
+    private void UnlockInventory(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
     {
-        if (itemIndex != currentInventoryIndex)
-            return;
-
-        if (newItem != null)
-        {
-            // TODO
-        }
-        else //Dropped item
-        {
-            // TODO
-        }
+        canChangeOrDrop = true;
     }
 
     void Update()
@@ -67,21 +61,24 @@ public class Inventory : NetworkBehaviour
         if (isLocalPlayer)
         {
             HandleInput();
+            UpdateCurrentViewport();
         }
-        UpdateCurrentViewport();
     }
 
     private void HandleInput()
     {
-        int previousSelection = currentInventoryIndex;
-        if (ChangeInventorySlot())
-        {
-            HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
+        if (!canChangeOrDrop)
+            return;
 
-        }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             DropItem();
+        }
+
+        if (ChangeInventorySlot())
+        {
+            HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
+            UpdateCurrentViewport();
         }
     }
 
@@ -138,15 +135,72 @@ public class Inventory : NetworkBehaviour
 
     void UpdateCurrentViewport()
     {
-        // TODO 
+        // Remove and add viewports if necessary
+
+        if (itemViewports.Count > inventory.Count) // Need to remove viewport
+        {
+            for (int i = 0; i < itemViewports.Count; i++)
+            {
+                if ((inventory.Count <= i) || !itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
+                {
+                    if (itemViewports[i] != defaultViewport)
+                    {
+                        Destroy(itemViewports[i]);
+                    }
+                    itemViewports.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+        if (itemViewports.Count < inventory.Count) // Need to add viewport
+        {
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                if(i >= itemViewports.Count)
+                {
+                    itemViewports.Add(CreateNewViewport(inventory[i].item.itemViewportPrefab));
+                    break;
+                }
+                if(itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
+                {
+                    Debug.Log(itemViewports[i].name + " " + inventory[i].item.itemPrefab.name + " " + i);
+                    itemViewports.Insert(i, CreateNewViewport(inventory[i].item.itemViewportPrefab));
+                    break;
+                }
+            }
+        }
+
+        // Show current viewport
+
+        defaultViewport.SetActive(inventory.Count > 0 ? false : true); // Show default viewport if no other is there
+
+        for (int i = 0; i < itemViewports.Count; i++)
+        {
+            if (i == currentInventoryIndex)
+            {
+                if (!itemViewports[i].activeSelf)
+                {
+                    itemViewports[i].SetActive(true);
+                }
+            }
+            else
+            {
+                if(itemViewports[i] != defaultViewport)
+                    itemViewports[i].SetActive(false);
+            }
+        }
     }
 
-    private void CreateNewViewport()
+    private GameObject CreateNewViewport(GameObject prefab)
     {
         Transform camera = Camera.main.transform;
-        if(inventory[currentInventoryIndex].item.itemViewportPrefab)
+        if(prefab)
         {
-            itemViewports[currentInventoryIndex] = Instantiate(inventory[currentInventoryIndex].item.itemViewportPrefab, camera.position, camera.rotation, camera);
+            return Instantiate(prefab, camera.position, camera.rotation, camera);
+        }
+        else
+        {
+            return defaultViewport;
         }
     }
 
@@ -193,24 +247,32 @@ public class Inventory : NetworkBehaviour
 
     private void DropItem()
     {
+        canChangeOrDrop = false;
         if (inventory.Count > currentInventoryIndex)
         {
-            CmdDropItem(currentInventoryIndex);
+            CmdDropItem(currentInventoryIndex, inventory.Count);
         }
     }
 
     [Command]
-    void CmdDropItem(int index)
+    void CmdDropItem(int index, int droppedWithNumberOfItems) // Second argument specifies how many items was client holding when dropped something. Fixes a problem.
     {
-        GameObject droppedObject = Instantiate(inventory[index].item.itemPrefab, transform.position + transform.forward, Quaternion.identity);
-        NetworkServer.Spawn(droppedObject);
-        InventorySlot newSlot = inventory[index];
-        newSlot.itemAmount--;
-
-        inventory.RemoveAt(index);
-        if (newSlot.itemAmount > 0)
+        if (inventory.Count == droppedWithNumberOfItems)
         {
-            inventory.Insert(index, newSlot);
+            GameObject droppedObject = Instantiate(inventory[index].item.itemPrefab, transform.position + transform.forward, Quaternion.identity);
+            NetworkServer.Spawn(droppedObject);
+            InventorySlot newSlot = inventory[index];
+            newSlot.itemAmount--;
+
+            inventory.RemoveAt(index);
+            if (newSlot.itemAmount > 0)
+            {
+                inventory.Insert(index, newSlot);
+            }
+        }
+        else
+        {
+            Debug.Log("Blocked!");
         }
     }
 }
