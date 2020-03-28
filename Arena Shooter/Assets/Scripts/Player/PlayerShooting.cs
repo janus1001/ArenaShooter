@@ -1,41 +1,43 @@
 ﻿using Mirror;
 using UnityEngine;
 
-public class PlayerShooting : NetworkBehaviour
+public class PlayerShooting : MonoBehaviour
 {
     public float damage = 0.0f;
     public float range = 100.0f;
     public float fireRate = 10.0f;
-    public int maxAmmo = 10;
+    public int maxAmmo = 999;
 
-    public Camera playerCamera;
+    Camera playerCamera;
     public GameObject impactEffect;
+    public Recoil gunRecoil;
 
-    public int currentAmmo = 0;
-    public float nextTimeToFire = 0;
+    float nextTimeToFire = 0;
 
-    private bool reloading = false;
-    private float reloadingTime = 0;
+    bool reloading = false;
+    float reloadingTime = 0;
+    private int currentAmmo;
 
     private void Start()
     {
-        if(isLocalPlayer)
-        {
-            // Setting player layer to Ignore Raycast in order to make it impossible to shoot yourself.
-            gameObject.layer = 2;
-        }
+        currentAmmo = maxAmmo;
         playerCamera = Camera.main;
     }
 
     private void Update()
     {
-        if (!isLocalPlayer)
-            return;
-
         HUDManager.current.UpdateAmmo(currentAmmo, maxAmmo);
 
         reloadingTime -= Time.deltaTime;
-        Camera.main.transform.GetChild(0).localPosition = new Vector3(0, -Mathf.Sin(Mathf.Clamp01(reloadingTime)), 0);
+        if (Inventory.HeldItem && Inventory.localInventory.itemViewports.Count > 0)
+        {
+            Inventory.localInventory.itemViewports[Inventory.localInventory.currentInventoryIndex].transform.localPosition = new Vector3(0, -Mathf.Sin(Mathf.Clamp01(reloadingTime)), 0);
+            //playerCamera.transform.GetChild(Inventory.localInventory.currentInventoryIndex + 1).localPosition = new Vector3(0, -Mathf.Sin(Mathf.Clamp01(reloadingTime)), 0);
+        }
+        else
+        {
+            playerCamera.transform.GetChild(0).localPosition = Vector3.zero;
+        }
 
         if (reloading == true && reloadingTime <= 0)
         {
@@ -60,7 +62,8 @@ public class PlayerShooting : NetworkBehaviour
     {
         // TODO muzzle flash
         currentAmmo--;
-        GunManager.singleton.Shoot();
+
+        gunRecoil.Punch();
 
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
@@ -70,23 +73,16 @@ public class PlayerShooting : NetworkBehaviour
             EntityNetwork hitObject = hit.collider.GetComponentInParent<EntityNetwork>();
             if (hitObject)
             {
-                CmdDealDamage(hitObject.GetComponent<NetworkIdentity>(), damage, BodyPart.Generic);
+                PlayerEntityNetwork.localPlayer.CmdShootAt(hitObject.GetComponent<NetworkIdentity>(), damage, BodyPart.Generic);
             }
 
             // TODO add force to the hit
-
-            GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.identity);
-            impact.transform.up = hit.normal;
-            //Destroy(impact, 0.5f);
+            if (impactEffect)
+            {
+                GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.identity);
+                impact.transform.up = hit.normal;
+                //Destroy(impact, 0.5f);
+            }
         }
-    }
-
-    // Function called by client, executed on server.
-    [Command]
-    public void CmdDealDamage(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
-    {
-        // TODO: simple checks if player was even able to hit the target.
-
-        targetPlayer.GetComponent<EntityNetwork>().DealDamage(baseDamage, connectionToClient, hitPart);
     }
 }

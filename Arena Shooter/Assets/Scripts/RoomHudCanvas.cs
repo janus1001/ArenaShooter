@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,18 +52,21 @@ public class RoomHudCanvas : MonoBehaviour
     public void ToggleReady()
     {
         NetworkRoomPlayerExtended.singleton.ToggleReady(); 
-        UpdateHUD(true);
+        UpdateReady(true);
     }
 
-    // Sets positions of buttons and player panels, hides buttons when there are two players on a team already.
-    public void UpdateHUD(bool isLocalPlayerChanged) 
+    private void UpdateReady(bool isLocalPlayerChanged)
     {
-        if(isLocalPlayerChanged)
+        if (isLocalPlayerChanged)
         {
-            // Show button if player chose a team
-            readyText.transform.parent.gameObject.SetActive(true);
+            bool ready = NetworkRoomPlayerExtended.singleton.readyToBegin;
 
-            if(!NetworkRoomPlayerExtended.singleton.readyToBegin)
+            if(Mirror.NetworkServer.active)
+            {
+                ready = !ready;
+            }
+
+            if (ready)
             {
                 readyText.text = "Mark as ready";
             }
@@ -71,8 +75,18 @@ public class RoomHudCanvas : MonoBehaviour
                 readyText.text = "Unready";
             }
         }
+    }
 
-        if(playerSlotsForest.childCount >= 3)
+    // Sets positions of buttons and player panels, hides buttons when there are two players on a team already.
+    public void UpdateHUD(bool isLocalPlayerChanged)
+    {
+        if (isLocalPlayerChanged)
+        {
+            // Show button if player chose a team
+            readyText.transform.parent.gameObject.SetActive(true);
+        }
+
+        if (playerSlotsForest.childCount >= 3)
         {
             forestButton.gameObject.SetActive(false);
         }

@@ -17,9 +17,11 @@ public class HUDManager : MonoBehaviour
     public TMP_Text playerShieldText;
 
     public TMP_Text dollarsText;
-    public TMP_Text tokensText;
 
     public TMP_Text ammoText;
+
+    public InventorySlotHud[] inventorySlots;
+    public TMP_Text itemDescriptionText;
 
     public Image forestTeamHealth;
     public Image desertTeamHealth;
@@ -31,6 +33,14 @@ public class HUDManager : MonoBehaviour
 
     private float mouseHUDMovementStrength = 0;
     private float lastPlayerYPosition = 0;
+
+    private float descriptionTransparency = 0;
+
+    readonly Color activeColor = new Color(1, 1, 1, 1);
+    readonly Color inactiveColor = new Color(1, 1, 1, 0.3f);
+    const float descriptionHighlightTime = 2;
+    const float descriptionDisappearSpeed = 2;
+    public Sprite transparentSprite;
 
     void Start()
     {
@@ -96,6 +106,9 @@ public class HUDManager : MonoBehaviour
         {
             MoveHUD();
         }
+
+        descriptionTransparency -= Time.deltaTime * descriptionDisappearSpeed;
+        itemDescriptionText.color = new Color(1, 1, 1, descriptionTransparency);
     }
 
     /// <summary>
@@ -103,11 +116,11 @@ public class HUDManager : MonoBehaviour
     /// </summary>
     private void MoveHUD()
     {
-        float playerHeightDelta = EntityNetwork.localPlayer.transform.position.y - lastPlayerYPosition;
+        float playerHeightDelta = PlayerEntityNetwork.localPlayer.transform.position.y - lastPlayerYPosition;
 
         Vector2 mouseDelta = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") + playerHeightDelta * 40) * mouseHUDMovementStrength;
         offsetHUD.localPosition = Vector2.Lerp(offsetHUD.localPosition, -mouseDelta, 0.2f);
-        lastPlayerYPosition = EntityNetwork.localPlayer.transform.position.y;
+        lastPlayerYPosition = PlayerEntityNetwork.localPlayer.transform.position.y;
     }
 
     public void SetHUDPlayerHealth(float health)
@@ -115,13 +128,75 @@ public class HUDManager : MonoBehaviour
         playerHealthText.text = health.ToString("00.");
         playerHealthImage.fillAmount = health / 100;
     }
+
     public void SetHUDPlayerShield(float shield)
     {
         playerShieldText.text = shield.ToString("00.");
         playerShieldImage.fillAmount = shield / 100;
     }
+
     public void UpdateAmmo(int currentAmmo, int maxAmmo)
     {
         ammoText.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
+    }
+
+    public void SetInventorySlotSelected(int index)
+    {
+        SetInventorySlotsUnselected();
+
+        inventorySlots[index].slotPanel.color = activeColor;
+
+        descriptionTransparency = descriptionHighlightTime * descriptionDisappearSpeed;
+
+        if (Inventory.HeldItem)
+        {
+            itemDescriptionText.text = Inventory.HeldItem.name;
+        }
+        else
+        {
+            itemDescriptionText.text = "";
+        }
+    }
+
+    private void SetInventorySlotsUnselected()
+    {
+        foreach (var slot in inventorySlots)
+        {
+            slot.slotPanel.color = inactiveColor;
+        }
+    }
+
+    public void UpdateInventory(SyncListInventorySlots.Operation op, int index, InventorySlot oldItem, InventorySlot newItem)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            inventorySlots[i].itemCount.text = string.Empty;
+            if (Inventory.localInventory.inventory.Count > i)
+            {
+                inventorySlots[i].itemIcon.sprite = Inventory.localInventory.inventory[i].item.itemIcon;
+                if (Inventory.localInventory.inventory[i].itemAmount > 1)
+                {
+                    inventorySlots[i].itemCount.text = Inventory.localInventory.inventory[i].itemAmount.ToString();
+                }
+
+            }
+            else
+            {
+                inventorySlots[i].itemIcon.sprite = transparentSprite;
+            }
+        }
+
+        if (Inventory.HeldItem)
+        {
+            itemDescriptionText.text = Inventory.HeldItem.name;
+            if (index == Inventory.localInventory.currentInventoryIndex)
+            {
+                descriptionTransparency = descriptionHighlightTime * descriptionDisappearSpeed;
+            }
+        }
+        else
+        {
+            itemDescriptionText.text = "";
+        }
     }
 }

@@ -12,9 +12,10 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
 
     public PlayerDataServer playerData;
     public Transform playerSlotPanel;
+    public TMPro.TMP_Text playerNameText;
     public Image playerAvatarImage;
     
-    [SyncVar]
+    [SyncVar(hook = "UpdatePlayerAvatar")]
     string playerAvatarUri;
     [SyncVar(hook = "UpdatePlayerName")]
     string playerName;
@@ -24,6 +25,7 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
     {
         connectionToClient.identity.GetComponent<NetworkRoomPlayerExtended>().playerData = new PlayerDataServer(playerData.playerName, playerData.avatarURI, connectionToClient);
         playerName = playerData.playerName;
+        playerAvatarUri = playerData.avatarURI;
     }
 
     [Command]
@@ -34,8 +36,18 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
 
     private void UpdatePlayerName(string oldValue, string newValue)
     {
-        //playerPanel.transform.Find("Avatar"); // Change avatar
-        transform.Find("Player Name").GetComponent<TMPro.TMP_Text>().text = playerName;
+        playerNameText.text = newValue;
+    }
+
+    void UpdatePlayerAvatar(string oldAvatar, string newAvatar)
+    {
+        Sprite sprite = Resources.Load<Sprite>("Avatars/" + newAvatar);
+        if (!sprite)
+        {
+            sprite = Resources.Load<Sprite>("Avatars/avatar");
+        }
+
+        playerAvatarImage.sprite = sprite;
     }
 
     [ClientRpc]
