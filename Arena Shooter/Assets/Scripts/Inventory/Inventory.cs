@@ -54,7 +54,6 @@ public class Inventory : NetworkBehaviour
 
     private void UpdateViewportCallback(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
     {
-        Debug.Log(op);
         switch (op)
         {
             case SyncList<InventorySlot>.Operation.OP_ADD: // Picking things up

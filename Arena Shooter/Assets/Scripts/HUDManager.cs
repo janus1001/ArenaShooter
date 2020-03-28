@@ -56,7 +56,7 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        /*if(Input.GetKeyDown(KeyCode.Escape))  UNCOMMENT TO RESTORE FUNCTIONALITY
         {
             Settings.settingsInstance.gameObject.SetActive(!Settings.settingsInstance.gameObject.activeSelf);
             if (Settings.settingsInstance.gameObject.activeSelf)
@@ -67,7 +67,7 @@ public class HUDManager : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
-        }
+        }*/
 
         if (forestCrystal)
         {

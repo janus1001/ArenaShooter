@@ -21,8 +21,8 @@ public class Settings : MonoBehaviour
 
         settingsInstance = this;
 
-        mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1.0f);
-        Debug.Log(mouseSensitivity);
+        // mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1.0f); UNCOMMENT TO RESTORE FUNCTIONALITY (and line 59 of HUDManager)
+        // Debug.Log(mouseSensitivity);
 
         gameObject.SetActive(false);
     }
@@ -42,8 +42,8 @@ public class Settings : MonoBehaviour
 
     public void MainVolumeControl(System.Single vol)
     {
-        mouseSensitivity = vol * 10.0f + 0.1f;
-        PlayerPrefs.SetFloat("MouseSensitivity", mouseSensitivity);
-        Debug.Log(mouseSensitivity);
+        //mouseSensitivity = vol * 10.0f + 0.1f;     JEŚLI BĘDZIESZ COŚ ROBIŁ, MOŻESZ MIEĆ PROBLEM Z TĄ LINIJKĄ. JEŚLI TAK, DOWIEDZ SIĘ CZEMU :)
+        // PlayerPrefs.SetFloat("MouseSensitivity", mouseSensitivity);
+        // Debug.Log(mouseSensitivity);
     }
 }
