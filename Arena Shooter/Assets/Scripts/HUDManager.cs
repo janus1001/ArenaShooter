@@ -102,7 +102,7 @@ public class HUDManager : MonoBehaviour
             if (crystal)
                 iceCrystal = crystal.GetComponent<EntityNetwork>();
         }
-        if (EntityNetwork.localPlayer && !Settings.settingsInstance.gameObject.activeSelf)
+        if (PlayerEntityNetwork.localPlayer && !Settings.settingsInstance.gameObject.activeSelf)
         {
             MoveHUD();
         }
