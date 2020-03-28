@@ -29,7 +29,7 @@ public class Inventory : NetworkBehaviour
     private bool canChangeOrDrop = true;
 
     public GameObject defaultViewport;  // Viewports are player objects in front of the camera, like hands and guns. Local only.
-    public List<GameObject> itemViewports { get; private set; } = new List<GameObject>();
+    public List<GameObject> itemViewports = new List<GameObject>();
 
     [SyncVar(hook = "UpdateDollarsHUD")]
     public int dollars = 30;
@@ -54,58 +54,30 @@ public class Inventory : NetworkBehaviour
 
     private void UpdateViewportCallback(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
     {
+        Debug.Log(op);
         switch (op)
         {
             case SyncList<InventorySlot>.Operation.OP_ADD: // Picking things up
-                UpdateCurrentViewport();
+                GameObject viewport = CreateNewViewport(newItem.item.itemViewportPrefab);
+                itemViewports.Add(viewport);
                 break;
             case SyncList<InventorySlot>.Operation.OP_REMOVEAT: // Dropping things
-                UpdateCurrentViewport();
+                if (itemViewports[itemIndex] != defaultViewport)
+                {
+                    Destroy(itemViewports[itemIndex]);
+                }
+                itemViewports.RemoveAt(itemIndex);
                 break;
             case SyncList<InventorySlot>.Operation.OP_SET: // Picking more stuff up
                 break;
             default:
                 break;
         }
+        UpdateCurrentViewport();
     }
 
     void UpdateCurrentViewport()
     {
-        // Remove and add viewports if necessary
-
-        if (itemViewports.Count > inventory.Count) // Need to remove viewport
-        {
-            for (int i = 0; i < itemViewports.Count; i++)
-            {
-                if ((inventory.Count <= i) || !itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
-                {
-                    if (itemViewports[i] != defaultViewport)
-                    {
-                        Destroy(itemViewports[i]);
-                    }
-                    itemViewports.RemoveAt(i);
-                    break;
-                }
-            }
-        }
-        if (itemViewports.Count < inventory.Count) // Need to add viewport
-        {
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                if (i >= itemViewports.Count)
-                {
-                    itemViewports.Add(CreateNewViewport(inventory[i].item.itemViewportPrefab));
-                    break;
-                }
-                if (itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
-                {
-                    Debug.Log(itemViewports[i].name + " " + inventory[i].item.itemPrefab.name + " " + i);
-                    itemViewports.Insert(i, CreateNewViewport(inventory[i].item.itemViewportPrefab));
-                    break;
-                }
-            }
-        }
-
         // Show current viewport
 
         defaultViewport.SetActive(inventory.Count > 0 ? false : true); // Show default viewport if no other is there
@@ -336,15 +308,18 @@ public class Inventory : NetworkBehaviour
             InventorySlot newSlot = inventory[index];
             newSlot.itemAmount--;
 
-            inventory.RemoveAt(index);
-            if (newSlot.itemAmount > 0)
+            if(newSlot.itemAmount == 0)
             {
-                inventory.Insert(index, newSlot);
+                inventory.RemoveAt(index);
+            }
+            else
+            {
+                inventory[index] = newSlot;
             }
         }
         else
         {
-            Debug.Log("Blocked!");
+            Debug.Log("Blocked drop!");
         }
     }
 }
