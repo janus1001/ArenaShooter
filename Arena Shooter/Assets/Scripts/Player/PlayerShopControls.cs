@@ -56,10 +56,7 @@ public class PlayerShopControls : NetworkBehaviour
 
         if (targetedShop.soldItem.priceInTokens) // Price specified in tokens
         {
-            if (targetedShop.soldItem.price > 1)
-            {
-                bool spaceInInventory = playerInventory.AddToInventory(targetedShop.soldItem.itemToBuy);
-            }
+            Inventory.localInventory.CheckAndBuyForTokens(targetedShop.soldItem.price, targetedShop.soldItem.itemToBuy);
         }
         else // Price specified in dollars
         {

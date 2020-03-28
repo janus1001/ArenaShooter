@@ -456,6 +456,7 @@ MonoBehaviour:
   syncInterval: 0.1
   defaultViewport: {fileID: 2720510582402920417}
   dollars: 999
+  exampleItem: {fileID: 11400000, guid: da1cc91432a27714b910e87f3b0a29fb, type: 2}
 --- !u!114 &4118996814263344134
 MonoBehaviour:
   m_ObjectHideFlags: 0

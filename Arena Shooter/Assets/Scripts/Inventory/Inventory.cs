@@ -24,7 +24,7 @@ public class Inventory : NetworkBehaviour
 
     public readonly SyncListInventorySlots inventory = new SyncListInventorySlots() { };
     public int currentInventoryIndex { get; private set; }
-    public const int maxInventoryIndex = 4;
+    public const int inventoryCapacity = 5;
 
     private bool canChangeOrDrop = true;
 
@@ -53,7 +53,53 @@ public class Inventory : NetworkBehaviour
 
     private void UnlockInventory(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
     {
+        Debug.Log(op);
         canChangeOrDrop = true;
+    }
+
+    public bool CheckAndBuyForTokens(int price, BaseItem item)
+    {
+        int totalTokens = 0;
+        foreach (var itemSlot in inventory)
+        {
+            if (itemSlot.item.name == "Token")
+            {
+                totalTokens += itemSlot.itemAmount;
+            }
+        }
+
+        if(totalTokens >= price)
+        {
+            for (int i = inventory.Count - 1; i >= 0; i--)
+            {
+                if (inventory[i].item.name == "Token")
+                {
+                    if(price < inventory[i].itemAmount) // Stack of tokens is enough
+                    {
+                        InventorySlot updatedSlot = inventory[i];
+
+                        //inventory.RemoveAt(i);
+                        //inventory.Insert(i, updatedSlot);
+                        bool succeded = AddToInventory(item);
+
+                        if(succeded)
+                        {
+                            updatedSlot.itemAmount -= price;
+                        }
+                        return true;
+                    }
+                    else // Need more tokens than the current stack
+                    {
+                        price -= inventory[i].itemAmount;
+                        inventory.RemoveAt(i);
+
+                        if(price == 0)
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     void Update()
@@ -230,13 +276,14 @@ public class Inventory : NetworkBehaviour
                 {
                     InventorySlot updatedSlot = inventory[i];
                     updatedSlot.itemAmount++;
-                    inventory.RemoveAt(i);
-                    inventory.Insert(i, updatedSlot);
+                    inventory[i] = updatedSlot;
+                    //inventory.RemoveAt(i);
+                    //inventory.Insert(i, updatedSlot);
                     return true;
                 }
             }
         }
-        if (inventory.Count < 5)
+        if (inventory.Count < inventoryCapacity)
         {
             InventorySlot newInventorySlot = new InventorySlot { item = item, itemAmount = 1 };
             inventory.Add(newInventorySlot);
@@ -278,7 +325,7 @@ public class Inventory : NetworkBehaviour
 }
 
 [Serializable]
-public class InventorySlot
+public struct InventorySlot
 {
     public BaseItem item;
     public int itemAmount;

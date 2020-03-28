@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10333e90fab79fa44bc03d298028287a, type: 3}
   m_Name: Elite Pistol
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 0}
-  itemIcon: {fileID: 0}
+  itemPrefab: {fileID: 6406731841065861605, guid: a523f16c726075042b6975bf940aeaf4,
+    type: 3}
+  itemViewportPrefab: {fileID: 3590848795596360808, guid: ea7527775aea69044aa612961aa21fdd,
+    type: 3}
+  itemIcon: {fileID: 21300000, guid: abe6d256a6864fd418321443f9d9417f, type: 3}
   maxStack: 1
   damage: 0
   fireRate: 0

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5176fc6d90e81af4db60228bc2566233, type: 3}
   m_Name: Buy DMR
   m_EditorClassIdentifier: 
-  itemToBuy: {fileID: 0}
-  moneyPrice: 0
-  tokenPrice: 10
-  id: 4
+  itemToBuy: {fileID: 11400000, guid: d7e2901c35bbd9443b9bf081451e4f15, type: 2}
+  priceInTokens: 1
+  price: 10
