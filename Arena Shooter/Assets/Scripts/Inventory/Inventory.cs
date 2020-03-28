@@ -48,12 +48,87 @@ public class Inventory : NetworkBehaviour
 
             inventory.Callback += HUDManager.current.UpdateInventory;
             inventory.Callback += UnlockInventory;
+            inventory.Callback += UpdateViewportCallback;
+        }
+    }
+
+    private void UpdateViewportCallback(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
+    {
+        switch (op)
+        {
+            case SyncList<InventorySlot>.Operation.OP_ADD: // Picking things up
+                UpdateCurrentViewport();
+                break;
+            case SyncList<InventorySlot>.Operation.OP_REMOVEAT: // Dropping things
+                UpdateCurrentViewport();
+                break;
+            case SyncList<InventorySlot>.Operation.OP_SET: // Picking more stuff up
+                break;
+            default:
+                break;
+        }
+    }
+
+    void UpdateCurrentViewport()
+    {
+        // Remove and add viewports if necessary
+
+        if (itemViewports.Count > inventory.Count) // Need to remove viewport
+        {
+            for (int i = 0; i < itemViewports.Count; i++)
+            {
+                if ((inventory.Count <= i) || !itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
+                {
+                    if (itemViewports[i] != defaultViewport)
+                    {
+                        Destroy(itemViewports[i]);
+                    }
+                    itemViewports.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+        if (itemViewports.Count < inventory.Count) // Need to add viewport
+        {
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                if (i >= itemViewports.Count)
+                {
+                    itemViewports.Add(CreateNewViewport(inventory[i].item.itemViewportPrefab));
+                    break;
+                }
+                if (itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
+                {
+                    Debug.Log(itemViewports[i].name + " " + inventory[i].item.itemPrefab.name + " " + i);
+                    itemViewports.Insert(i, CreateNewViewport(inventory[i].item.itemViewportPrefab));
+                    break;
+                }
+            }
+        }
+
+        // Show current viewport
+
+        defaultViewport.SetActive(inventory.Count > 0 ? false : true); // Show default viewport if no other is there
+
+        for (int i = 0; i < itemViewports.Count; i++)
+        {
+            if (i == currentInventoryIndex)
+            {
+                if (!itemViewports[i].activeSelf)
+                {
+                    itemViewports[i].SetActive(true);
+                }
+            }
+            else
+            {
+                if (itemViewports[i] != defaultViewport)
+                    itemViewports[i].SetActive(false);
+            }
         }
     }
 
     private void UnlockInventory(SyncList<InventorySlot>.Operation op, int itemIndex, InventorySlot oldItem, InventorySlot newItem)
     {
-        Debug.Log(op);
         canChangeOrDrop = true;
     }
 
@@ -78,13 +153,25 @@ public class Inventory : NetworkBehaviour
                     {
                         InventorySlot updatedSlot = inventory[i];
 
-                        //inventory.RemoveAt(i);
-                        //inventory.Insert(i, updatedSlot);
                         bool succeded = AddToInventory(item);
 
                         if(succeded)
                         {
-                            updatedSlot.itemAmount -= price;
+                            InventorySlot leftoverTokens = inventory[i];
+                            leftoverTokens.itemAmount -= price;
+                            inventory[i] = leftoverTokens;
+                        }
+                        return true;
+                    }
+                    else if (price == inventory[i].itemAmount) // Exactly enough tokens
+                    {
+                        InventorySlot updatedSlot = inventory[i];
+
+                        bool succeded = AddToInventory(item);
+
+                        if (succeded)
+                        {
+                            inventory.RemoveAt(i);
                         }
                         return true;
                     }
@@ -92,9 +179,6 @@ public class Inventory : NetworkBehaviour
                     {
                         price -= inventory[i].itemAmount;
                         inventory.RemoveAt(i);
-
-                        if(price == 0)
-                            return true;
                     }
                 }
             }
@@ -107,7 +191,6 @@ public class Inventory : NetworkBehaviour
         if (isLocalPlayer)
         {
             HandleInput();
-            UpdateCurrentViewport();
         }
     }
 
@@ -177,64 +260,6 @@ public class Inventory : NetworkBehaviour
     {
         if (isLocalPlayer)
             HUDManager.current.dollarsText.text = "$" + newValue.ToString();
-    }
-
-    void UpdateCurrentViewport()
-    {
-        // Remove and add viewports if necessary
-
-        if (itemViewports.Count > inventory.Count) // Need to remove viewport
-        {
-            for (int i = 0; i < itemViewports.Count; i++)
-            {
-                if ((inventory.Count <= i) || !itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
-                {
-                    if (itemViewports[i] != defaultViewport)
-                    {
-                        Destroy(itemViewports[i]);
-                    }
-                    itemViewports.RemoveAt(i);
-                    break;
-                }
-            }
-        }
-        if (itemViewports.Count < inventory.Count) // Need to add viewport
-        {
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                if(i >= itemViewports.Count)
-                {
-                    itemViewports.Add(CreateNewViewport(inventory[i].item.itemViewportPrefab));
-                    break;
-                }
-                if(itemViewports[i].gameObject.name.Contains(inventory[i].item.itemPrefab.name))
-                {
-                    Debug.Log(itemViewports[i].name + " " + inventory[i].item.itemPrefab.name + " " + i);
-                    itemViewports.Insert(i, CreateNewViewport(inventory[i].item.itemViewportPrefab));
-                    break;
-                }
-            }
-        }
-
-        // Show current viewport
-
-        defaultViewport.SetActive(inventory.Count > 0 ? false : true); // Show default viewport if no other is there
-
-        for (int i = 0; i < itemViewports.Count; i++)
-        {
-            if (i == currentInventoryIndex)
-            {
-                if (!itemViewports[i].activeSelf)
-                {
-                    itemViewports[i].SetActive(true);
-                }
-            }
-            else
-            {
-                if(itemViewports[i] != defaultViewport)
-                    itemViewports[i].SetActive(false);
-            }
-        }
     }
 
     private GameObject CreateNewViewport(GameObject prefab)
