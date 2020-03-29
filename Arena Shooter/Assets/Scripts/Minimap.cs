@@ -25,6 +25,10 @@ public class Minimap : MonoBehaviour
 
     void Update()
     {
+        if(!localPlayer)
+        {
+            localPlayer = NetworkClient.connection.identity.transform;
+        }
         if (Settings.rotateMinimap)
         {
             Vector3 newRotation = new Vector3(0, 0, Camera.main.transform.rotation.eulerAngles.y);

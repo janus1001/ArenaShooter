@@ -321,11 +321,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6291389003617165792}
+  - component: {fileID: 4059586475804762699}
   - component: {fileID: 5453014847442469121}
   - component: {fileID: 7332901583459692462}
   - component: {fileID: 6291389003617165797}
   - component: {fileID: 6291389003617165793}
-  - component: {fileID: 4059586475804762699}
   - component: {fileID: 4118996814263344134}
   - component: {fileID: -469662474525219990}
   m_Layer: 0
@@ -352,6 +352,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4059586475804762699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291389003617165796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c7b2e3715e69d46ac15f84ac2a8de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  defaultViewport: {fileID: 2720510582402920417}
+  itemViewports: []
+  dollars: 30
 --- !u!114 &5453014847442469121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,25 +455,7 @@ MonoBehaviour:
   speed: 6
   aerialMultiplier: 0.8
   jumpStrength: 5
-  mouseSensitivity: 1.2
   slopeForce: 150
---- !u!114 &4059586475804762699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6291389003617165796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c7b2e3715e69d46ac15f84ac2a8de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  defaultViewport: {fileID: 2720510582402920417}
-  dollars: 999
-  exampleItem: {fileID: 11400000, guid: da1cc91432a27714b910e87f3b0a29fb, type: 2}
 --- !u!114 &4118996814263344134
 MonoBehaviour:
   m_ObjectHideFlags: 0

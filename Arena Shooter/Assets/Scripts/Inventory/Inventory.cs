@@ -46,9 +46,15 @@ public class Inventory : NetworkBehaviour
 
             HUDManager.current.SetInventorySlotSelected(currentInventoryIndex);
 
-            inventory.Callback += HUDManager.current.UpdateInventory;
+            inventory.Callback += HUDManager.current.UpdateInventoryCallback;
             inventory.Callback += UnlockInventory;
             inventory.Callback += UpdateViewportCallback;
+        }
+        UpdateCurrentViewport();
+
+        if(isServer)
+        {
+            InvokeRepeating("Payout", 10, 10);
         }
     }
 
@@ -246,6 +252,11 @@ public class Inventory : NetworkBehaviour
         }
     }
 
+    private void Payout() 
+    {
+        dollars += 10;
+    }
+
     [Command]
     public void CmdPickUpItem(NetworkIdentity item)
     {
@@ -294,6 +305,18 @@ public class Inventory : NetworkBehaviour
         if (inventory.Count > currentInventoryIndex)
         {
             CmdDropItem(currentInventoryIndex, inventory.Count);
+        }
+    }
+
+    public void DropAllItems()
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            for (int j = 0; j < inventory[i].itemAmount; j++)
+            {
+                GameObject droppedObject = Instantiate(inventory[i].item.itemPrefab, transform.position + transform.forward, Quaternion.identity);
+                NetworkServer.Spawn(droppedObject);
+            }
         }
     }
 

@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerBuilding : NetworkBehaviour
+public class PlayerBuilding : MonoBehaviour
 {
-	public static PlayerBuilding singleton;
 	public PlaceableData PlaceableData;
 	Placeable currentPlaceable;
 
 	private const float PlacementRange = 4;
 
-	private void Start()
-	{
-		if(isLocalPlayer)
-		{
-			singleton = this;
-		}
-	}
+	private float buildCooldown = 0;
+
 	private void Update()
 	{
-		if(currentPlaceable.IsPlaceable && Input.GetMouseButtonDown(0))
+		buildCooldown -= Time.deltaTime;
+		if(!currentPlaceable)
 		{
-			Instantiate(PlaceableData.placeablePrefab, currentPlaceable.transform.position, currentPlaceable.transform.rotation);
-			StopBuilding();
-			return;
+			currentPlaceable = Instantiate(PlaceableData.placeableIndicatorPrefab).GetComponent<Placeable>();
+		}
+
+		if (currentPlaceable.IsPlaceable && Input.GetMouseButtonDown(0))
+		{
+			if (buildCooldown < 0)
+			{
+				buildCooldown = 1f;
+				PlayerEntityNetwork.localPlayer.CmdBuild(currentPlaceable.transform.position, currentPlaceable.transform.rotation, PlaceableData.placeablePrefab.name, Inventory.localInventory.currentInventoryIndex);
+				return;
+			}
 		}
 
 		RaycastHit hit;
@@ -40,26 +43,15 @@ public class PlayerBuilding : NetworkBehaviour
 		}
 	}
 
-	public void EquipPlaceable(PlaceableData placeableData)
+	private void OnDestroy()
 	{
-		enabled = true;
-		PlaceableData = placeableData;
-
-		currentPlaceable = Instantiate(placeableData.placeableIndicatorPrefab).GetComponent<Placeable>();
-	}
-
-	public void StopBuilding()
-	{
-		enabled = false;
 		if (currentPlaceable)
-		{
 			Destroy(currentPlaceable.gameObject);
-		}
 	}
 
-	[Command]
-	private void CmdBuildStructure()
+	private void OnDisable()
 	{
-		
+		if (currentPlaceable)
+			Destroy(currentPlaceable.gameObject);
 	}
 }

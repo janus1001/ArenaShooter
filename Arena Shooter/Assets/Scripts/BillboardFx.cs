@@ -14,12 +14,16 @@ public class BillboardFx : MonoBehaviour
 
     void Update()
     {
-        if(!cameraTransform)
+        if (!cameraTransform && Camera.main)
         {
-            cameraTransform = Camera.main.transform;
+            Transform newCameraTransform = Camera.main.transform;
+            if (newCameraTransform)
+            {
+                cameraTransform = newCameraTransform;
+            }
         }
 
-        if(cameraTransform)
+        if (cameraTransform)
         {
             transform.rotation = cameraTransform.rotation;
         }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5565ad82a208a44c88fc4e38d768ed4, type: 3}
+  m_Name: Sniper
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 6406731841065861605, guid: 204dfdad5d52d384c9059ae8944ebfeb,
+    type: 3}
+  itemViewportPrefab: {fileID: 3413680343052719554, guid: efcbb28298e462047a92505279cab5a4,
+    type: 3}
+  itemIcon: {fileID: 21300000, guid: a275dd5f0d9bf52478fecce2aa248d73, type: 3}
+  maxStack: 1

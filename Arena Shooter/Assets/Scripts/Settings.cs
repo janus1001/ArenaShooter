@@ -14,10 +14,10 @@ public class Settings : MonoBehaviour
 
     void Awake()
     {
-        #if UNITY_EDITOR
+        //#if UNITY_EDITOR
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = targetFPS;
-        #endif
+        //#endif
 
         settingsInstance = this;
 

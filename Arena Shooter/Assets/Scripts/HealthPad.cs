@@ -51,11 +51,20 @@ public class HealthPad : NetworkBehaviour
 		healthRestoreText.text = amountOfHealthRestored.ToString();
 	}
 
+	[Server]
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
-			Debug.Log("Collected");
+			PlayerEntityNetwork playerEntityNetwork = other.GetComponent<PlayerEntityNetwork>();
+			float health = playerEntityNetwork.health;
+			health += amountOfHealthRestored;
+			if(health > 100)
+			{
+				health = 100;
+			}
+			playerEntityNetwork.health = health;
 		}
+		Destroy(gameObject);
 	}
 }

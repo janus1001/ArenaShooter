@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5565ad82a208a44c88fc4e38d768ed4, type: 3}
   m_Name: Health Pack
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 0}
-  itemIcon: {fileID: 0}
-  maxStack: 1
+  itemPrefab: {fileID: 6406731841065861605, guid: 0883e5a7b25d0bf4bb7f9b440943b33f,
+    type: 3}
+  itemViewportPrefab: {fileID: 3413680343052719554, guid: 6fe538b7c14e060409cb11d2740a8ef7,
+    type: 3}
+  itemIcon: {fileID: 21300000, guid: ce1d54d74a4549345b4f877375cac359, type: 3}
+  maxStack: 5

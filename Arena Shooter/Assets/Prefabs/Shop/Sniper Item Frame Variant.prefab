@@ -1,0 +1,245 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3869648206183426694
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -450367923795663058, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148492, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Sniper Item Frame Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148499, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: soldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 32bafbc0f2d680249a63c458f11f158f,
+        type: 2}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.202744
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.61461
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.685162
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.022929775
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8508485
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.037494246
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5235698
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -5.038
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 116.787
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733057148503, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733174272721, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733174272721, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733174272721, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733174272721, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733174272721, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733174272721, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_text
+      value: 5 Tokens
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733802724260, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733802724260, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733802724260, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733802724260, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733802724260, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733802724260, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_text
+      value: Sniper Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616751733802724260, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217899564559590950, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 5561349426305759274, guid: dd84ddc49b178a74e801c08a6a67ea78,
+        type: 3}
+    - target: {fileID: 4998338393113370087, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5097931348417991345, guid: dd84ddc49b178a74e801c08a6a67ea78,
+        type: 3}
+    - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_text
+      value: 'Very powerful weapon that needs to be reloaded after each shot.
+
+
+        80
+        Damage
+
+        1 Ammo'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 9.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.057
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c43605c7c9483d4488fc4c8e212ea0e1, type: 3}

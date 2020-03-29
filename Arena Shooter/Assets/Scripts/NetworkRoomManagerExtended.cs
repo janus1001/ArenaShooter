@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using System;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class NetworkRoomManagerExtended : NetworkRoomManager
 {
@@ -22,10 +23,7 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
     public static List<Transform> iceStartPositions = new List<Transform>();
     static int iceStartPositionIndex = 0;
 
-    private void ColorPlayers()
-    {
-
-    }
+    private const int respawnTime = 5;
 
     public override void OnRoomServerSceneChanged(string sceneName)
     {
@@ -220,7 +218,36 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
     public override void Start()
     {
         base.Start();
-
+        
         GameObject.Find("Player Name Input").GetComponent<TMPro.TMP_InputField>().text = Environment.UserName;
+    }
+
+    public async void InvokeSpawnPlayer(NetworkConnection networkConnection)
+    {
+        int money = networkConnection.identity.GetComponent<Inventory>().dollars;
+        PlayerDataServer data = networkConnection.identity.GetComponent<PlayerEntityNetwork>().serverSidePlayerData;
+        Transform startPosition = GetTeamStartPosition(data.belongingTo);
+
+        GameObject newPlayerObject = Instantiate(playerPrefab, startPosition.position, startPosition.rotation);
+        newPlayerObject.GetComponent<PlayerEntityNetwork>().serverSidePlayerData = data;
+        newPlayerObject.GetComponent<Inventory>().dollars = money;
+
+        newPlayerObject.SetActive(false);
+
+        await Task.Delay(respawnTime * 1000);
+
+        if (!newPlayerObject || networkConnection == null) // If play mode stopped or if player disconnected
+            return;
+
+        newPlayerObject.SetActive(true);
+
+        if (NetworkServer.AddPlayerForConnection(networkConnection, newPlayerObject))
+        {
+
+        }
+        else // Failed to add player
+        {
+            Debug.LogError("Failed to add player object!");
+        }
     }
 }

@@ -18,11 +18,13 @@ public class PickupItem : NetworkBehaviour
     private void Update()
     {
         pickUpCooldown -= Time.deltaTime;
-
-        if (pickUpCooldown < 0f && Vector3.Distance(transform.position, Inventory.localInventory.transform.position) < 2)
+        if (PlayerEntityNetwork.localPlayer)
         {
-            Inventory.localInventory.CmdPickUpItem(networkIdentity);
-            pickUpCooldown = 1f;
+            if (pickUpCooldown < 0f && Vector3.Distance(transform.position, Inventory.localInventory.transform.position) < 2)
+            {
+                Inventory.localInventory.CmdPickUpItem(networkIdentity);
+                pickUpCooldown = 1f;
+            }
         }
     }
 

@@ -21,9 +21,14 @@ public class EntityNetwork : NetworkBehaviour
         }
     }
 
-    protected virtual void UpdateHealth(float oldHealth, float newHealth)
+    protected void UpdateHealth(float oldHealth, float newHealth)
     {
-        
+        ActualUpdateHealth(oldHealth, newHealth);
+    }
+
+    protected virtual void ActualUpdateHealth(float oldHealth, float newHealth)
+    {
+
     }
 
     protected virtual void UpdateShield(float oldShield, float newShield)

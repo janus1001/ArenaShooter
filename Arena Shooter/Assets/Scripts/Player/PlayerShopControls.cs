@@ -21,7 +21,7 @@ public class PlayerShopControls : NetworkBehaviour
             return;
         }
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit raycastHit, maxDistance, raycastLayer))
+        if (Camera.main && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit raycastHit, maxDistance, raycastLayer))
         {
             GameObject shop = raycastHit.collider.gameObject;
             if (shop != lastHitShop)
@@ -56,10 +56,11 @@ public class PlayerShopControls : NetworkBehaviour
 
         if (targetedShop.soldItem.priceInTokens) // Price specified in tokens
         {
-            Inventory.localInventory.CheckAndBuyForTokens(targetedShop.soldItem.price, targetedShop.soldItem.itemToBuy);
+            playerInventory.CheckAndBuyForTokens(targetedShop.soldItem.price, targetedShop.soldItem.itemToBuy);
         }
         else // Price specified in dollars
         {
+            Debug.Log(targetedShop.soldItem.price + " " + playerInventory.dollars);
             if (targetedShop.soldItem.price <= playerInventory.dollars)
             {
                 bool spaceInInventory = playerInventory.AddToInventory(targetedShop.soldItem.itemToBuy);

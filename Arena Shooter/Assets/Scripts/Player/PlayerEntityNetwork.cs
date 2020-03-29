@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class PlayerEntityNetwork : EntityNetwork
     public string playerName;
     [SyncVar(hook = "SetPlayerAvatar")]
     public string playerAvatar;
+
     [SyncVar(hook = "SetPlayerTeam")]
     public Team playerTeam;
 
@@ -40,6 +42,8 @@ public class PlayerEntityNetwork : EntityNetwork
                 if(renderer.CompareTag("Player"))
                     renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
             }
+            HUDManager.current.UpdateInventory(0);
+            SpectatorObject.SetSpectatorActive(false);
         }
         else
         {
@@ -51,13 +55,14 @@ public class PlayerEntityNetwork : EntityNetwork
             playerName = serverSidePlayerData.playerName;
             playerAvatar = serverSidePlayerData.avatarURI;
             playerTeam = serverSidePlayerData.belongingTo;
-        } 
+        }
+
+        HUDManager.SetHUDActive(true);
+        ActualUpdateHealth(0, 100);
     }
 
-    protected override void UpdateHealth(float oldHealth, float newHealth)
+    protected override void ActualUpdateHealth(float oldHealth, float newHealth)
     {
-        base.UpdateHealth(oldHealth, newHealth);
-        
         if (isLocalPlayer)
         {
             HUDManager.current.SetHUDPlayerHealth(newHealth);
@@ -96,53 +101,38 @@ public class PlayerEntityNetwork : EntityNetwork
 
         if (health <= 0)
         {
+            Inventory inventory = GetComponent<Inventory>();
+            inventory.DropAllItems();
+
+            // Money awarded on kill
+            attackingPlayer.identity.GetComponentInParent<Inventory>().dollars += 50;
+
             health = 100;
 
             switch (serverSidePlayerData.belongingTo)
             {
                 case Team.Desert:
-                    if (!HUDManager.desertCrystal)
+                    if (HUDManager.desertCrystal)
                     {
-                        Destroy(gameObject);
-                        connectionToClient.Disconnect();
+                        NetworkRoomManagerExtended.newSingleton.InvokeSpawnPlayer(connectionToClient);
                     }
                     break;
                 case Team.Forest:
-                    if (!HUDManager.forestCrystal)
+                    if (HUDManager.forestCrystal)
                     {
-                        Destroy(gameObject);
-                        connectionToClient.Disconnect();
-
+                        NetworkRoomManagerExtended.newSingleton.InvokeSpawnPlayer(connectionToClient);
                     }
                     break;
                 case Team.Ice:
-                    if (!HUDManager.iceCrystal)
+                    if (HUDManager.iceCrystal)
                     {
-                        Destroy(gameObject);
-                        connectionToClient.Disconnect();
-
+                        NetworkRoomManagerExtended.newSingleton.InvokeSpawnPlayer(connectionToClient);
                     }
                     break;
             }
 
-            Transform startPosition = NetworkRoomManagerExtended.newSingleton.GetTeamStartPosition(serverSidePlayerData.belongingTo);
-            TargetRespawnAt(connectionToClient, startPosition.position, startPosition.rotation);
-
-            // TODO: Remove items
-
-
-            // Money awarded on kill
-            attackingPlayer.identity.GetComponentInParent<Inventory>().dollars += 50;
+            Destroy(gameObject);
         }
-    }
-
-    [TargetRpc]
-    void TargetRespawnAt(NetworkConnection conn, Vector3 position, Quaternion rotation)
-    {
-        GetComponent<CharacterController>().enabled = false;
-        localPlayer.transform.position = position;
-        localPlayer.transform.rotation = rotation;
-        GetComponent<CharacterController>().enabled = true;
     }
 
     void SetPlayerName(string oldName, string newName)
@@ -192,8 +182,36 @@ public class PlayerEntityNetwork : EntityNetwork
     public void CmdShootAt(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
     {
         // TODO: simple checks if player was even able to hit the target.
+        if(targetPlayer) // Cannot attack player, if it doesn't exist
+            targetPlayer.GetComponent<EntityNetwork>().DealDamage(baseDamage, connectionToClient, hitPart);
+    }
 
-        targetPlayer.GetComponent<EntityNetwork>().DealDamage(baseDamage, connectionToClient, hitPart);
+    [Command]
+    public void CmdBuild(Vector3 position, Quaternion rotation, string placeableName, int inventoryIndex)
+    {
+        GameObject builtObject = (GameObject)Instantiate(Resources.Load("Placeables/" + placeableName), position, rotation);
+        NetworkServer.Spawn(builtObject);
+
+        Inventory inventoryComponent = connectionToClient.identity.GetComponent<Inventory>();
+        InventorySlot newSlot = inventoryComponent.inventory[inventoryIndex];
+        newSlot.itemAmount--;
+
+        if (newSlot.itemAmount == 0)
+        {
+            inventoryComponent.inventory.RemoveAt(inventoryIndex);
+        }
+        else
+        {
+            inventoryComponent.inventory[inventoryIndex] = newSlot;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(isLocalPlayer && SpectatorObject.singleton)
+        {
+            SpectatorObject.SetSpectatorActive(true);
+        }
     }
 }
 

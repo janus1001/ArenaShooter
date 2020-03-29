@@ -69,6 +69,12 @@ public class HUDManager : MonoBehaviour
             }
         }*/
 
+        if(!PlayerEntityNetwork.localPlayer)
+        {
+            SetHUDActive(false);
+            return;
+        }
+
         if (forestCrystal)
         {
             forestTeamHealth.fillAmount = forestCrystal.health / forestCrystal.startingHealth;
@@ -165,9 +171,15 @@ public class HUDManager : MonoBehaviour
             slot.slotPanel.color = inactiveColor;
         }
     }
-
-    public void UpdateInventory(SyncListInventorySlots.Operation op, int index, InventorySlot oldItem, InventorySlot newItem)
+    public void UpdateInventoryCallback(SyncListInventorySlots.Operation op, int index, InventorySlot oldItem, InventorySlot newItem)
     {
+        UpdateInventory(index);
+    }
+
+    public void UpdateInventory(int index)
+    {
+        //if (!Inventory.localInventory)
+        //    return;
         for (int i = 0; i < 5; i++)
         {
             inventorySlots[i].itemCount.text = string.Empty;
@@ -198,5 +210,10 @@ public class HUDManager : MonoBehaviour
         {
             itemDescriptionText.text = "";
         }
+    }
+
+    public static void SetHUDActive(bool isActive)
+    {
+        current.gameObject.SetActive(isActive);
     }
 }
