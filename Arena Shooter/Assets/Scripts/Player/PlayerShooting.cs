@@ -51,7 +51,7 @@ public class PlayerShooting : MonoBehaviour
             reloadingTime = 1;
         }
 
-        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire && currentAmmo > 0)
+        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire && currentAmmo > 0 && !Settings.settingsInstance.gameObject.activeSelf)
         {
             nextTimeToFire = Time.time + 1.0f / fireRate;
             Shoot();

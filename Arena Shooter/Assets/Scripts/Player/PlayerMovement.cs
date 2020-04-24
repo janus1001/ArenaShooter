@@ -122,6 +122,16 @@ public class PlayerMovement : NetworkBehaviour
         float mouseX = Input.GetAxis("Mouse X") * Settings.mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * Settings.mouseSensitivity;
 
+        //Checking for mouse invertion
+        if (Settings.invertX)
+        {
+            mouseX = -mouseX;
+        }
+        if (Settings.invertY)
+        {
+            mouseY = -mouseY;
+        }
+
         // Vertical movement
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);

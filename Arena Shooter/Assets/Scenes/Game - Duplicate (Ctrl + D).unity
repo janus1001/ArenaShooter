@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028392, g: 0.2257143, b: 0.3069234, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571424, b: 0.3069231, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -255,6 +255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca38bceace234ef439e05ca86d0183a2, type: 3}
+--- !u!4 &1008611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1008610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6014064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -648,12 +653,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4eed3ae7a5410b47884233d90ac0ab1, type: 3}
---- !u!4 &425659199 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ca38bceace234ef439e05ca86d0183a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1008610}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &456201877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1144,10 +1143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  serverSidePlayerData:
-    avatarURI: 
-    playerName: 
-    belongingTo: 0
   startingHealth: 100
 --- !u!114 &749030682
 MonoBehaviour:
@@ -1644,7 +1639,7 @@ PrefabInstance:
     - target: {fileID: 4462374797774998171, guid: eea5699edb0947241a229d6d592dfcaa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.423706
+      value: 2.423584
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eea5699edb0947241a229d6d592dfcaa, type: 3}
@@ -1723,7 +1718,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43732
+  m_Name: pb_Mesh68400
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4604,7 +4599,7 @@ Transform:
   m_LocalPosition: {x: 100, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 425659199}
+  - {fileID: 1008611}
   m_Father: {fileID: 876259374}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4621,7 +4616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PolyMesh:
-    name: pb_Mesh43732
+    name: pb_Mesh68400
     vertices:
     - {x: 0, y: 0, z: 0}
     - {x: 0, y: 6.55, z: 0}
@@ -6568,6 +6563,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3527750032469250271, guid: cde546947a7f54abdbf40fbfeb554391,
+        type: 3}
+      propertyPath: sceneId
+      value: 1231627408
+      objectReference: {fileID: 0}
     - target: {fileID: 3581651445283727874, guid: cde546947a7f54abdbf40fbfeb554391,
         type: 3}
       propertyPath: m_LocalPosition.x
