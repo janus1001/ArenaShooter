@@ -66,7 +66,9 @@ public class PlayerShooting : MonoBehaviour
         gunRecoil.Punch();
 
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
+
+        Vector3 shootDirection = playerCamera.transform.forward;
+        if (Physics.Raycast(playerCamera.transform.position, shootDirection, out hit, range))
         {
             // TODO add damage
 
