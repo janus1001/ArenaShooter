@@ -31,6 +31,27 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
     [Command]
     public void CmdSelectTeam(Team selectedTeam)
     {
+        switch (selectedTeam) // Check if team isn't full
+        {
+            case Team.Forest:
+                if(NetworkRoomManagerExtended.teamForest.Count >= NetworkRoomManagerExtended.MaxTeamSize)
+                {
+                    return;
+                }
+                break;
+            case Team.Desert:
+                if (NetworkRoomManagerExtended.teamDesert.Count >= NetworkRoomManagerExtended.MaxTeamSize)
+                {
+                    return;
+                }
+                break;
+            case Team.Ice:
+                if (NetworkRoomManagerExtended.teamIce.Count >= NetworkRoomManagerExtended.MaxTeamSize)
+                {
+                    return;
+                }
+                break;
+        }
         NetworkRoomManagerExtended.newSingleton.AddPlayerToTeam(connectionToClient, selectedTeam);
     }
 
@@ -51,7 +72,7 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
     }
 
     [ClientRpc]
-    public void RpcSetPanelPosition(LobbyPosition lobbyPosition, NetworkIdentity playerIdentity)
+    public void RpcSetPanelPosition(LobbyPosition lobbyPosition, NetworkIdentity playerIdentity, int maxTeamSize)
     {
         switch (lobbyPosition)
         {
@@ -72,7 +93,7 @@ public class NetworkRoomPlayerExtended : NetworkRoomPlayer
                 break;
         }
 
-        RoomHudCanvas.singleton.UpdateHUD(isLocalPlayer);
+        RoomHudCanvas.singleton.UpdateHUD(isLocalPlayer, maxTeamSize);
     }
 
     public override void OnStartClient()

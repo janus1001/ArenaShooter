@@ -12,6 +12,14 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
 
     public static NetworkRoomManagerExtended newSingleton;
 
+    public static int MaxTeamSize
+    {
+        get
+        {
+            return (singleton.numPlayers + 2) / 3;
+        }
+    }
+
     public static List<PlayerDataServer> teamForest = new List<PlayerDataServer>();
     public static List<PlayerDataServer> teamDesert = new List<PlayerDataServer>();
     public static List<PlayerDataServer> teamIce = new List<PlayerDataServer>();
@@ -44,20 +52,20 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
             case Team.Forest:
                 calledBy.playerData.belongingTo = Team.Forest;
                 teamForest.Add(calledBy.playerData);
-                calledBy.RpcSetPanelPosition(LobbyPosition.Forest, playerConnection.identity);
+                calledBy.RpcSetPanelPosition(LobbyPosition.Forest, playerConnection.identity, MaxTeamSize);
                 break;
             case Team.Desert:
                 calledBy.playerData.belongingTo = Team.Desert;
                 teamDesert.Add(calledBy.playerData);
-                calledBy.RpcSetPanelPosition(LobbyPosition.Desert, playerConnection.identity);
+                calledBy.RpcSetPanelPosition(LobbyPosition.Desert, playerConnection.identity, MaxTeamSize);
                 break;
             case Team.Ice:
                 calledBy.playerData.belongingTo = Team.Ice;
                 teamIce.Add(calledBy.playerData);
-                calledBy.RpcSetPanelPosition(LobbyPosition.Ice, playerConnection.identity);
+                calledBy.RpcSetPanelPosition(LobbyPosition.Ice, playerConnection.identity, MaxTeamSize);
                 break;
-            case Team.NoTeam:
-                calledBy.RpcSetPanelPosition(LobbyPosition.List, playerConnection.identity);
+            case Team.Spectator:
+                calledBy.RpcSetPanelPosition(LobbyPosition.List, playerConnection.identity, MaxTeamSize);
                 break;
             default:
                 Debug.LogError("Unknown Team selected.");
@@ -100,7 +108,7 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
             case Team.Ice:
                 iceStartPositions.Add(transform);
                 break;
-            case Team.NoTeam:
+            case Team.Spectator:
                 RegisterStartPosition(transform);
                 break;
             default:
@@ -154,7 +162,7 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
             case Team.Ice:
                 iceStartPositions.Remove(transform);
                 break;
-            case Team.NoTeam:
+            case Team.Spectator:
                 UnRegisterStartPosition(transform);
                 break;
             default:
@@ -198,6 +206,14 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
         }
         else
         {
+            PlayerDataServer playerData = PlayerDataServer.RetrievePlayerDataByConnection(conn);
+
+            if(playerData.belongingTo == Team.Spectator)
+            {
+                //TODO: SPECTATOR ONLY SPAWN
+                return;
+            }
+
             AddPlayer(conn);
         }
     }
@@ -212,7 +228,6 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
         NetworkServer.AddPlayerForConnection(conn, player);
 
         player.GetComponent<PlayerEntityNetwork>().serverSidePlayerData = PlayerDataServer.RetrievePlayerDataByConnection(conn);
-        //player.GetComponent<EntityNetwork>().RpcSetColorToTeam(player.GetComponent<EntityNetwork>().serverSidePlayerData.belongingTo);
     }
 
     public override void Start()

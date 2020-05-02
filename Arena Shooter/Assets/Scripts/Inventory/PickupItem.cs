@@ -7,12 +7,17 @@ public class PickupItem : NetworkBehaviour
 {
     public BaseItem baseItem;
     NetworkIdentity networkIdentity;
+    public float timeBeforeDespawn = -1f;
 
     private float pickUpCooldown = 1f; // Stopping clients from spamming pickup command and not allowing them to pick up items when dropping them.
 
     private void Start()
     {
         networkIdentity = GetComponent<NetworkIdentity>();
+        if (timeBeforeDespawn > 0)
+        {
+            Destroy(gameObject, timeBeforeDespawn);
+        }
     }
 
     private void Update()

@@ -30,4 +30,9 @@ public class MenuAvatarsList : MonoBehaviour
     {
         roomManager.ChangePlayerAvatar(avatar);
     }
+
+    public void ToggleShowList()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
 }

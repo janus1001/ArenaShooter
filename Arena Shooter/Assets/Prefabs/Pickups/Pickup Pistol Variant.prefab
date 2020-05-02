@@ -19,6 +19,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6f430247112b4b94cbc12ed889aca713,
         type: 2}
+    - target: {fileID: 3154953766365228128, guid: a523f16c726075042b6975bf940aeaf4,
+        type: 3}
+      propertyPath: timeBeforeDespawn
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 3154953766365228130, guid: a523f16c726075042b6975bf940aeaf4,
         type: 3}
       propertyPath: sceneId

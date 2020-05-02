@@ -277,6 +277,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_text
+      value: Spectate
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1307708311590235541, guid: a8de6f397363f314fb91deda96241874,
         type: 3}
       propertyPath: m_Name
@@ -387,6 +407,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2499249926251616500, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499249926251616500, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499249926251616500, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499249926251616500, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639789027955546820, guid: a8de6f397363f314fb91deda96241874,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -447,5 +487,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3075559377662425749, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303463268889774865, guid: a8de6f397363f314fb91deda96241874,
+        type: 3}
+      propertyPath: playerSlotsList
+      value: 
+      objectReference: {fileID: 6869287921955228988}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8de6f397363f314fb91deda96241874, type: 3}
+--- !u!224 &6869287921955228988 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3266538627635089044, guid: a8de6f397363f314fb91deda96241874,
+    type: 3}
+  m_PrefabInstance: {fileID: 6869287921955228987}
+  m_PrefabAsset: {fileID: 0}

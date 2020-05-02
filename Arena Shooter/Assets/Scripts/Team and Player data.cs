@@ -6,7 +6,7 @@ using System.Linq;
 
 public enum Team
 {
-    NoTeam, Forest, Desert, Ice
+    Spectator, Forest, Desert, Ice
 }
 
 [Serializable]
@@ -30,7 +30,7 @@ public struct PlayerDataServer
         avatarURI = newAvatarURI;
         playerName = newPlayerName;
         connectionToPlayer = newConnectionToPlayer;
-        belongingTo = Team.NoTeam;
+        belongingTo = Team.Spectator;
     }
 
     public static PlayerDataServer RetrievePlayerDataByConnection(NetworkConnection conn)

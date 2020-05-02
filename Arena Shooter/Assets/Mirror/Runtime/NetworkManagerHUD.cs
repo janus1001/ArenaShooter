@@ -62,9 +62,10 @@ namespace Mirror
                     {
                         manager.StartClient();
                     }
-                    manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+                    manager.networkAddress = GUILayout.TextField(manager.networkAddress).Trim();
                     GUILayout.EndHorizontal();
 
+                    /* SERVER ONLY
                     // LAN Server Only
                     if (Application.platform == RuntimePlatform.WebGLPlayer)
                     {
@@ -74,7 +75,7 @@ namespace Mirror
                     else
                     {
                         if (GUILayout.Button("LAN Server Only")) manager.StartServer();
-                    }
+                    }*/
                 }
                 else
                 {

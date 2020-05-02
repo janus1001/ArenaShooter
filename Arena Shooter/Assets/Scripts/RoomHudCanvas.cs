@@ -41,7 +41,7 @@ public class RoomHudCanvas : MonoBehaviour
                 NetworkRoomPlayerExtended.singleton.CmdSelectTeam(Team.Ice);
                 break;
             case "no team":
-                NetworkRoomPlayerExtended.singleton.CmdSelectTeam(Team.NoTeam);
+                NetworkRoomPlayerExtended.singleton.CmdSelectTeam(Team.Spectator);
                 break;
             default:
                 Debug.LogError("Check team text on button.");
@@ -78,7 +78,7 @@ public class RoomHudCanvas : MonoBehaviour
     }
 
     // Sets positions of buttons and player panels, hides buttons when there are two players on a team already.
-    public void UpdateHUD(bool isLocalPlayerChanged)
+    public void UpdateHUD(bool isLocalPlayerChanged, int maxTeamSize)
     {
         if (isLocalPlayerChanged)
         {
@@ -86,7 +86,7 @@ public class RoomHudCanvas : MonoBehaviour
             readyText.transform.parent.gameObject.SetActive(true);
         }
 
-        if (playerSlotsForest.childCount >= 3)
+        if (playerSlotsForest.childCount > maxTeamSize)
         {
             forestButton.gameObject.SetActive(false);
         }
@@ -95,7 +95,7 @@ public class RoomHudCanvas : MonoBehaviour
             forestButton.gameObject.SetActive(true);
         }
 
-        if (playerSlotsDesert.childCount >= 3)
+        if (playerSlotsDesert.childCount > maxTeamSize)
         {
             desertButton.gameObject.SetActive(false);
         }
@@ -104,7 +104,7 @@ public class RoomHudCanvas : MonoBehaviour
             desertButton.gameObject.SetActive(true);
         }
 
-        if (playerSlotsIce.childCount >= 3)
+        if (playerSlotsIce.childCount > maxTeamSize)
         {
             iceButton.gameObject.SetActive(false);
         }
