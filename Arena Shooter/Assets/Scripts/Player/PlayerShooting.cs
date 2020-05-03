@@ -31,7 +31,6 @@ public class PlayerShooting : MonoBehaviour
     {
         HUDManager.current.UpdateAmmo(currentAmmo, maxAmmo);
 
-        Debug.Log(inaccuracy);
         reloadingTime -= Time.deltaTime;
         if (Inventory.HeldItem && Inventory.localInventory.itemViewports.Count > 0)
         {

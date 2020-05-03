@@ -62,10 +62,12 @@ public class HUDManager : MonoBehaviour
             if (Settings.settingsInstance.gameObject.activeSelf)
             {
                 Cursor.lockState = CursorLockMode.None;
+                PlayerEntityNetwork.localPlayer.GetComponent<PlayerMovement>().canMove = false;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
+                PlayerEntityNetwork.localPlayer.GetComponent<PlayerMovement>().canMove = true;
             }
         }
 

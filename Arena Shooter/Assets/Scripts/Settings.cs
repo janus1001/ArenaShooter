@@ -56,6 +56,7 @@ public class Settings : MonoBehaviour
     {
         Settings.settingsInstance.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        PlayerEntityNetwork.localPlayer.GetComponent<PlayerMovement>().canMove = true;
     }
 
     public void SetXAxis(bool value)

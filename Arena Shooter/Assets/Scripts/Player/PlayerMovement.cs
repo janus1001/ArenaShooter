@@ -9,6 +9,7 @@ public class PlayerMovement : NetworkBehaviour
     public float aerialMultiplier = 0.5f;
     public float jumpStrength = 10.0f;
     public float slopeForce = 300.0f;
+    public bool canMove = true;
 
     CharacterController characterController;
     Vector3 positionLastFrame;
@@ -29,13 +30,15 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            Debug.Log(1 / Time.deltaTime);
+
             isStill = transform.position == positionLastFrame;
             positionLastFrame = transform.position;
-            if (!Settings.settingsInstance.gameObject.activeSelf)
+            if (canMove)
             {
                 CameraControl();
-                Move();
             }
+            Move();
         }
     }
 
@@ -76,8 +79,8 @@ public class PlayerMovement : NetworkBehaviour
         if (characterController.isGrounded)
         {
             // Moving on the ground
-            motion = transform.right * Input.GetAxis("Horizontal");
-            motion += transform.forward * Input.GetAxis("Vertical");
+            motion = transform.right * Input.GetAxis("Horizontal") * (canMove ? 1 : 0);
+            motion += transform.forward * Input.GetAxis("Vertical") * (canMove ? 1 : 0);
             if (motion.sqrMagnitude > motion.normalized.sqrMagnitude)
             {
                 motion = motion.normalized;
@@ -88,8 +91,8 @@ public class PlayerMovement : NetworkBehaviour
         {
             // Moving in the air
             float ySpeed = motion.y;
-            motion = transform.right * Input.GetAxis("Horizontal");
-            motion += transform.forward * Input.GetAxis("Vertical");
+            motion = transform.right * Input.GetAxis("Horizontal") * (canMove ? 1 : 0);
+            motion += transform.forward * Input.GetAxis("Vertical") * (canMove ? 1 : 0);
             if (motion.sqrMagnitude > motion.normalized.sqrMagnitude)
             {
                 motion = motion.normalized;
@@ -104,7 +107,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // Jumping
-        if (characterController.isGrounded && !isSlipping && Input.GetButton("Jump") || isSlipping && isStill && Input.GetButton("Jump"))
+        if (canMove && (characterController.isGrounded && !isSlipping && Input.GetButton("Jump") || isSlipping && isStill && Input.GetButton("Jump")))
         {
             motion.y = jumpStrength;
         }
