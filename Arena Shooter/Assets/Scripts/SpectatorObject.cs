@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpectatorObject : MonoBehaviour
 {
     public static SpectatorObject singleton;
-    public bool isSpectating = true;
+    public bool isSpectating = false;
 
     [SerializeField]
     Behaviour[] disableComponentsWhenInactive;
@@ -26,13 +26,13 @@ public class SpectatorObject : MonoBehaviour
 
     void Update()
     {
-        if(isSpectating)
+        /*if(isSpectating)
         {
             if(Mirror.NetworkClient.connection.identity)
             {
                 isSpectating = false;
             }
-        }
+        }*/
 
         CameraControl();
         if (Camera.main)

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerEntityNetwork : EntityNetwork
@@ -52,6 +53,8 @@ public class PlayerEntityNetwork : EntityNetwork
 
             HUDManager.current.UpdateInventory(0);
             SpectatorObject.SetSpectatorActive(false);
+
+            SpectatorObject.singleton.isSpectating = false;
         }
         else
         {
@@ -67,6 +70,27 @@ public class PlayerEntityNetwork : EntityNetwork
 
         HUDManager.SetHUDActive(true);
         ActualUpdateHealth(0, 100);
+    }
+
+    private void Update()
+    {
+        if(isServer)
+        {
+            if (playerTeam == Team.Spectator)
+            {
+                RpcEnableSpectator();
+                Destroy(gameObject, 1f);
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void RpcEnableSpectator()
+    {
+        if(isLocalPlayer)
+        {
+            SpectatorObject.singleton.isSpectating = true;
+        }
     }
 
     protected override void ActualUpdateHealth(float oldHealth, float newHealth)
@@ -124,17 +148,29 @@ public class PlayerEntityNetwork : EntityNetwork
                     {
                         NetworkRoomManagerExtended.newSingleton.InvokeSpawnPlayer(connectionToClient);
                     }
+                    else
+                    {
+                        RpcEnableSpectator();
+                    }
                     break;
                 case Team.Forest:
                     if (HUDManager.forestCrystal)
                     {
                         NetworkRoomManagerExtended.newSingleton.InvokeSpawnPlayer(connectionToClient);
                     }
+                    else
+                    {
+                        RpcEnableSpectator();
+                    }
                     break;
                 case Team.Ice:
                     if (HUDManager.iceCrystal)
                     {
                         NetworkRoomManagerExtended.newSingleton.InvokeSpawnPlayer(connectionToClient);
+                    }
+                    else
+                    {
+                        RpcEnableSpectator();
                     }
                     break;
             }
