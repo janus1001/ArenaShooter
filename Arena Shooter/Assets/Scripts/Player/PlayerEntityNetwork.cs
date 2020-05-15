@@ -42,11 +42,14 @@ public class PlayerEntityNetwork : EntityNetwork
 
             // Hide model if local player
 
-            foreach (Renderer renderer in transform.GetComponentsInChildren<Renderer>())
-            {
-                if(renderer.CompareTag("Player"))
-                    renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-            }
+            //foreach (Renderer renderer in transform.GetComponentsInChildren<Renderer>())
+            //{
+            //    if(renderer.CompareTag("Player"))
+            //        renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+            //}
+
+            playerRenderers[0].shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+
             HUDManager.current.UpdateInventory(0);
             SpectatorObject.SetSpectatorActive(false);
         }
