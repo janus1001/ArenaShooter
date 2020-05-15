@@ -210,11 +210,13 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
 
             if(playerData.belongingTo == Team.Spectator)
             {
+                Debug.Log("ree");
                 //TODO: SPECTATOR ONLY SPAWN
                 return;
             }
+            else
+                AddPlayer(conn);
 
-            AddPlayer(conn);
         }
     }
 
