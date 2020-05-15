@@ -52,6 +52,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   baseItem: {fileID: 11400000, guid: fa7b279c503e0134f80e9befaa39a00a, type: 2}
+  timeBeforeDespawn: -1
 --- !u!33 &1434704128695830976
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -78,7 +79,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: aa5b1effb44dbd84e95cdf351d2311fa, type: 3}
+  - {fileID: 2100000, guid: 959b155bef1a3b54b9c44bb0c9520be7, type: 2}
   - {fileID: 2100000, guid: 7a0daef2b39fde449865a1dfecbe0d32, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

@@ -20,7 +20,10 @@ public class Minimap : MonoBehaviour
 
     private void Start()
     {
-        localPlayer = NetworkClient.connection.identity.transform;
+        if (NetworkClient.connection.identity)
+        {
+            localPlayer = NetworkClient.connection.identity.transform;
+        }
     }
 
     void Update()
