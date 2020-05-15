@@ -73,8 +73,12 @@ public class HUDManager : MonoBehaviour
 
         if(!PlayerEntityNetwork.localPlayer)
         {
-            //SetHUDActive(false);
+            SetHUDActive(false);
             return;
+        }
+        else
+        {
+            SetHUDActive(true);
         }
 
         if (forestCrystal)
