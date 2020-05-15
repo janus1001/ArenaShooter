@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 1616751733057148492, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_Name
-      value: Assault Rifle Item Frame Variant (1)
+      value: Assault Rifle Item Frame Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1616751733057148499, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
@@ -142,13 +142,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -1134714066672644336, guid: d71ba8c6c8247934f82f48abecb07543,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: fc69c19a1343ce447a35c79717a472dc, type: 2}
     - target: {fileID: 4998338393113370087, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1848256367665038095, guid: aa5b1effb44dbd84e95cdf351d2311fa,
+      objectReference: {fileID: 1921087003027962483, guid: aa5b1effb44dbd84e95cdf351d2311fa,
         type: 3}
     - target: {fileID: 6451883444427911879, guid: c43605c7c9483d4488fc4c8e212ea0e1,
         type: 3}
@@ -219,6 +218,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031212961061617136, guid: c43605c7c9483d4488fc4c8e212ea0e1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c43605c7c9483d4488fc4c8e212ea0e1, type: 3}

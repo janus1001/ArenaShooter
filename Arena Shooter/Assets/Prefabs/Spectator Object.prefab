@@ -162,7 +162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You will respawn in 5 seconds.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -231,13 +231,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -1.9371338, w: 0}
   m_textInfo:
     textComponent: {fileID: 2140284888945242390}
-    characterCount: 30
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 6
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 3
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44f956b78a0cde429bd34b627d24ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpectating: 1
   disableComponentsWhenInactive:
   - {fileID: 8145295652046725124}
   - {fileID: 8145295652046725125}

@@ -22,4 +22,10 @@ public class PlayerEffects : NetworkBehaviour
         animator.SetFloat("walkingSpeed", walkingSpeed);
         positionLastFrame = gameObject.transform.position;
     }
+
+    [Command]
+    void CmdMakeShot()
+    {
+
+    }
 }

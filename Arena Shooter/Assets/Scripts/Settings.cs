@@ -6,7 +6,7 @@ public class Settings : MonoBehaviour
 {
     public static Settings settingsInstance;
     public static float MoveHUDMultiplier = 10;
-    public static int targetFPS = 144; // My PC was becoming a jet turbine ok
+    public static int targetFPS = 90; // My PC was becoming a jet turbine ok
     public static float mouseSensitivity = 1; // Currently unused
     public static bool invertX = false;
     public static bool invertY = false;
@@ -27,7 +27,6 @@ public class Settings : MonoBehaviour
         mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1.0f); //UNCOMMENT TO RESTORE FUNCTIONALITY (and line 59 of HUDManager)
         invertX = PlayerPrefs.GetInt("InvertX") == 1;
         invertY = PlayerPrefs.GetInt("InvertY") == 1;
-        Debug.Log(mouseSensitivity);
 
         gameObject.SetActive(false);
     }

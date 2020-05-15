@@ -22,9 +22,14 @@ public class PlayerEntityNetwork : EntityNetwork
 
     public TMPro.TMP_Text playerNameTag;
     public UnityEngine.UI.Image playerAvatarTag;
-    public MeshRenderer[] playerRenderers;
+    public SkinnedMeshRenderer[] playerRenderers;
 
     public Material[] teamMaterials;
+
+    public AudioClip gunshot;
+    public AudioSource audioSource;
+
+    public GameObject bulletTrailPrefab;
 
     protected override void Start()
     {
@@ -179,11 +184,24 @@ public class PlayerEntityNetwork : EntityNetwork
 
     // Function called by client, executed on server.
     [Command]
-    public void CmdShootAt(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart)
+    public void CmdShootAt(NetworkIdentity targetPlayer, float baseDamage, BodyPart hitPart, Vector3 start, Vector3 end)
     {
         // TODO: simple checks if player was even able to hit the target.
         if(targetPlayer) // Cannot attack player, if it doesn't exist
             targetPlayer.GetComponent<EntityNetwork>().DealDamage(baseDamage, connectionToClient, hitPart);
+
+
+    }
+    [ClientRpc]
+    public void RpcPlayerShot(Vector3 start, Vector3 end)
+    {
+        if(!isLocalPlayer)
+        {
+            LineRenderer lineRenderer = Instantiate(bulletTrailPrefab).GetComponent<LineRenderer>();
+            lineRenderer.SetPosition(0, start); lineRenderer.SetPosition(1, end);
+            Destroy(lineRenderer, 0.02f);
+            audioSource.PlayOneShot(gunshot);
+        }
     }
 
     [Command]

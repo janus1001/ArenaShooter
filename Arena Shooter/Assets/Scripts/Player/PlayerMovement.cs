@@ -30,8 +30,6 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            Debug.Log(1 / Time.deltaTime);
-
             isStill = transform.position == positionLastFrame;
             positionLastFrame = transform.position;
             if (canMove)

@@ -130,6 +130,7 @@ MonoBehaviour:
   range: 100
   fireRate: 1
   maxAmmo: 1
+  recoilRate: 0.2
   impactEffect: {fileID: 565196021349365542, guid: 97cc492531d6b944bbc7b591df86d3b1,
     type: 3}
   gunRecoil: {fileID: 2392758441367874137}
@@ -228,12 +229,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: dd84ddc49b178a74e801c08a6a67ea78,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.228
+      value: -0.308
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: dd84ddc49b178a74e801c08a6a67ea78,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.951004
+      value: 0.835
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: dd84ddc49b178a74e801c08a6a67ea78,
         type: 3}
@@ -275,6 +276,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: dd84ddc49b178a74e801c08a6a67ea78,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7448e40521ab7124aa22c374f8a30e03, type: 2}
     - target: {fileID: -927199367670048503, guid: dd84ddc49b178a74e801c08a6a67ea78,
         type: 3}
       propertyPath: m_Name

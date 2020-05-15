@@ -92,7 +92,7 @@ public class PlayerShooting : MonoBehaviour
             EntityNetwork hitObject = hit.collider.GetComponentInParent<EntityNetwork>();
             if (hitObject)
             {
-                PlayerEntityNetwork.localPlayer.CmdShootAt(hitObject.GetComponent<NetworkIdentity>(), damage, BodyPart.Generic);
+                PlayerEntityNetwork.localPlayer.CmdShootAt(hitObject.GetComponent<NetworkIdentity>(), damage, BodyPart.Generic, transform.position + (Vector3.up * 0.2f), hit.point);
             }
 
             // TODO add force to the hit

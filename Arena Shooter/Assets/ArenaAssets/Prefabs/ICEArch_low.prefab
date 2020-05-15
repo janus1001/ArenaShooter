@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8396414236321716621}
   - component: {fileID: 710734194890908603}
   - component: {fileID: 6548657820273336130}
+  - component: {fileID: 7697024860358733845}
   m_Layer: 0
   m_Name: ICEArch_low
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7697024860358733845
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818103503504010142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4680329609546576999, guid: ab54247cf9eeb2444b1570763a6ce91e, type: 3}

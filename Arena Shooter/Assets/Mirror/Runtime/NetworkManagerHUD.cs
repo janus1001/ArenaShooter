@@ -50,7 +50,7 @@ namespace Mirror
                     // LAN Host
                     if (Application.platform != RuntimePlatform.WebGLPlayer)
                     {
-                        if (GUILayout.Button("LAN Host"))
+                        if (GUILayout.Button("Host game"))
                         {
                             manager.StartHost();
                         }
@@ -58,7 +58,7 @@ namespace Mirror
 
                     // LAN Client + IP
                     GUILayout.BeginHorizontal();
-                    if (GUILayout.Button("LAN Client"))
+                    if (GUILayout.Button("Connect to:"))
                     {
                         manager.StartClient();
                     }
