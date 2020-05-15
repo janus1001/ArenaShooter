@@ -212,11 +212,11 @@ public class NetworkRoomManagerExtended : NetworkRoomManager
             {
                 Debug.Log("ree");
                 //TODO: SPECTATOR ONLY SPAWN
-                AddPlayer(conn);
                 return;
             }
-            
-            AddPlayer(conn);
+            else
+                AddPlayer(conn);
+
         }
     }
 
