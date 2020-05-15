@@ -280,22 +280,22 @@ PrefabInstance:
     - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
         type: 3}
       propertyPath: m_text
-      value: Spectate
+      value: Change team
       objectReference: {fileID: 0}
     - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1055055904622134252, guid: a8de6f397363f314fb91deda96241874,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1307708311590235541, guid: a8de6f397363f314fb91deda96241874,
         type: 3}

@@ -399,9 +399,9 @@ MonoBehaviour:
   playerRenderers:
   - {fileID: 8094078026727695842}
   teamMaterials:
-  - {fileID: 2100000, guid: 0d79736b920bc3e4d901f5f45715fc2d, type: 2}
-  - {fileID: 2100000, guid: c01085e79a4f2cc498fd2a831520d13f, type: 2}
-  - {fileID: 2100000, guid: 1199ba9d07bf35f4280f59e7ec83f73e, type: 2}
+  - {fileID: 2100000, guid: 85acff8faaf0d044e8010644dc3d19aa, type: 2}
+  - {fileID: 2100000, guid: 2bbfe4250948ed941b4a6a601b3581e4, type: 2}
+  - {fileID: 2100000, guid: 038e64eadda917247a23e03b6aa3c71b, type: 2}
   gunshot: {fileID: 8300000, guid: fd242a3b60c5fe6468416ce406899421, type: 3}
   audioSource: {fileID: 924479458008734742}
   bulletTrailPrefab: {fileID: 8948164964034712571, guid: 203198a69037bf24aab0deeb95c09add,
