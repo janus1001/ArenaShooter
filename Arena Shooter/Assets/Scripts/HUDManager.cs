@@ -76,6 +76,10 @@ public class HUDManager : MonoBehaviour
             SetHUDActive(false);
             return;
         }
+        else
+        {
+            SetHUDActive(true);
+        }
 
         if (forestCrystal)
         {

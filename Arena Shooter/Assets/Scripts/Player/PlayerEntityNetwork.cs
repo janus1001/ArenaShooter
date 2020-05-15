@@ -79,7 +79,7 @@ public class PlayerEntityNetwork : EntityNetwork
             if (playerTeam == Team.Spectator)
             {
                 RpcEnableSpectator();
-                Destroy(gameObject, 1f);
+                Destroy(gameObject, 0.1f);
             }
         }
     }
