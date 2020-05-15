@@ -86,7 +86,10 @@ public class Inventory : NetworkBehaviour
         // Show current viewport
 
         defaultViewport.SetActive(inventory.Count > 0 ? false : true); // Show default viewport if no other is there
-
+        if (PlayerEffects.singleton)
+        {
+            PlayerEffects.singleton.CmdSetWeapon(0);
+        }
         for (int i = 0; i < itemViewports.Count; i++)
         {
             if (i == currentInventoryIndex)
@@ -95,6 +98,21 @@ public class Inventory : NetworkBehaviour
                 {
                     itemViewports[i].SetActive(true);
                 }
+                int ID = 0;
+                switch (itemViewports[i].name)
+                {
+                    case "Pistol Viewport Variant(Clone)":
+                        ID = 1;
+                        break;
+                    case "Rifle Viewport Variant(Clone)":
+                        ID = 2;
+                        break;
+                    case "Sniper Viewport(Clone)":
+                        ID = 3;
+                        break;
+                }
+                PlayerEffects.singleton.CmdSetWeapon(ID);
+                //Debug.Log(itemViewports[i]);
             }
             else
             {

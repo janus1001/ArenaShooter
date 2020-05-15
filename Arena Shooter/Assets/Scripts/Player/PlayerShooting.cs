@@ -85,6 +85,8 @@ public class PlayerShooting : MonoBehaviour
         recoil = Quaternion.AngleAxis(angle, shootDirection) * recoil * radius;
         shootDirection += recoil;
 
+        transform.root.GetComponent<PlayerEffects>().CmdMakeShoot();
+
         if (Physics.Raycast(playerCamera.transform.position, shootDirection, out hit, range))
         {
             // TODO add damage
